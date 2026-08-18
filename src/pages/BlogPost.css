@@ -1,0 +1,135 @@
+.post {
+  padding-block: var(--sp-7) var(--sp-8);
+}
+.post-container {
+  max-width: 780px;
+}
+
+.post-back {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: var(--sp-5);
+}
+
+.post-head {
+  margin-bottom: var(--sp-5);
+}
+.post-head .badge {
+  margin-bottom: var(--sp-4);
+}
+.post-head h1 {
+  margin-bottom: var(--sp-3);
+}
+.post-byline {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+.post-author {
+  font-weight: 600;
+  color: var(--leaf-700);
+}
+
+.post-cover {
+  margin: 0 0 var(--sp-6);
+}
+.post-cover img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* -------------------- Markdown body -------------------- */
+.post-content {
+  font-size: 1.08rem;
+  color: var(--ink);
+  line-height: 1.75;
+}
+.post-content > *:first-child {
+  margin-top: 0;
+}
+.post-content h2 {
+  margin-top: var(--sp-7);
+  margin-bottom: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--sage-100);
+}
+.post-content h3 {
+  margin-top: var(--sp-5);
+  margin-bottom: var(--sp-2);
+  color: var(--leaf-700);
+}
+.post-content p {
+  margin-bottom: var(--sp-5);
+}
+.post-content ul,
+.post-content ol {
+  margin: 0 0 var(--sp-5);
+  padding-left: 1.4rem;
+}
+.post-content li {
+  margin-bottom: var(--sp-2);
+}
+.post-content li::marker {
+  color: var(--leaf-500);
+}
+.post-content img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin: var(--sp-5) 0;
+}
+.post-content a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.post-content strong {
+  color: var(--leaf-900);
+}
+.post-content em {
+  color: var(--earth-700);
+}
+.post-content blockquote {
+  margin: var(--sp-5) 0;
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--sage-100);
+  border-left: 4px solid var(--leaf-500);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--leaf-900);
+  font-style: italic;
+}
+.post-content blockquote p {
+  margin: 0;
+}
+.post-content code {
+  background: var(--cream-dark);
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+.post-content hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--sp-6) 0;
+}
+
+.post-footer {
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+
+.post-missing {
+  text-align: center;
+  padding-block: var(--sp-8);
+}
+.post-missing span[aria-hidden] {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--sp-3);
+}
