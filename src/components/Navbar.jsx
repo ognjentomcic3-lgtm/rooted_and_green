@@ -15,7 +15,7 @@ export default function Navbar() {
           </span>
           <span className="brand-text">
             <span className="brand-name">Rooted &amp; Green</span>
-            <span className="brand-tag">Gardens that grow with you</span>
+            <span className="brand-tag">Gardens that live with you</span>
           </span>
         </Link>
 

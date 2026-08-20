@@ -38,7 +38,7 @@ export default function Landing() {
           <div className="hero-copy">
             <p className="eyebrow">Garden design &amp; maintenance</p>
             <h1>
-              Gardens that <span className="hero-accent">grow with you.</span>
+              Gardens that <span className="hero-accent">live with you.</span>
             </h1>
             <p className="lead">
               Rooted &amp; Green designs, plants, and cares for beautiful,

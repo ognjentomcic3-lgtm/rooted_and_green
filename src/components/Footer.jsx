@@ -11,7 +11,7 @@ export default function Footer() {
           </span>
           <div>
             <p className="footer-name">Rooted &amp; Green</p>
-            <p className="footer-tag">Gardens that grow with you.</p>
+            <p className="footer-tag">Gardens that live with you.</p>
           </div>
         </div>
 

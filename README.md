@@ -1,6 +1,6 @@
 # 🌿 Rooted & Green
 
-_Gardens that grow with you._
+_Gardens that live with you._
 
 A front-end-only React + Vite blog site for a garden design & maintenance
 business. Posts are seeded on first run and persisted entirely in the browser's
