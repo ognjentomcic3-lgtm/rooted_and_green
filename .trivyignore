@@ -1,0 +1,16 @@
+# Findings deliberately accepted. Trivy reads this file automatically
+# (config key: ignorefile).
+#
+# One ID per line. Put the reason and a review date in a comment directly
+# ABOVE the ID -- Trivy treats a whole line starting with # as a comment:
+#
+#   # RSC mode is not used here; this app is client-side routing only.
+#   # Accepted 2026-08-22, revisit 2026-11-22.
+#   GHSA-qwww-vcr4-c8h2
+#
+# Prefer fixing over ignoring: an entry here is a promise to look again.
+# For expiry dates and per-path scoping, Trivy also supports a richer
+# .trivyignore.yaml format:
+# https://trivy.dev/docs/configuration/filtering/
+
+# (nothing accepted right now)

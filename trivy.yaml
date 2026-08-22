@@ -1,0 +1,43 @@
+# Shared Trivy configuration.
+#
+# CI (.github/workflows/security.yml) and `npm run scan` both read this file,
+# so a finding on your laptop is the same finding the pipeline reports. Trivy
+# picks it up automatically when run from the repo root.
+#
+# Reference: https://trivy.dev/docs/references/configuration/config-file/
+
+scan:
+  scanners:
+    - vuln # known CVEs in npm packages, resolved from package-lock.json
+    - secret # credentials committed by accident
+    # Dockerfile / Terraform / Kubernetes / Ansible. There are none today, so
+    # this one is a tripwire for whenever infra files land in the repo.
+    - misconfig
+  skip-dirs:
+    # package-lock.json is the source of truth for the dependency tree; the
+    # installed tree only duplicates it and makes scans far slower.
+    - node_modules
+    - dist # build output, regenerated on every deploy
+
+pkg:
+  # Nothing in devDependencies (vite, oxlint, @types/*) is ever served to a
+  # browser, so their CVEs are noise for a static site. This is Trivy's default;
+  # it is spelled out because it is the assumption the whole setup rests on.
+  # Flip to true if this repo ever grows a server-side build.
+  include-dev-deps: false
+
+vulnerability:
+  # Report unfixed issues too, so they stay visible in the Security tab. CI
+  # decides separately (with --ignore-unfixed) what may actually break a build.
+  ignore-unfixed: false
+
+# Show every severity by default, so a local run gives the full picture. CI
+# narrows this to HIGH,CRITICAL for the one step that is allowed to fail.
+severity:
+  - UNKNOWN
+  - LOW
+  - MEDIUM
+  - HIGH
+  - CRITICAL
+
+timeout: 10m

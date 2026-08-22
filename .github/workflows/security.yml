@@ -1,0 +1,80 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # 06:00 UTC every Monday. The dependency tree does not change on a quiet
+    # week, but the advisory feed does -- this run is what catches a CVE
+    # published after the last commit landed.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  trivy:
+    name: Trivy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write # publish SARIF to the Security tab
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.3.1
+        with:
+          # Pinned on purpose: with "latest", an upstream release lands as a
+          # surprise red build on an unrelated PR.
+          version: v0.74.0
+          cache: true
+
+      # Dependencies are read from package-lock.json, so there is deliberately
+      # no `npm ci` here -- the lockfile already describes the full tree.
+
+      # Pass 1: everything, every severity, never fails. Feeds the Security tab
+      # so low/medium findings stay visible without blocking anyone.
+      - name: Scan (full report)
+        run: |
+          trivy fs . \
+            --format sarif \
+            --output trivy-results.sarif \
+            --exit-code 0
+
+      - name: Publish to code scanning
+        uses: github/codeql-action/upload-sarif@v3
+        # Code scanning needs a public repo or GitHub Advanced Security, and
+        # forked PRs get a read-only token. Neither should fail the job -- the
+        # gate below is what actually enforces anything.
+        continue-on-error: true
+        with:
+          sarif_file: trivy-results.sarif
+          category: trivy
+
+      - name: Upload scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-results
+          path: trivy-results.sarif
+          retention-days: 30
+
+      # Pass 2: the gate. Reuses the DB pass 1 just downloaded, so it is quick.
+      # Fails only on HIGH/CRITICAL that have a fix available -- the build
+      # breaks when there is something concrete to do about it. Secret findings
+      # are not vulnerabilities, so --ignore-unfixed never suppresses them.
+      - name: Fail on fixable HIGH/CRITICAL
+        run: |
+          trivy fs . \
+            --severity HIGH,CRITICAL \
+            --ignore-unfixed \
+            --exit-code 1

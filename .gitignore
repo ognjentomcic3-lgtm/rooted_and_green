@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 dokumentacija
+
+# Trivy scan output
+trivy-results.sarif
+trivy-default.yaml
