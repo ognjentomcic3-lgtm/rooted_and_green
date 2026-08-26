@@ -1,0 +1,48 @@
+/* Segmented pill built from the same tokens as .chip — reads as part of the
+   design system rather than a bolted-on widget. */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  flex-shrink: 0;
+}
+
+.lang-option {
+  border: 0;
+  background: transparent;
+  color: var(--leaf-700);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 0.36rem 0.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.lang-option:hover {
+  background: var(--sage-100);
+  color: var(--leaf-900);
+}
+.lang-option.is-active {
+  background: var(--leaf-700);
+  color: var(--white);
+}
+
+@media (max-width: 760px) {
+  /* Inside the mobile menu the switcher sits on its own row, matching the
+     stacked link rhythm rather than the desktop inline pill. */
+  .nav-links .lang-switch {
+    align-self: flex-start;
+    margin-top: var(--sp-4);
+  }
+  .lang-option {
+    padding: 0.42rem 0.8rem;
+    font-size: 0.82rem;
+  }
+}

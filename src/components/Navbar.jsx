@@ -1,8 +1,11 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useI18n } from '../i18n/context.js';
+import LanguageSwitcher from './LanguageSwitcher.jsx';
 import './Navbar.css';
 
 export default function Navbar() {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
@@ -15,13 +18,13 @@ export default function Navbar() {
           </span>
           <span className="brand-text">
             <span className="brand-name">Rooted &amp; Green</span>
-            <span className="brand-tag">Gardens that live with you</span>
+            <span className="brand-tag">{t('nav.tagline')}</span>
           </span>
         </Link>
 
         <button
           className="nav-toggle"
-          aria-label="Toggle menu"
+          aria-label={t('nav.toggle')}
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
         >
@@ -32,16 +35,17 @@ export default function Navbar() {
 
         <nav className={`nav-links ${open ? 'is-open' : ''}`}>
           <NavLink to="/" end onClick={close}>
-            Home
+            {t('nav.home')}
           </NavLink>
           <NavLink to="/blog" onClick={close}>
-            Blog
+            {t('nav.blog')}
           </NavLink>
           <NavLink to="/admin" onClick={close}>
-            Admin
+            {t('nav.admin')}
           </NavLink>
+          <LanguageSwitcher />
           <Link to="/blog" className="btn btn-primary btn-sm nav-cta" onClick={close}>
-            Read the blog
+            {t('nav.cta')}
           </Link>
         </nav>
       </div>

@@ -1,42 +1,62 @@
 import { useMemo, useState } from 'react';
 import { usePosts } from '../hooks/usePosts.js';
+import { useI18n } from '../i18n/context.js';
+import { foldDiacritics } from '../i18n/core.js';
+import { localizePost } from '../i18n/posts.js';
 import PostCard from '../components/PostCard.jsx';
 import './BlogList.css';
 
+const ALL = 'all';
+
 export default function BlogList() {
   const { getAll } = usePosts();
+  const { lang, locale, t, categoryLabel } = useI18n();
   const all = getAll();
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState(ALL);
 
+  // Filter on the stable category key, sort the chips by their translated label.
   const categories = useMemo(() => {
-    const set = new Set(all.map((p) => p.category).filter(Boolean));
-    return ['All', ...Array.from(set).sort()];
-  }, [all]);
+    const keys = Array.from(
+      new Set(all.map((p) => p.category).filter(Boolean)),
+    );
+    keys.sort((a, b) => categoryLabel(a).localeCompare(categoryLabel(b), locale));
+    return [ALL, ...keys];
+  }, [all, categoryLabel, locale]);
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = foldDiacritics(query.trim(), locale);
     return all.filter((p) => {
-      const matchesCategory = category === 'All' || p.category === category;
-      const matchesQuery =
-        !q ||
-        p.title.toLowerCase().includes(q) ||
-        p.excerpt.toLowerCase().includes(q) ||
-        (p.author || '').toLowerCase().includes(q);
-      return matchesCategory && matchesQuery;
+      const matchesCategory = category === ALL || p.category === category;
+      if (!matchesCategory) return false;
+      if (!q) return true;
+      const copy = localizePost(p, lang);
+      return (
+        foldDiacritics(copy.title, locale).includes(q) ||
+        foldDiacritics(copy.excerpt, locale).includes(q) ||
+        foldDiacritics(p.author || '', locale).includes(q)
+      );
     });
-  }, [all, query, category]);
+  }, [all, query, category, lang, locale]);
+
+  // Complete sentences, not glued fragments — each variant is one message so
+  // every language controls its own word order.
+  const resultKey =
+    category !== ALL && query
+      ? 'blog.resultsInCategoryMatching'
+      : category !== ALL
+        ? 'blog.resultsInCategory'
+        : query
+          ? 'blog.resultsMatching'
+          : 'blog.results';
 
   return (
     <>
       <section className="blog-header">
         <div className="container">
-          <p className="eyebrow">The Rooted &amp; Green blog</p>
-          <h1>Notes from the garden</h1>
-          <p className="lead">
-            Practical guides, seasonal know-how, and inspiration for growing a
-            garden you love.
-          </p>
+          <p className="eyebrow">{t('blog.eyebrow')}</p>
+          <h1>{t('blog.title')}</h1>
+          <p className="lead">{t('blog.lead')}</p>
         </div>
       </section>
 
@@ -50,13 +70,17 @@ export default function BlogList() {
               <input
                 type="search"
                 className="input search-input"
-                placeholder="Search posts…"
+                placeholder={t('blog.searchPlaceholder')}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                aria-label="Search posts"
+                aria-label={t('blog.searchLabel')}
               />
             </div>
-            <div className="chip-row" role="group" aria-label="Filter by category">
+            <div
+              className="chip-row"
+              role="group"
+              aria-label={t('blog.filterLabel')}
+            >
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -64,16 +88,18 @@ export default function BlogList() {
                   onClick={() => setCategory(cat)}
                   aria-pressed={category === cat}
                 >
-                  {cat}
+                  {cat === ALL ? t('blog.all') : categoryLabel(cat)}
                 </button>
               ))}
             </div>
           </div>
 
           <p className="result-count">
-            {filtered.length} {filtered.length === 1 ? 'post' : 'posts'}
-            {category !== 'All' && ` in ${category}`}
-            {query && ` matching “${query}”`}
+            {t(resultKey, {
+              count: filtered.length,
+              category: categoryLabel(category),
+              query: query.trim(),
+            })}
           </p>
 
           {filtered.length > 0 ? (
@@ -85,16 +111,16 @@ export default function BlogList() {
           ) : (
             <div className="empty-state card">
               <span aria-hidden="true">🌱</span>
-              <h3>No posts found</h3>
-              <p>Try a different search term or category.</p>
+              <h3>{t('blog.empty.title')}</h3>
+              <p>{t('blog.empty.text')}</p>
               <button
                 className="btn btn-ghost"
                 onClick={() => {
                   setQuery('');
-                  setCategory('All');
+                  setCategory(ALL);
                 }}
               >
-                Clear filters
+                {t('blog.empty.clear')}
               </button>
             </div>
           )}
