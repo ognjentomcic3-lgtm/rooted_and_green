@@ -51,9 +51,9 @@ export default function Navbar() {
           <NavLink to="/" end onClick={close}>
             {t('nav.home')}
           </NavLink>
-          <Link to="/#projects" onClick={close}>
+          <NavLink to="/projects" onClick={close}>
             {t('nav.projects')}
-          </Link>
+          </NavLink>
           <NavLink to="/blog" onClick={close}>
             {t('nav.blog')}
           </NavLink>

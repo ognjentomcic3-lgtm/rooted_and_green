@@ -34,7 +34,8 @@ export default function HomeHero() {
         </p>
       </div>
 
-      <a className="home-hero-cue" href="#projects">
+      {/* Points at whatever comes next, which is now the services segment. */}
+      <a className="home-hero-cue" href="#services-detail">
         <span className="sr-only">{t('home.hero.scrollCue')}</span>
         <span className="home-hero-cue-line" aria-hidden="true" />
       </a>

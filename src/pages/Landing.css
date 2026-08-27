@@ -26,8 +26,8 @@
   margin-bottom: 0;
 }
 
-/* The homepage header and the project index own their own files —
-   HomeHero.css and ProjectIndex.css. */
+/* The homepage header, the services segment and the project rows own their own
+   files — HomeHero.css, ServicesDetail.css and ProjectShowcase.css. */
 
 /* -------------------- Services -------------------- */
 .services-grid {

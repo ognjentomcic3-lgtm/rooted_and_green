@@ -46,10 +46,13 @@ export default {
   'projects.eyebrow': 'Finished projects',
   'projects.title': 'Places we have planted',
   'projects.lead':
-    'Every garden is one place, one year and one list of jobs. Open a row to see how it turned out.',
-  'projects.hint': 'Open a row for photos and detail',
+    'Every garden is one place, one year and one list of jobs. Here are three recent ones.',
   'projects.scope': 'Scope of works',
   'projects.imageAlt': '{title} — {place}, photograph {index}',
+  'projects.viewAll': 'All projects',
+  'projectsPage.title': 'All projects',
+  'projectsPage.lead':
+    'The gardens we have built and still look after — from the coast to the mountains.',
 
   // -------------------- Landing: services --------------------
   'landing.services.eyebrow': 'What we do',

@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { usePosts } from '../hooks/usePosts.js';
 import { useI18n } from '../i18n/context.js';
+import { projects } from '../data/projectsData.js';
 import HomeHero from '../components/HomeHero.jsx';
 import ServicesDetail from '../components/ServicesDetail.jsx';
-import ProjectIndex from '../components/ProjectIndex.jsx';
+import ProjectShowcase from '../components/ProjectShowcase.jsx';
 import PostCard from '../components/PostCard.jsx';
 import './Landing.css';
 
@@ -28,8 +29,22 @@ export default function Landing() {
       {/* The services, in detail: text left, photograph right */}
       <ServicesDetail />
 
-      {/* Then the projects, as an index */}
-      <ProjectIndex />
+      {/* Then three projects, text and pictures swapping sides row by row */}
+      <section className="pshow" id="projects" aria-labelledby="pshow-title">
+        <div className="container">
+          <div className="pshow-head">
+            <p className="eyebrow">{t('projects.eyebrow')}</p>
+            <h2 id="pshow-title">{t('projects.title')}</h2>
+            <p className="pshow-lead">{t('projects.lead')}</p>
+          </div>
+          <ProjectShowcase items={projects.slice(0, 3)} />
+          <div className="pshow-more">
+            <Link to="/projects" className="btn btn-outline">
+              {t('projects.viewAll')}
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Services */}
       <section className="section" id="services">

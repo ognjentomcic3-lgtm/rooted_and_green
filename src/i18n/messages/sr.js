@@ -50,10 +50,13 @@ export default {
   'projects.eyebrow': 'Realizovani projekti',
   'projects.title': 'Mesta koja smo zasadili',
   'projects.lead':
-    'Svaki vrt je jedno mesto, jedna godina i jedan spisak poslova. Otvorite red da vidite kako izgleda.',
-  'projects.hint': 'Otvorite red za slike i detalje',
+    'Svaki vrt je jedno mesto, jedna godina i jedan spisak poslova. Evo tri skorašnja.',
   'projects.scope': 'Obim radova',
   'projects.imageAlt': '{title} — {place}, fotografija {index}',
+  'projects.viewAll': 'Svi projekti',
+  'projectsPage.title': 'Svi projekti',
+  'projectsPage.lead':
+    'Vrtovi koje smo do sada napravili i održavamo — od primorja do planine.',
 
   // -------------------- Landing: services --------------------
   'landing.services.eyebrow': 'Šta radimo',
