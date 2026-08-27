@@ -3,7 +3,7 @@
 
 export default {
   // -------------------- Document / meta --------------------
-  'meta.title': 'Rooted & Green — Gardens that live with you',
+  'meta.title': 'Malina Garden — Gardens that live with you',
 
   // -------------------- Navigation --------------------
   'nav.tagline': 'Gardens that live with you',
@@ -24,7 +24,7 @@ export default {
   'footer.tagline': 'Gardens that live with you.',
   'footer.navLabel': 'Footer',
   'footer.note': 'Garden design & maintenance · Serving keen gardeners everywhere',
-  'footer.copyright': '© {year} Rooted & Green. Grown with care.',
+  'footer.copyright': '© {year} Malina Garden. Grown with care.',
 
   // -------------------- Home: header --------------------
   'home.hero.ideology': 'Gardens that live with you.',
@@ -33,7 +33,6 @@ export default {
   'home.hero.scrollCue': 'Skip to the projects',
 
   // -------------------- Home: services in detail --------------------
-  // The list items themselves live in src/data/servicesData.js.
   'servicesDetail.eyebrow': 'What we do',
   'servicesDetail.title': 'From the first sketch to the regular upkeep',
   'servicesDetail.lead':
@@ -54,36 +53,8 @@ export default {
   'projectsPage.lead':
     'The gardens we have built and still look after — from the coast to the mountains.',
 
-  // -------------------- Landing: services --------------------
-  'landing.services.eyebrow': 'What we do',
-  'landing.services.title': 'Care for every corner of your garden',
-  'landing.services.lead':
-    'From first sketch to seasonal upkeep, we help your outdoor space flourish.',
-  'landing.service.design.title': 'Garden Design',
-  'landing.service.design.text':
-    'Bespoke planting plans and layouts that suit your space, soil, and the way you like to live outdoors.',
-  'landing.service.planting.title': 'Planting & Maintenance',
-  'landing.service.planting.text':
-    'Seasonal care, pruning, feeding, and tidy-ups that keep your borders looking their best all year.',
-  'landing.service.wildlife.title': 'Wildlife & Meadows',
-  'landing.service.wildlife.text':
-    'Pollinator borders, wildflower meadows, and habitats that make your garden hum with life.',
-  'landing.service.containers.title': 'Containers & Courtyards',
-  'landing.service.containers.text':
-    'Lush pot displays and small-space schemes that turn balconies and patios into green retreats.',
-
-  // -------------------- Landing: blog teaser & CTA --------------------
-  'landing.blog.eyebrow': 'From the potting shed',
-  'landing.blog.title': 'Latest from the blog',
-  'landing.blog.viewAll': 'View all posts',
-  'landing.blog.empty': 'No posts yet — check back soon.',
-  'landing.cta.title': 'Ready to grow something wonderful?',
-  'landing.cta.lead':
-    'Whether you dream of a wildflower meadow or simply want tidy, healthy borders, we would love to help your garden thrive.',
-  'landing.cta.button': 'Start reading',
-
   // -------------------- Blog list --------------------
-  'blog.eyebrow': 'The Rooted & Green blog',
+  'blog.eyebrow': 'The Malina Garden blog',
   'blog.title': 'Notes from the garden',
   'blog.lead':
     'Practical guides, seasonal know-how, and inspiration for growing a garden you love.',

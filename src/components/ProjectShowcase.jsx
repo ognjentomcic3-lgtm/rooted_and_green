@@ -25,15 +25,10 @@ export default function ProjectShowcase({ items }) {
                 <span className="pshow-num" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                {project.place} · {project.year}
+                {project.place}
               </p>
               <h3 className="pshow-title">{copy.title}</h3>
               <p className="pshow-summary">{copy.summary}</p>
-              <ul className="pshow-scope">
-                {copy.scope.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
             </div>
 
             <div className="pshow-media">

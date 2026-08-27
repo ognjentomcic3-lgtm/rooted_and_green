@@ -82,7 +82,7 @@ chown -R "$DEPLOY_USER:$DEPLOY_USER" "$DEPLOY_HOME/.ssh"
 echo "==> Preparing webroot: $WEBROOT"
 install -d -o "$DEPLOY_USER" -g "$DEPLOY_USER" -m 755 "$WEBROOT"
 if [[ ! -f "$WEBROOT/index.html" ]]; then
-  echo "<h1>Rooted &amp; Green</h1><p>Awaiting first deploy.</p>" > "$WEBROOT/index.html"
+  echo "<h1>Malina Garden</h1><p>Awaiting first deploy.</p>" > "$WEBROOT/index.html"
   chown "$DEPLOY_USER:$DEPLOY_USER" "$WEBROOT/index.html"
 fi
 

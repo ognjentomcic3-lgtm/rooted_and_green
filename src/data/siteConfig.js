@@ -5,7 +5,7 @@
 // sample post authors — swap them for the real details before going live.
 
 export const site = {
-  name: 'Rooted & Green',
+  name: 'Malina Garden',
   email: 'zdravo@rootedandgreen.me',
   phone: '+382 67 000 000',
   // Kept as a display string; a real address block would want structured data.

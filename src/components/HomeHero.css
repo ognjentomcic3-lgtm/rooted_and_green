@@ -12,7 +12,7 @@
   min-height: calc(100vh + var(--nav-h));
   min-height: calc(100svh + var(--nav-h));
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   isolation: isolate;
   background: var(--leaf-900);
   overflow: hidden;
@@ -47,7 +47,13 @@
 
 .home-hero-inner {
   position: relative;
-  padding-block: var(--part-space) calc(var(--part-space) + var(--sp-6));
+  /* Centred on the screen rather than on the section. The sticky bar is in
+     flow, so the negative margin above only claws the header back up to the
+     top of the page — the extra --nav-h of height ends up hanging below the
+     fold instead. Reserving that strip as bottom padding takes it out of the
+     reckoning, and the copy lands on the middle of the screen rather than a
+     half-navbar below it. */
+  padding-block: var(--part-space) calc(var(--part-space) + var(--nav-h));
   color: var(--white);
 }
 
@@ -146,7 +152,7 @@
    sliver of photo and a wall of type. */
 @media (max-height: 520px) {
   .home-hero-inner {
-    padding-block: var(--sp-8) var(--sp-7);
+    padding-block: var(--sp-7) calc(var(--sp-7) + var(--nav-h));
   }
   .home-hero-cue {
     display: none;

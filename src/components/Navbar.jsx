@@ -31,7 +31,7 @@ export default function Navbar() {
             🌿
           </span>
           <span className="brand-text">
-            <span className="brand-name">Rooted &amp; Green</span>
+            <span className="brand-name">Malina Garden</span>
             <span className="brand-tag">{t('nav.tagline')}</span>
           </span>
         </Link>

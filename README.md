@@ -1,4 +1,4 @@
-# 🌿 Rooted & Green
+# 🌿 Malina Garden
 
 _Gardens that live with you._
 
@@ -33,7 +33,7 @@ npm run lint     # oxlint
 
 | Route         | Page      | Purpose                                               |
 | ------------- | --------- | ----------------------------------------------------- |
-| `/`           | Landing   | Full-screen header, project index, services, latest 3 posts, CTA |
+| `/`           | Landing   | Full-screen header, services in detail, project index          |
 | `/blog`       | Blog list | All posts as cards, with search + category filter     |
 | `/blog/:slug` | Post      | Cover image, meta, Markdown body (with inline images) |
 | `/admin`      | Admin     | Table of posts + create / edit / delete (open panel)  |

@@ -5,7 +5,7 @@
 
 export default {
   // -------------------- Document / meta --------------------
-  'meta.title': 'Rooted & Green — Vrtovi koji žive s vama',
+  'meta.title': 'Malina Garden — Vrtovi koji žive s vama',
 
   // -------------------- Navigation --------------------
   'nav.tagline': 'Vrtovi koji žive s vama',
@@ -28,7 +28,7 @@ export default {
   'footer.tagline': 'Vrtovi koji žive s vama.',
   'footer.navLabel': 'Podnožje',
   'footer.note': 'Dizajn i održavanje vrtova · Uz vas gde god da gajite vrt',
-  'footer.copyright': '© {year} Rooted & Green. Uzgojeno s pažnjom.',
+  'footer.copyright': '© {year} Malina Garden. Uzgojeno s pažnjom.',
 
   // -------------------- Home: header --------------------
   'home.hero.ideology': 'Vrtovi koji žive s vama.',
@@ -37,7 +37,6 @@ export default {
   'home.hero.scrollCue': 'Pređite na projekte',
 
   // -------------------- Home: services in detail --------------------
-  // The list items themselves live in src/data/servicesData.js.
   'servicesDetail.eyebrow': 'Šta radimo',
   'servicesDetail.title': 'Od prve skice do redovnog održavanja',
   'servicesDetail.lead':
@@ -58,36 +57,8 @@ export default {
   'projectsPage.lead':
     'Vrtovi koje smo do sada napravili i održavamo — od primorja do planine.',
 
-  // -------------------- Landing: services --------------------
-  'landing.services.eyebrow': 'Šta radimo',
-  'landing.services.title': 'Briga za svaki kutak vašeg vrta',
-  'landing.services.lead':
-    'Od prve skice do sezonskog održavanja, pomažemo vašem prostoru da procveta.',
-  'landing.service.design.title': 'Dizajn vrta',
-  'landing.service.design.text':
-    'Planovi sadnje i rasporedi po meri, prilagođeni vašem prostoru, zemljištu i načinu na koji volite da boravite napolju.',
-  'landing.service.planting.title': 'Sadnja i održavanje',
-  'landing.service.planting.text':
-    'Sezonska nega, rezidba, prihrana i sređivanje koji vaše leje drže u najboljem izdanju tokom cele godine.',
-  'landing.service.wildlife.title': 'Divlji svet i livade',
-  'landing.service.wildlife.text':
-    'Leje za oprašivače, livade divljeg cveća i staništa od kojih vaš vrt bruji od života.',
-  'landing.service.containers.title': 'Saksije i dvorišta',
-  'landing.service.containers.text':
-    'Bujne kompozicije u saksijama i rešenja za male prostore koja balkone i terase pretvaraju u zelena utočišta.',
-
-  // -------------------- Landing: blog teaser & CTA --------------------
-  'landing.blog.eyebrow': 'Iz baštenske šupe',
-  'landing.blog.title': 'Najnovije s bloga',
-  'landing.blog.viewAll': 'Sve objave',
-  'landing.blog.empty': 'Još nema objava — navratite uskoro.',
-  'landing.cta.title': 'Spremni da uzgojite nešto divno?',
-  'landing.cta.lead':
-    'Bilo da sanjate livadu divljeg cveća ili jednostavno želite uredne i zdrave leje, rado ćemo pomoći vašem vrtu da napreduje.',
-  'landing.cta.button': 'Počnite da čitate',
-
   // -------------------- Blog list --------------------
-  'blog.eyebrow': 'Blog Rooted & Green',
+  'blog.eyebrow': 'Blog Malina Garden',
   'blog.title': 'Beleške iz vrta',
   'blog.lead':
     'Praktični vodiči, sezonsko znanje i inspiracija za vrt koji ćete voleti.',

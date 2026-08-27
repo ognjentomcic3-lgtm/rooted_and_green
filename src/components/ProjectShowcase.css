@@ -87,23 +87,9 @@
   color: var(--sage-200);
   font-size: 1.02rem;
   max-width: 46ch;
-  margin-bottom: var(--sp-5);
-}
-
-.pshow-scope {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
-  margin: 0;
-  padding: 0;
-}
-.pshow-scope li {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  padding: 0.3rem 0.8rem;
-  font-size: 0.82rem;
-  color: var(--sage-200);
+  /* Last thing in the column now the scope pills have gone. Trailing room
+     here would sit the copy off centre against the photographs. */
+  margin-bottom: 0;
 }
 
 /* -------------------- The two photographs -------------------- */
