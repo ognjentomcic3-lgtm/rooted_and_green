@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { usePosts } from '../hooks/usePosts.js';
 import { useI18n } from '../i18n/context.js';
 import HomeHero from '../components/HomeHero.jsx';
+import ServicesDetail from '../components/ServicesDetail.jsx';
 import ProjectIndex from '../components/ProjectIndex.jsx';
 import PostCard from '../components/PostCard.jsx';
 import './Landing.css';
@@ -24,7 +25,10 @@ export default function Landing() {
       {/* Header: full-screen darkened photograph */}
       <HomeHero />
 
-      {/* Directly below the header: the projects, as an index */}
+      {/* The services, in detail: text left, photograph right */}
+      <ServicesDetail />
+
+      {/* Then the projects, as an index */}
       <ProjectIndex />
 
       {/* Services */}

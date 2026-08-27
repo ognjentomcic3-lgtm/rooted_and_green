@@ -36,6 +36,16 @@ export default {
   'home.hero.imageAlt': 'Bujna cvetna leja u punom rastu',
   'home.hero.scrollCue': 'Pređite na projekte',
 
+  // -------------------- Home: services in detail --------------------
+  // The list items themselves live in src/data/servicesData.js.
+  'servicesDetail.eyebrow': 'Šta radimo',
+  'servicesDetail.title': 'Od prve skice do redovnog održavanja',
+  'servicesDetail.lead':
+    'Radimo ceo posao — izađemo na teren, nacrtamo rešenje, damo predmer i predračun, izvedemo radove i posle toga održavamo ono što smo zasadili.',
+  'servicesDetail.body':
+    'Ne prodajemo pakete. Svaki vrt dobije spisak poslova koji mu zaista treba, u redosledu koji ima smisla za sezonu i za teren.',
+  'servicesDetail.imageAlt': 'Rad u vrtu tokom sadnje',
+
   // -------------------- Home: projects --------------------
   'projects.eyebrow': 'Realizovani projekti',
   'projects.title': 'Mesta koja smo zasadili',

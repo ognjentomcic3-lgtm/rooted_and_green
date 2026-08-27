@@ -32,6 +32,16 @@ export default {
   'home.hero.imageAlt': 'A lush, thriving garden border in full growth',
   'home.hero.scrollCue': 'Skip to the projects',
 
+  // -------------------- Home: services in detail --------------------
+  // The list items themselves live in src/data/servicesData.js.
+  'servicesDetail.eyebrow': 'What we do',
+  'servicesDetail.title': 'From the first sketch to the regular upkeep',
+  'servicesDetail.lead':
+    'We do the whole job — come out to the site, draw up a design, price the work, build it, and then look after what we planted.',
+  'servicesDetail.body':
+    'We do not sell packages. Every garden gets the list of jobs it actually needs, in the order that makes sense for the season and the ground.',
+  'servicesDetail.imageAlt': 'Work under way in a garden during planting',
+
   // -------------------- Home: projects --------------------
   'projects.eyebrow': 'Finished projects',
   'projects.title': 'Places we have planted',
