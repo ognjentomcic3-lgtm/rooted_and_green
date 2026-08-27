@@ -41,6 +41,7 @@
   --sp-7: 3rem;
   --sp-8: 4rem;
   --sp-9: 6rem;
+  --sp-10: 8rem;
 
   /* Radius & shadow */
   --radius-sm: 8px;
@@ -59,7 +60,7 @@
   /* The room above and below a part's content. Parts pay for it in padding,
      never margin, so a part carrying its own colour keeps that colour right
      up against its neighbours. */
-  --part-space: clamp(var(--sp-7), 6vw, var(--sp-9));
+  --part-space: clamp(var(--sp-8), 8vw, var(--sp-10));
 
   /* Height of the sticky bar. The homepage header pulls itself up by exactly
      this much to sit under it, so the two must agree. */
