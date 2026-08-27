@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { usePosts } from '../hooks/usePosts.js';
 import { useI18n } from '../i18n/context.js';
+import HomeHero from '../components/HomeHero.jsx';
+import ProjectIndex from '../components/ProjectIndex.jsx';
 import PostCard from '../components/PostCard.jsx';
 import './Landing.css';
 
@@ -19,43 +21,11 @@ export default function Landing() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="hero">
-        <div className="container hero-inner">
-          <div className="hero-copy">
-            <p className="eyebrow">{t('landing.eyebrow')}</p>
-            <h1>
-              {t('landing.hero.titleLead')}{' '}
-              <span className="hero-accent">{t('landing.hero.titleAccent')}</span>
-            </h1>
-            <p className="lead">{t('landing.hero.lead')}</p>
-            <div className="hero-actions">
-              <Link to="/blog" className="btn btn-primary">
-                {t('landing.hero.ctaPrimary')}
-              </Link>
-              <a href="#services" className="btn btn-outline">
-                {t('landing.hero.ctaSecondary')}
-              </a>
-            </div>
-          </div>
-          <div className="hero-media">
-            <img
-              src="https://picsum.photos/seed/rooted-green-hero/900/1100"
-              alt={t('landing.hero.imageAlt')}
-              width="900"
-              height="1100"
-              fetchPriority="high"
-            />
-            <div className="hero-badge card">
-              <span aria-hidden="true">🌿</span>
-              <div>
-                <strong>Rooted &amp; Green</strong>
-                <span>{t('landing.hero.badgeText')}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Header: full-screen darkened photograph */}
+      <HomeHero />
+
+      {/* Directly below the header: the projects, as an index */}
+      <ProjectIndex />
 
       {/* Services */}
       <section className="section" id="services">

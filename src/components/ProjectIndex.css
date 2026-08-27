@@ -1,0 +1,342 @@
+/* ============================================================
+   Project index — a list, not a grid
+   Dark, so it reads as a continuation of the header photo above it.
+   ============================================================ */
+
+.pindex {
+  position: relative;
+  background: #0f1512;
+  color: var(--sage-100);
+  padding-block: var(--sp-8) var(--sp-9);
+  overflow: hidden;
+}
+
+.pindex-head {
+  padding-bottom: var(--sp-7);
+}
+.pindex-eyebrow {
+  color: var(--leaf-500);
+}
+.pindex h2 {
+  color: var(--white);
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  margin-bottom: var(--sp-4);
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.pindex-lead {
+  color: var(--sage-400);
+  font-size: 1.08rem;
+  max-width: 52ch;
+  margin-bottom: var(--sp-3);
+}
+.pindex-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(203, 220, 203, 0.42);
+}
+
+/* -------------------- Rows -------------------- */
+.pindex-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.pindex-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.pindex-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.25s ease;
+}
+.pindex-trigger:hover,
+.pindex-row.is-open .pindex-trigger {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pindex-trigger-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1.1fr) minmax(0, 1.4fr) auto auto;
+  align-items: baseline;
+  gap: var(--sp-5);
+  padding-block: clamp(var(--sp-4), 2.6vw, var(--sp-6));
+}
+
+.pindex-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--leaf-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.pindex-place {
+  font-size: clamp(1.35rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  /* Sits back until the row is pointed at, so the list reads as one column of
+     names first and a table of detail second. */
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.3, 1), color 0.25s ease;
+}
+.pindex-row.is-hovered .pindex-place,
+.pindex-row.is-open .pindex-place {
+  transform: translateX(clamp(6px, 1.4vw, 18px));
+  color: var(--sage-100);
+}
+
+.pindex-title {
+  color: var(--sage-400);
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.pindex-year {
+  color: rgba(203, 220, 203, 0.5);
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* A plus that becomes a minus, drawn rather than typed so it stays centred. */
+.pindex-sign {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  align-self: center;
+  flex: none;
+}
+.pindex-sign::before,
+.pindex-sign::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 1.5px;
+  background: var(--sage-100);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.pindex-sign::after {
+  transform: rotate(90deg);
+}
+.pindex-row.is-open .pindex-sign::after {
+  transform: rotate(0deg);
+}
+
+/* -------------------- Expanded panel -------------------- */
+.pindex-panel {
+  overflow: hidden;
+  animation: pindex-open 0.36s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.pindex-panel[hidden] {
+  display: none;
+}
+
+.pindex-panel-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: var(--sp-6);
+  padding-bottom: var(--sp-7);
+  align-items: start;
+}
+
+.pindex-summary {
+  font-size: 1.05rem;
+  color: var(--sage-200);
+  max-width: 44ch;
+}
+
+.pindex-scope-label {
+  margin: 0 0 var(--sp-3);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--leaf-500);
+}
+
+.pindex-scope {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin: 0;
+  padding: 0;
+}
+.pindex-scope li {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+  color: var(--sage-200);
+}
+
+/* Photos overlap and tilt — the "unconventional" bit that stops the panel
+   looking like a stock gallery. Every shot stays fully visible. */
+.pindex-shots {
+  display: flex;
+  align-items: flex-start;
+  padding-inline: var(--sp-4);
+}
+/* Negative margin rather than a negative gap — `gap` cannot go below zero. */
+.pindex-shots img + img {
+  margin-left: clamp(-44px, -2.4vw, -16px);
+}
+.pindex-shots img {
+  /* `flex: 1 1 0` plus `min-width: 0` — without the override an <img> refuses
+     to shrink past its intrinsic width and the row overflows the panel. */
+  flex: 1 1 0;
+  min-width: 0;
+  /* The width/height attributes on the <img> are there to reserve space, but
+     their presentation hint would otherwise pin the height at 1200px and beat
+     aspect-ratio. */
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.pindex-shots img:nth-child(1) {
+  transform: rotate(-2.5deg) translateY(10px);
+}
+.pindex-shots img:nth-child(2) {
+  transform: rotate(1.5deg);
+  z-index: 1;
+}
+.pindex-shots img:nth-child(3) {
+  transform: rotate(3deg) translateY(16px);
+}
+.pindex-shots img:hover {
+  transform: rotate(0deg) translateY(-6px) scale(1.03);
+  z-index: 2;
+}
+
+@keyframes pindex-open {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------- Cursor follower -------------------- */
+/* Outer node is moved by JS (pure translate); the card inside owns the offset
+   and the reveal, so the two never fight over one transform. */
+.pindex-follow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  pointer-events: none;
+  will-change: transform;
+}
+.pindex-follow-card {
+  position: relative;
+  width: 210px;
+  transform: translate(28px, -55%) scale(0.94);
+  opacity: 0;
+  transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.pindex-follow-card.is-visible {
+  opacity: 1;
+  transform: translate(28px, -55%) scale(1);
+}
+.pindex-follow-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55);
+}
+.pindex-follow-title {
+  display: block;
+  margin-top: var(--sp-3);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+.pindex-follow-meta {
+  display: block;
+  color: var(--sage-400);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 900px) {
+  .pindex-panel-inner {
+    grid-template-columns: 1fr;
+  }
+  .pindex-shots {
+    padding-inline: 0;
+    gap: var(--sp-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pindex-shots img {
+    min-width: 70%;
+    scroll-snap-align: center;
+    transform: none !important;
+  }
+  .pindex-shots img + img {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  /* The row collapses to name over detail — the year and the plus stay put on
+     the right so the list still scans as a column. */
+  .pindex-trigger-inner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'num place sign'
+      '.   title year';
+    gap: var(--sp-2) var(--sp-4);
+    align-items: center;
+  }
+  .pindex-num {
+    grid-area: num;
+  }
+  .pindex-place {
+    grid-area: place;
+  }
+  .pindex-title {
+    grid-area: title;
+  }
+  .pindex-year {
+    grid-area: year;
+  }
+  .pindex-sign {
+    grid-area: sign;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pindex-panel {
+    animation: none;
+  }
+  .pindex-place,
+  .pindex-shots img,
+  .pindex-sign::before,
+  .pindex-sign::after {
+    transition: none;
+  }
+}

@@ -8,6 +8,7 @@ export default {
   // -------------------- Navigation --------------------
   'nav.tagline': 'Gardens that live with you',
   'nav.home': 'Home',
+  'nav.projects': 'Projects',
   'nav.blog': 'Blog',
   'nav.admin': 'Admin',
   'nav.cta': 'Read the blog',
@@ -15,21 +16,30 @@ export default {
   'nav.language': 'Language',
 
   // -------------------- Footer --------------------
+  'footer.ideology': 'Gardens that live with you.',
+  'footer.contactCta': 'Get in touch',
+  'footer.exploreLabel': 'Site',
+  'footer.contactLabel': 'Contact',
+  'footer.followLabel': 'Follow',
   'footer.tagline': 'Gardens that live with you.',
   'footer.navLabel': 'Footer',
   'footer.note': 'Garden design & maintenance · Serving keen gardeners everywhere',
   'footer.copyright': '© {year} Rooted & Green. Grown with care.',
 
-  // -------------------- Landing: hero --------------------
-  'landing.eyebrow': 'Garden design & maintenance',
-  'landing.hero.titleLead': 'Gardens that',
-  'landing.hero.titleAccent': 'live with you.',
-  'landing.hero.lead':
-    'Rooted & Green designs, plants, and cares for beautiful, wildlife-friendly gardens. Practical advice, honest craft, and a love of growing things.',
-  'landing.hero.ctaPrimary': 'Explore the blog',
-  'landing.hero.ctaSecondary': 'Our services',
-  'landing.hero.imageAlt': 'A lush, thriving garden border in full growth',
-  'landing.hero.badgeText': 'Growing gardens since day one',
+  // -------------------- Home: header --------------------
+  'home.hero.ideology': 'Gardens that live with you.',
+  'home.hero.service': 'Garden design & maintenance',
+  'home.hero.imageAlt': 'A lush, thriving garden border in full growth',
+  'home.hero.scrollCue': 'Skip to the projects',
+
+  // -------------------- Home: projects --------------------
+  'projects.eyebrow': 'Finished projects',
+  'projects.title': 'Places we have planted',
+  'projects.lead':
+    'Every garden is one place, one year and one list of jobs. Open a row to see how it turned out.',
+  'projects.hint': 'Open a row for photos and detail',
+  'projects.scope': 'Scope of works',
+  'projects.imageAlt': '{title} — {place}, photograph {index}',
 
   // -------------------- Landing: services --------------------
   'landing.services.eyebrow': 'What we do',

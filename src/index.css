@@ -51,6 +51,9 @@
   --shadow-lg: 0 18px 44px rgba(30, 58, 43, 0.16);
 
   --maxw: 1140px;
+  /* Height of the sticky bar. The homepage header pulls itself up by exactly
+     this much to sit under it, so the two must agree. */
+  --nav-h: 74px;
   --font-sans: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial,
     sans-serif;
 

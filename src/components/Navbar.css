@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 74px;
+  min-height: var(--nav-h);
   gap: var(--sp-4);
 }
 
@@ -107,7 +107,7 @@
   }
   .nav-links {
     position: absolute;
-    top: 74px;
+    top: var(--nav-h);
     left: 0;
     right: 0;
     flex-direction: column;
@@ -133,4 +133,49 @@
     margin-top: var(--sp-4);
     text-align: center;
   }
+}
+
+/* -------------------- Over the homepage header -------------------- */
+/* The bar sits on top of the full-screen photo until the page scrolls. The
+   photo's own scrim is heaviest at the top, so white type has contrast. */
+.nav.is-over-hero {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+.nav.is-over-hero .brand,
+.nav.is-over-hero .brand:hover,
+.nav.is-over-hero .nav-links a {
+  color: #fff;
+}
+.nav.is-over-hero .brand-tag {
+  color: rgba(255, 255, 255, 0.72);
+}
+.nav.is-over-hero .nav-links a.active:not(.nav-cta) {
+  color: #fff;
+}
+.nav.is-over-hero .nav-links a:not(.nav-cta).active::after {
+  background: #fff;
+}
+.nav.is-over-hero .nav-toggle-bar {
+  background: #fff;
+}
+.nav.is-over-hero .nav-cta {
+  background: #fff;
+  color: var(--leaf-900) !important;
+}
+.nav.is-over-hero .nav-cta:hover {
+  background: var(--leaf-500);
+  color: #fff !important;
+}
+.nav.is-over-hero .lang-switch {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.nav.is-over-hero .lang-option {
+  color: #fff;
+}
+.nav.is-over-hero .lang-option.is-active {
+  background: #fff;
+  color: var(--leaf-900);
 }

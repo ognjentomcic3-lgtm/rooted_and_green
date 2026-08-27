@@ -10,6 +10,7 @@ export default {
   // -------------------- Navigation --------------------
   'nav.tagline': 'Vrtovi koji žive s vama',
   'nav.home': 'Početna',
+  'nav.projects': 'Projekti',
   'nav.blog': 'Blog',
   'nav.admin': 'Admin',
   'nav.cta': 'Pročitajte blog',
@@ -17,21 +18,32 @@ export default {
   'nav.language': 'Jezik',
 
   // -------------------- Footer --------------------
+  // Row one is the ideology sentence and the contact button; the rest is the
+  // usual footer matter.
+  'footer.ideology': 'Vrtovi koji žive s vama.',
+  'footer.contactCta': 'Javite nam se',
+  'footer.exploreLabel': 'Sajt',
+  'footer.contactLabel': 'Kontakt',
+  'footer.followLabel': 'Pratite nas',
   'footer.tagline': 'Vrtovi koji žive s vama.',
   'footer.navLabel': 'Podnožje',
   'footer.note': 'Dizajn i održavanje vrtova · Uz vas gde god da gajite vrt',
   'footer.copyright': '© {year} Rooted & Green. Uzgojeno s pažnjom.',
 
-  // -------------------- Landing: hero --------------------
-  'landing.eyebrow': 'Dizajn i održavanje vrtova',
-  'landing.hero.titleLead': 'Vrtovi koji',
-  'landing.hero.titleAccent': 'žive s vama.',
-  'landing.hero.lead':
-    'Rooted & Green projektuje, sadi i neguje lepe vrtove u kojima se dobro oseća i divlji svet. Praktični saveti, pošten zanat i ljubav prema svemu što raste.',
-  'landing.hero.ctaPrimary': 'Istražite blog',
-  'landing.hero.ctaSecondary': 'Naše usluge',
-  'landing.hero.imageAlt': 'Bujna cvetna leja u punom rastu',
-  'landing.hero.badgeText': 'Negujemo vrtove od prvog dana',
+  // -------------------- Home: header --------------------
+  'home.hero.ideology': 'Vrtovi koji žive s vama.',
+  'home.hero.service': 'Dizajn i održavanje vrtova',
+  'home.hero.imageAlt': 'Bujna cvetna leja u punom rastu',
+  'home.hero.scrollCue': 'Pređite na projekte',
+
+  // -------------------- Home: projects --------------------
+  'projects.eyebrow': 'Realizovani projekti',
+  'projects.title': 'Mesta koja smo zasadili',
+  'projects.lead':
+    'Svaki vrt je jedno mesto, jedna godina i jedan spisak poslova. Otvorite red da vidite kako izgleda.',
+  'projects.hint': 'Otvorite red za slike i detalje',
+  'projects.scope': 'Obim radova',
+  'projects.imageAlt': '{title} — {place}, fotografija {index}',
 
   // -------------------- Landing: services --------------------
   'landing.services.eyebrow': 'Šta radimo',
