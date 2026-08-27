@@ -2,13 +2,13 @@
    Projects — alternating rows of text and two photographs
    ============================================================ */
 
-/* The one part with no breathing room of its own: the dark slab butts straight
-   up against whatever sits above and below it. What is left is the little the
-   type needs so it is not touching the colour boundary. */
+/* The dark slab still butts straight up against whatever sits above and below
+   it — that comes from carrying no margin, which no part here does. The room
+   inside is the same --part-space every other part gets. */
 .pshow {
   background: #0f1512;
   color: var(--sage-100);
-  padding-block: var(--sp-5);
+  padding-block: var(--part-space);
 }
 
 .pshow-head {

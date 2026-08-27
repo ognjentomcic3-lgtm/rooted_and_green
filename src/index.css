@@ -159,6 +159,26 @@ img {
   padding-block: var(--part-space);
 }
 
+/* A part is never shorter than the screen. Give it less content than that and
+   the part still covers the screen anyway, with the room left over split above
+   and below the content: the least padding that fills a screen, which is what
+   keeps a short page (a lone call to action, a 404, an empty blog) from
+   reading as stubby. Give it more content and min-height stops mattering —
+   the part grows and --part-space is the padding you get.
+   The header and the footer already carry a full screen of their own, and
+   .blog-header is left out on purpose: it is a header band with its own part
+   directly beneath it, so a whole screen for it would be the opposite of
+   minimal. */
+.section,
+.svc,
+.pshow,
+.post {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+}
+
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.14em;
