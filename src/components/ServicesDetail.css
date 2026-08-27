@@ -4,7 +4,7 @@
 
 .svc {
   background: var(--cream);
-  padding-block: var(--sp-9);
+  padding-block: var(--part-space);
 }
 
 .svc-inner {
@@ -101,9 +101,6 @@
 }
 
 @media (max-width: 900px) {
-  .svc {
-    padding-block: var(--sp-8);
-  }
   .svc-inner {
     grid-template-columns: 1fr;
   }

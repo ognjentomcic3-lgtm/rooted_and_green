@@ -47,9 +47,8 @@
 
 .home-hero-inner {
   position: relative;
-  padding-block: var(--sp-9) calc(var(--sp-9) + var(--sp-6));
+  padding-block: var(--part-space) calc(var(--part-space) + var(--sp-6));
   color: var(--white);
-  max-width: var(--maxw);
 }
 
 .home-hero-name {

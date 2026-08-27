@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-6);
-  padding-block: clamp(var(--sp-7), 7vw, var(--sp-9));
+  padding-block: var(--part-space);
   flex-wrap: wrap;
 }
 
@@ -104,6 +104,10 @@
   flex-direction: column;
   gap: var(--sp-2);
   font-size: 0.94rem;
+  /* An email address is one unbreakable word; inside a four-column grid that
+     now sits in 80% of the screen it would otherwise widen its own column and
+     take the page with it. */
+  overflow-wrap: anywhere;
 }
 .footer-list a {
   color: #d7ded6;

@@ -2,10 +2,13 @@
    Projects — alternating rows of text and two photographs
    ============================================================ */
 
+/* The one part with no breathing room of its own: the dark slab butts straight
+   up against whatever sits above and below it. What is left is the little the
+   type needs so it is not touching the colour boundary. */
 .pshow {
   background: #0f1512;
   color: var(--sage-100);
-  padding-block: var(--sp-9);
+  padding-block: var(--sp-5);
 }
 
 .pshow-head {
@@ -144,9 +147,6 @@
 }
 
 @media (max-width: 860px) {
-  .pshow {
-    padding-block: var(--sp-8);
-  }
   /* The :nth-child(even) template above out-specifies a bare .pshow-row, so
      the stacked reset has to match its specificity. */
   .pshow-row,

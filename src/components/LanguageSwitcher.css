@@ -34,7 +34,8 @@
   color: var(--white);
 }
 
-@media (max-width: 760px) {
+/* Matches the width at which Navbar.css folds the row into a menu. */
+@media (max-width: 900px) {
   /* Inside the mobile menu the switcher sits on its own row, matching the
      stacked link rhythm rather than the desktop inline pill. */
   .nav-links .lang-switch {

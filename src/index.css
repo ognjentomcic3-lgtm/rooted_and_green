@@ -50,7 +50,17 @@
   --shadow: 0 6px 20px rgba(30, 58, 43, 0.1);
   --shadow-lg: 0 18px 44px rgba(30, 58, 43, 0.16);
 
-  --maxw: 1140px;
+  /* How far content is held off the screen edges. Every part runs its own
+     background the full width of the viewport; .container is what keeps the
+     copy, pictures and grids clear of the edges — ten per cent of the screen
+     per side on a regular display, so the page is the middle 80%. */
+  --gutter: 10vw;
+
+  /* The room above and below a part's content. Parts pay for it in padding,
+     never margin, so a part carrying its own colour keeps that colour right
+     up against its neighbours. */
+  --part-space: clamp(var(--sp-7), 6vw, var(--sp-9));
+
   /* Height of the sticky bar. The homepage header pulls itself up by exactly
      this much to sit under it, so the two must agree. */
   --nav-h: 74px;
@@ -58,6 +68,15 @@
     sans-serif;
 
   color-scheme: light;
+}
+
+/* Ten per cent of a phone is a squeeze rather than a margin. Below the width
+   where the layouts stack, the gutter goes back to something fixed and
+   comfortable, easing off as the screen narrows. */
+@media (max-width: 900px) {
+  :root {
+    --gutter: max(var(--sp-5), 5vw);
+  }
 }
 
 * {
@@ -124,15 +143,20 @@ img {
 }
 
 /* -------------------- Layout helpers -------------------- */
+/* Parts are full-bleed: their background runs edge to edge and .container is
+   the only thing holding content off those edges. No max-width here, so the
+   inset really does follow the screen; long lines are handled where they
+   happen, by the ch caps on the prose itself.
+   margin-inline stays for the few blocks that set their own measure cap
+   (.post-container) and want to sit centred inside the gutters. */
 .container {
   width: 100%;
-  max-width: var(--maxw);
   margin-inline: auto;
-  padding-inline: var(--sp-5);
+  padding-inline: var(--gutter);
 }
 
 .section {
-  padding-block: var(--sp-8);
+  padding-block: var(--part-space);
 }
 
 .eyebrow {

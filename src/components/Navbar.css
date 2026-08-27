@@ -74,8 +74,10 @@
 }
 
 /* Serbian nav labels run longer than English and the switcher adds a pill, so
-   the desktop row tightens up before it reaches the mobile breakpoint. */
-@media (max-width: 940px) {
+   the desktop row tightens up before it reaches the mobile breakpoint. The bar
+   keeps the same gutters as the rest of the page, so it is working with 80% of
+   the screen and hits that squeeze earlier than it used to. */
+@media (max-width: 1100px) {
   .nav-links {
     gap: var(--sp-4);
   }
@@ -101,7 +103,9 @@
   transition: 0.2s ease;
 }
 
-@media (max-width: 760px) {
+/* Same arithmetic: 80% of 900px is about what the row used to have at 760px,
+   which is where it gave up and became a menu. */
+@media (max-width: 900px) {
   .nav-toggle {
     display: flex;
   }
@@ -115,7 +119,8 @@
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--border);
-    padding: var(--sp-3) var(--sp-5) var(--sp-5);
+    /* Gutter, not a fixed inset — the links line up under the brand. */
+    padding: var(--sp-3) var(--gutter) var(--sp-5);
     box-shadow: var(--shadow);
     display: none;
   }
