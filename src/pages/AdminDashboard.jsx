@@ -1,22 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { usePosts } from '../hooks/usePosts.js';
+import { useI18n } from '../i18n/context.js';
+import { localizePost } from '../i18n/posts.js';
 import PostForm from '../components/PostForm.jsx';
 import './AdminDashboard.css';
-
-function formatDate(iso) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-}
 
 // view: 'list' | 'create' | 'edit'
 export default function AdminDashboard() {
   const { getAll, create, update, remove } = usePosts();
+  const { lang, t, categoryLabel, formatDate } = useI18n();
   const posts = getAll();
   const [view, setView] = useState('list');
   const [editing, setEditing] = useState(null);
@@ -44,11 +37,8 @@ export default function AdminDashboard() {
   };
 
   const handleDelete = (post) => {
-    if (
-      window.confirm(
-        `Delete “${post.title}”? This cannot be undone.`,
-      )
-    ) {
+    const title = localizePost(post, lang).title;
+    if (window.confirm(t('admin.deleteConfirm', { title }))) {
       remove(post.id);
     }
   };
@@ -58,23 +48,21 @@ export default function AdminDashboard() {
       <div className="container">
         <div className="admin-head">
           <div>
-            <p className="eyebrow">Admin</p>
+            <p className="eyebrow">{t('admin.eyebrow')}</p>
             <h1>
               {view === 'list'
-                ? 'Manage posts'
+                ? t('admin.list.title')
                 : view === 'edit'
-                  ? 'Edit post'
-                  : 'New post'}
+                  ? t('admin.edit.title')
+                  : t('admin.new.title')}
             </h1>
             <p className="lead">
-              {view === 'list'
-                ? 'Create, edit, and delete blog posts. Changes save to your browser and appear instantly on the public site.'
-                : 'Fill in the details below. All fields marked required must be completed.'}
+              {view === 'list' ? t('admin.list.lead') : t('admin.form.lead')}
             </p>
           </div>
           {view === 'list' && (
             <button className="btn btn-primary" onClick={startCreate}>
-              + New post
+              + {t('admin.newPost')}
             </button>
           )}
         </div>
@@ -84,29 +72,29 @@ export default function AdminDashboard() {
             <div className="admin-stats">
               <div className="stat card">
                 <span className="stat-num">{posts.length}</span>
-                <span className="stat-label">Total posts</span>
+                <span className="stat-label">{t('admin.stats.posts')}</span>
               </div>
               <div className="stat card">
                 <span className="stat-num">
                   {new Set(posts.map((p) => p.category)).size}
                 </span>
-                <span className="stat-label">Categories</span>
+                <span className="stat-label">{t('admin.stats.categories')}</span>
               </div>
               <div className="stat card">
                 <span className="stat-num">
                   {new Set(posts.map((p) => p.author)).size}
                 </span>
-                <span className="stat-label">Authors</span>
+                <span className="stat-label">{t('admin.stats.authors')}</span>
               </div>
             </div>
 
             {posts.length === 0 ? (
               <div className="admin-empty card">
                 <span aria-hidden="true">🌱</span>
-                <h3>No posts yet</h3>
-                <p>Create your first post to get growing.</p>
+                <h3>{t('admin.empty.title')}</h3>
+                <p>{t('admin.empty.text')}</p>
                 <button className="btn btn-primary" onClick={startCreate}>
-                  + New post
+                  + {t('admin.newPost')}
                 </button>
               </div>
             ) : (
@@ -114,11 +102,11 @@ export default function AdminDashboard() {
                 <table className="admin-table">
                   <thead>
                     <tr>
-                      <th>Post</th>
-                      <th>Category</th>
-                      <th>Author</th>
-                      <th>Date</th>
-                      <th className="col-actions">Actions</th>
+                      <th>{t('admin.table.post')}</th>
+                      <th>{t('admin.table.category')}</th>
+                      <th>{t('admin.table.author')}</th>
+                      <th>{t('admin.table.date')}</th>
+                      <th className="col-actions">{t('admin.table.actions')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -137,14 +125,16 @@ export default function AdminDashboard() {
                                 to={`/blog/${post.slug}`}
                                 className="cell-title"
                               >
-                                {post.title}
+                                {localizePost(post, lang).title}
                               </Link>
                               <span className="cell-slug">/{post.slug}</span>
                             </div>
                           </div>
                         </td>
                         <td>
-                          <span className="badge">{post.category}</span>
+                          <span className="badge">
+                            {categoryLabel(post.category)}
+                          </span>
                         </td>
                         <td className="cell-muted">{post.author}</td>
                         <td className="cell-muted">{formatDate(post.date)}</td>
@@ -154,13 +144,13 @@ export default function AdminDashboard() {
                               className="btn btn-ghost btn-sm"
                               onClick={() => startEdit(post)}
                             >
-                              Edit
+                              {t('admin.action.edit')}
                             </button>
                             <button
                               className="btn btn-danger btn-sm"
                               onClick={() => handleDelete(post)}
                             >
-                              Delete
+                              {t('admin.action.delete')}
                             </button>
                           </div>
                         </td>
@@ -174,7 +164,7 @@ export default function AdminDashboard() {
         ) : (
           <div className="admin-form-panel card">
             <button className="post-back" onClick={backToList}>
-              ← Back to posts
+              ← {t('admin.back')}
             </button>
             <PostForm
               initial={editing}

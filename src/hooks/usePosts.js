@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { seedPosts } from '../data/seedData.js';
+import { DEFAULT_LANG, foldDiacritics, localeOf } from '../i18n/core.js';
+import { migratePosts, postsChanged, slugSourceTitle } from '../i18n/posts.js';
+
+const DEFAULT_LOCALE = localeOf(DEFAULT_LANG);
 
 const STORAGE_KEY = 'rooted-and-green:posts';
 
@@ -15,7 +19,16 @@ function readStore() {
       return seedPosts;
     }
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : seedPosts;
+    if (!Array.isArray(parsed)) return seedPosts;
+
+    // Browsers from before the i18n release hold posts in the flat shape
+    // (title/excerpt/content at the top level, category as a display string).
+    // Upgrade them in place so nobody loses a post or lands on a blank site.
+    const migrated = migratePosts(parsed);
+    if (postsChanged(parsed, migrated)) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+    }
+    return migrated;
   } catch {
     return seedPosts;
   }
@@ -30,9 +43,10 @@ function sortByDateDesc(posts) {
   return [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
+// Diacritics are folded first so Serbian titles still produce readable,
+// ASCII-safe URLs ("Vodič kroz rezidbu" → "vodic-kroz-rezidbu").
 export function slugify(text) {
-  return String(text)
-    .toLowerCase()
+  return foldDiacritics(text, DEFAULT_LOCALE)
     .trim()
     .replace(/[^\w\s-]/g, '')
     .replace(/[\s_]+/g, '-')
@@ -66,7 +80,7 @@ export function usePosts() {
     const newPost = {
       ...data,
       id: `post-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      slug: data.slug ? slugify(data.slug) : slugify(data.title),
+      slug: data.slug ? slugify(data.slug) : slugify(slugSourceTitle(data)),
       date: data.date || new Date().toISOString().slice(0, 10),
     };
     const next = [newPost, ...current];

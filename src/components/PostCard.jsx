@@ -1,17 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useI18n } from '../i18n/context.js';
+import { localizePost } from '../i18n/posts.js';
 import './PostCard.css';
 
-function formatDate(iso) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-}
-
 export default function PostCard({ post }) {
+  const { lang, t, categoryLabel, formatDate } = useI18n();
+  const copy = localizePost(post, lang);
+
   return (
     <article className="post-card card">
       <Link to={`/blog/${post.slug}`} className="post-card-media" aria-hidden="true" tabIndex={-1}>
@@ -22,7 +17,9 @@ export default function PostCard({ post }) {
           width="600"
           height="338"
         />
-        <span className="post-card-badge badge">{post.category}</span>
+        <span className="post-card-badge badge">
+          {categoryLabel(post.category)}
+        </span>
       </Link>
       <div className="post-card-body">
         <div className="post-card-meta">
@@ -31,11 +28,11 @@ export default function PostCard({ post }) {
           <time dateTime={post.date}>{formatDate(post.date)}</time>
         </div>
         <h3 className="post-card-title">
-          <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+          <Link to={`/blog/${post.slug}`}>{copy.title}</Link>
         </h3>
-        <p className="post-card-excerpt">{post.excerpt}</p>
+        <p className="post-card-excerpt">{copy.excerpt}</p>
         <Link to={`/blog/${post.slug}`} className="post-card-link">
-          Read article →
+          {t('postCard.read')} →
         </Link>
       </div>
     </article>

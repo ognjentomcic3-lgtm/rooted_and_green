@@ -21,6 +21,72 @@
   margin-bottom: 0;
 }
 
+/* Per-language tabs for the translated fields. Shared fields stay in the
+   sidebar so they are never duplicated per language. */
+.form-langs {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.form-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--leaf-700);
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+.form-lang:hover {
+  border-color: var(--leaf-500);
+}
+.form-lang.is-active {
+  background: var(--leaf-700);
+  border-color: var(--leaf-700);
+  color: var(--white);
+}
+.form-lang.is-invalid {
+  border-color: #c0563f;
+  color: #b04a34;
+}
+.form-lang.is-invalid.is-active {
+  background: #b04a34;
+  border-color: #b04a34;
+  color: var(--white);
+}
+
+.form-lang-req {
+  color: var(--accent);
+  font-weight: 700;
+}
+.form-lang.is-active .form-lang-req {
+  color: var(--sage-200);
+}
+
+/* Quiet marker: this language still has an empty title or body. */
+.form-lang-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--earth-300);
+}
+.form-lang.is-active .form-lang-dot {
+  background: var(--sage-400);
+}
+.form-lang.is-invalid .form-lang-dot {
+  background: #c0563f;
+}
+
 .excerpt-area {
   min-height: 96px;
   font-family: inherit;
