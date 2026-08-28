@@ -7,8 +7,8 @@ import WhyUs from '../components/WhyUs.jsx';
 import ProjectShowcase from '../components/ProjectShowcase.jsx';
 import './Landing.css';
 
-// Four parts and no more: the header, the services, the references and the
-// projects. The blog keeps its own pages — it just no longer trails the
+// Four parts and no more: the header, the services, the projects and the
+// references. The blog keeps its own pages — it just no longer trails the
 // homepage.
 export default function Landing() {
   const { t } = useI18n();
@@ -20,9 +20,6 @@ export default function Landing() {
 
       {/* The services, in detail: text left, photograph right */}
       <ServicesDetail />
-
-      {/* Why people stay with us: three references, then the tally */}
-      <WhyUs />
 
       {/* Then three projects, text and pictures swapping sides row by row */}
       <section className="pshow" id="projects" aria-labelledby="pshow-title">
@@ -40,6 +37,11 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      {/* Why people stay with us: three references, then the tally. Last of
+          the four, so the work itself has been shown before anyone is asked
+          to take a customer's word for it. */}
+      <WhyUs />
     </>
   );
 }
