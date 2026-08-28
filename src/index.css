@@ -172,6 +172,7 @@ img {
    minimal. */
 .section,
 .svc,
+.wy,
 .pshow,
 .post {
   min-height: 100vh;

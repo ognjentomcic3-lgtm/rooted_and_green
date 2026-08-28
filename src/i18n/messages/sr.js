@@ -45,6 +45,17 @@ export default {
     'Ne prodajemo pakete. Svaki vrt dobije spisak poslova koji mu zaista treba, u redosledu koji ima smisla za sezonu i za teren.',
   'servicesDetail.imageAlt': 'Rad u vrtu tokom sadnje',
 
+  // -------------------- Home: why choose us --------------------
+  // Written from scratch rather than translated across from en.js. "Zašto baš
+  // mi" is how the question is actually put here — the "baš" is the whole
+  // point of it, and English has no word to spend on it.
+  'whyUs.eyebrow': 'Zašto baš mi',
+  'whyUs.title': 'Razlozi zbog kojih ostaju s nama',
+  'whyUs.lead':
+    'Najveći deo posla dobijemo od ljudi koji već imaju naš broj. Evo šta kažu troje od njih i šta se za ove godine skupilo.',
+  'whyUs.tally.eyebrow': 'U brojkama',
+  'whyUs.tally.title': 'Šta smo do sada uradili',
+
   // -------------------- Home: projects --------------------
   'projects.eyebrow': 'Realizovani projekti',
   'projects.title': 'Mesta koja smo zasadili',

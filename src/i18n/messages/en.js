@@ -41,6 +41,17 @@ export default {
     'We do not sell packages. Every garden gets the list of jobs it actually needs, in the order that makes sense for the season and the ground.',
   'servicesDetail.imageAlt': 'Work under way in a garden during planting',
 
+  // -------------------- Home: why choose us --------------------
+  // Two rows in one part: the references first, the tally under them. The
+  // names, places and figures those rows are built from are facts, so they
+  // live in data/testimonialsData.js and never pass through here.
+  'whyUs.eyebrow': 'Why choose us',
+  'whyUs.title': 'Reasons people stay with us',
+  'whyUs.lead':
+    'Most of our work comes from people who already have our number. Here is what three of them say, and what the years since add up to.',
+  'whyUs.tally.eyebrow': 'By the numbers',
+  'whyUs.tally.title': 'What we have accomplished',
+
   // -------------------- Home: projects --------------------
   'projects.eyebrow': 'Finished projects',
   'projects.title': 'Places we have planted',
