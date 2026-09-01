@@ -1,0 +1,161 @@
+/* The admin split shell. Every class here is prefixed `adm-`: all CSS in this
+   project is global, and the panes that render inside the <Outlet /> carry
+   their own prefixes (`admp-`, `admref-`, `refform-`). */
+
+.adm-shell {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--cream);
+}
+
+/* -------------------- Master pane -------------------- */
+
+/* Fixed width, and it does not shrink: a nav that reflows as the list beside
+   it changes is a nav you cannot aim at. */
+.adm-master {
+  flex: 0 0 240px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.adm-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  line-height: 1.2;
+}
+.adm-brand-name {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--leaf-900);
+}
+.adm-brand-tag {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--leaf-500);
+}
+
+.adm-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.adm-nav-link {
+  display: block;
+  padding: 0.62rem var(--sp-4);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.adm-nav-link:hover {
+  background: var(--cream);
+  color: var(--leaf-900);
+}
+/* The active section has to read as active at a glance — a colour shift alone
+   is too quiet next to only one sibling. */
+.adm-nav-link.is-active {
+  background: var(--sage-100);
+  color: var(--leaf-900);
+  box-shadow: inset 3px 0 0 var(--leaf-700);
+}
+
+/* Pushed to the bottom of the pane on desktop: these are the two ways out, not
+   the two things you came here to do. */
+.adm-master-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.adm-site-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.adm-site-link:hover {
+  color: var(--primary-hover);
+}
+.adm-logout {
+  width: 100%;
+}
+
+/* -------------------- Detail pane -------------------- */
+
+/* Intentionally unopinionated: no padding, no max-width, no grid. The
+   references pane renders a nested split in here and must be able to fill it,
+   so the contract is only "the rest of the row, and at least as tall as the
+   shell". `min-width: 0` is what stops a wide table inside from pushing the
+   master pane off its fixed width. */
+.adm-detail {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: block;
+  padding: 0;
+}
+
+/* -------------------- Stacked, master first -------------------- */
+
+/* Under 720px a split view is a stack. The master keeps its two entries but
+   lays them out in a row, so it costs a strip at the top rather than half the
+   screen. */
+@media (max-width: 720px) {
+  .adm-shell {
+    display: block;
+  }
+  .adm-master {
+    width: auto;
+    flex-direction: column;
+    gap: var(--sp-4);
+    padding: var(--sp-4) var(--sp-5);
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .adm-nav {
+    flex-direction: row;
+    gap: var(--sp-2);
+  }
+  .adm-nav-link {
+    flex: 1 1 0;
+    text-align: center;
+    padding: 0.55rem var(--sp-3);
+  }
+  .adm-nav-link.is-active {
+    box-shadow: inset 0 -3px 0 var(--leaf-700);
+  }
+  .adm-master-foot {
+    margin-top: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding-top: var(--sp-4);
+  }
+  .adm-logout {
+    width: auto;
+  }
+}
+
+/* 375px: the pane's side padding matches the page gutter and nothing else has
+   to give. */
+@media (max-width: 420px) {
+  .adm-master {
+    padding-inline: var(--sp-4);
+  }
+  .adm-brand-name {
+    font-size: 1rem;
+  }
+}

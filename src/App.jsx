@@ -5,6 +5,7 @@ import ProjectList from './pages/ProjectList.jsx';
 import ProjectDetail from './pages/ProjectDetail.jsx';
 import NotFound from './pages/NotFound.jsx';
 import AdminLogin from './pages/AdminLogin.jsx';
+import AdminLayout from './pages/admin/AdminLayout.jsx';
 import AdminProjects from './pages/admin/AdminProjects.jsx';
 import AdminReferences from './pages/admin/AdminReferences.jsx';
 import AdminProjectEdit from './pages/admin/AdminProjectEdit.jsx';
@@ -43,12 +44,9 @@ export default function App() {
       <Route element={<RequireAuth />}>
         <Route path="/admin" element={<Navigate to="/admin/projects" replace />} />
 
-        {/* The master-detail split shell. T3 writes
-            src/pages/admin/AdminLayout.jsx and plugs it into the pathless
-            <Route> below as element={<AdminLayout />}; these two panes then
-            render inside its <Outlet />. Until then the route group has no
-            element of its own, so the panes render bare. Nothing else moves. */}
-        <Route>
+        {/* The master-detail split shell: these two panes render inside
+            AdminLayout's <Outlet />, beside the master pane that lists them. */}
+        <Route element={<AdminLayout />}>
           <Route path="/admin/projects" element={<AdminProjects />} />
           <Route path="/admin/references" element={<AdminReferences />} />
         </Route>

@@ -1,0 +1,251 @@
+/* The projects pane. Mined out of the old AdminDashboard.css — same row
+   proportions, same table chrome — with every class renamed into the `admp-`
+   prefix, because all CSS here is global and the other admin screens are
+   writing rows and thumbnails of their own right next door.
+
+   The pane brings its own padding: the detail pane it sits in has none, on
+   purpose, so the references screen can fill it edge to edge. */
+
+.admp-pane {
+  padding: var(--sp-6);
+}
+
+/* -------------------- Heading -------------------- */
+
+.admp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+  flex-wrap: wrap;
+}
+/* Takes the room left over so the New project button stays on the right until
+   there is no longer room for it beside the heading. */
+.admp-head-text {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.admp-head h1 {
+  margin-bottom: var(--sp-2);
+}
+.admp-head .lead {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+/* "n / 3 on the landing page", right under the lead. It turns amber at the cap
+   so the reason the boxes went dead is on screen before they are clicked. */
+.admp-count {
+  display: inline-block;
+  margin-top: var(--sp-3);
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: var(--sage-100);
+  color: var(--leaf-700);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.admp-count.is-full {
+  background: #f4e7d6;
+  color: var(--earth-700);
+}
+
+/* Shown only when setFeatured() actually refused a write. */
+.admp-notice {
+  margin-bottom: var(--sp-5);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-sm);
+  background: #f4e7d6;
+  color: var(--earth-700);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* -------------------- Table -------------------- */
+
+.admp-table-wrap {
+  overflow-x: auto;
+  padding: 0;
+}
+.admp-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+.admp-table th,
+.admp-table td {
+  text-align: left;
+  padding: var(--sp-4) var(--sp-4);
+  vertical-align: middle;
+}
+.admp-table thead th {
+  background: var(--sage-100);
+  color: var(--leaf-900);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+.admp-table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+.admp-table tbody tr:last-child {
+  border-bottom: 0;
+}
+.admp-table tbody tr:hover {
+  background: var(--cream);
+}
+
+.admp-col-check {
+  width: 1%;
+  white-space: nowrap;
+}
+.admp-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  cursor: pointer;
+}
+.admp-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--leaf-700);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.admp-check input:disabled {
+  cursor: not-allowed;
+}
+/* Visually hidden while the column header carries the label; the stacked
+   layout below brings it back. */
+.admp-check-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.admp-cell-project {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.admp-thumb {
+  width: 58px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  background: var(--sage-100);
+}
+.admp-title {
+  display: block;
+  font-weight: 700;
+  color: var(--leaf-900);
+  line-height: 1.3;
+}
+.admp-slug {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+.admp-muted {
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.admp-col-actions {
+  text-align: right;
+}
+.admp-row-actions {
+  display: inline-flex;
+  gap: var(--sp-2);
+  justify-content: flex-end;
+}
+
+/* -------------------- Empty -------------------- */
+
+.admp-empty {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-5);
+}
+.admp-empty span[aria-hidden] {
+  font-size: 2.6rem;
+  display: block;
+  margin-bottom: var(--sp-3);
+}
+.admp-empty h2 {
+  margin-bottom: var(--sp-3);
+}
+.admp-empty p {
+  color: var(--text-soft);
+  margin-bottom: var(--sp-5);
+}
+
+/* -------------------- Stacked rows -------------------- */
+
+/* At the width where the shell stops being two columns, the table stops being
+   a table: five columns and a 680px floor inside a 375px screen is a sideways
+   scrollbar over every row. Each row becomes a block instead, and the checkbox
+   picks up the visible label the dropped header used to give it. */
+@media (max-width: 720px) {
+  .admp-pane {
+    padding: var(--sp-5) var(--sp-4);
+  }
+  .admp-head {
+    margin-bottom: var(--sp-5);
+  }
+  .admp-table,
+  .admp-table tbody,
+  .admp-table tr,
+  .admp-table td {
+    display: block;
+    width: 100%;
+  }
+  .admp-table {
+    min-width: 0;
+  }
+  .admp-table thead {
+    display: none;
+  }
+  .admp-table tbody tr {
+    padding: var(--sp-4);
+  }
+  .admp-table td {
+    padding: var(--sp-1) 0;
+  }
+  .admp-col-check {
+    white-space: normal;
+  }
+  .admp-check-text {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--leaf-900);
+  }
+  .admp-muted {
+    white-space: normal;
+  }
+  .admp-col-actions {
+    text-align: left;
+    padding-top: var(--sp-3);
+  }
+  .admp-row-actions {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
