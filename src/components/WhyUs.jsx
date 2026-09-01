@@ -3,8 +3,8 @@ import {
   achievementCopy,
   achievements,
   testimonialCopy,
-  testimonials,
 } from '../data/testimonialsData.js';
+import { useTestimonials } from '../hooks/useTestimonials.js';
 import './WhyUs.css';
 
 // The last part of the homepage, after the services, in two rows: what three
@@ -12,8 +12,15 @@ import './WhyUs.css';
 //
 // The second row carries its own eyebrow and heading because without one the
 // numbers would read as a fourth reference card rather than a separate claim.
+//
+// The references come from the store rather than straight from the seed array,
+// so a quote edited in the admin shows up here. They are deliberately *not*
+// filtered by `featured` — which of them the checkbox should put on the landing
+// page is a separate piece of work, and until it is done this row keeps showing
+// every reference there is. The tally stays static; it is not editable.
 export default function WhyUs() {
   const { t, lang } = useI18n();
+  const { testimonials } = useTestimonials();
 
   return (
     <section className="wy" id="why-us" aria-labelledby="wy-title">

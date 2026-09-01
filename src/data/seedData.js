@@ -4,6 +4,12 @@
 // Categories are stable keys — display labels live in src/i18n/messages/*.js.
 // Each post keeps language-neutral fields at the top level and its copy under
 // `i18n`, so the slug (and therefore every /projects/:slug URL) stays single.
+//
+// `featured` is the admin's checkbox: whether a project is one of the ones put
+// forward on the landing page. At most three may be true at once, which is why
+// exactly three are seeded that way — a first visit should already satisfy the
+// rule rather than start over the limit. The cap itself is enforced by
+// setFeatured() in src/hooks/usePosts.js, not here.
 
 export const CATEGORIES = [
   'design',
@@ -21,6 +27,7 @@ export const seedPosts = [
     category: 'design',
     author: 'Maya Fernsby',
     date: '2026-06-28',
+    featured: true,
     i18n: {
       sr: {
         title: 'Podignute leje koje traju deceniju',
@@ -83,6 +90,7 @@ Give the timber a full season to settle, top up the soil each spring, and a good
     category: 'planting',
     author: 'Theo Marsh',
     date: '2026-06-15',
+    featured: true,
     i18n: {
       sr: {
         title: 'Leja za oprašivače koja cveta u svakoj sezoni',
@@ -167,6 +175,7 @@ Do this, and your border will be busy from the first warm day of March to the la
     category: 'sustainability',
     author: 'Maya Fernsby',
     date: '2026-05-30',
+    featured: true,
     i18n: {
       sr: {
         title: 'Od umornog travnjaka do livade divljeg cveća',
@@ -235,6 +244,7 @@ Less mowing, more butterflies, and a garden that changes beautifully with the se
     category: 'maintenance',
     author: 'Theo Marsh',
     date: '2026-01-18',
+    featured: false,
     i18n: {
       sr: {
         title: 'Vrtlarski vodič kroz zimsku rezidbu',
@@ -319,6 +329,7 @@ Take your time, step back often, and remember: you cannot glue a branch back on.
     category: 'seasonal',
     author: 'Priya Ellwood',
     date: '2026-04-09',
+    featured: false,
     i18n: {
       sr: {
         title: 'Deset biljaka za saksije koje uspevaju u senci',

@@ -1,0 +1,287 @@
+/* The references pane and its nested split.
+
+   Every class here is prefixed `admref-` (the form beside it uses `refform-`).
+   All CSS in this project is global — Vite does not scope it — so a `.row` or a
+   `.thumb` in here would land on the projects pane and the shell as well.
+
+   The pane makes no assumption about what it renders into: no width, no
+   max-width, no margin. AdminLayout's detail pane hands it the rest of the row
+   with no padding, and this file supplies the padding. */
+
+.admref {
+  width: 100%;
+  padding: var(--sp-6);
+}
+
+/* -------------------- Head -------------------- */
+
+.admref-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+.admref-headtext {
+  min-width: 0;
+}
+.admref-title {
+  font-size: 1.7rem;
+  margin-bottom: var(--sp-2);
+}
+.admref-lead {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.98rem;
+  max-width: 54ch;
+}
+
+/* -------------------- The nested split -------------------- */
+
+/* Stacked is the default and two columns is the exception, because this split
+   lives *inside* another one. The shell keeps a 240px master pane down to
+   720px, so at 900px viewport there are only ~640px here — enough for a list or
+   a form, not for both. Two columns start at 1081px, where the detail pane is
+   about 840px wide: a ~320px list beside a ~450px form, which is the narrowest
+   the form is comfortable at. Below that the list sits above the form, which is
+   also the DOM order, so nothing has to be reordered. */
+.admref-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+@media (min-width: 1081px) {
+  .admref-split {
+    grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  }
+}
+
+/* -------------------- List -------------------- */
+
+.admref-listpane,
+.admref-formpane {
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.admref-listpane {
+  overflow: hidden;
+}
+
+/* The form carries no padding of its own, so the pane holds it — and the
+   no-selection state below reuses the same box. */
+.admref-formpane {
+  padding: var(--sp-5);
+}
+
+.admref-listhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-1) var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+}
+/* The counter, in the seeded state, reads "3 / 3 on the landing page" the
+   moment the pane opens — which is what makes three dead checkboxes read as a
+   rule rather than as a bug. */
+.admref-count {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--leaf-900);
+}
+/* Empty until a click is actually refused, and it keeps its place in the flow
+   so the head does not jump when the message appears. */
+.admref-limit {
+  margin: 0;
+  flex: 1 1 100%;
+  min-height: 1.2em;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #b04a34;
+}
+
+.admref-legend,
+.admref-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.admref-legend {
+  background: var(--sage-100);
+  border-bottom: 1px solid var(--border);
+  color: var(--leaf-900);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.admref-legend-actions {
+  text-align: right;
+}
+
+.admref-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admref-row {
+  border-bottom: 1px solid var(--border);
+}
+.admref-row:last-child {
+  border-bottom: 0;
+}
+.admref-row:hover {
+  background: var(--cream);
+}
+/* Which row the form on the right belongs to. The inset bar is the same signal
+   the shell's active nav entry uses. */
+.admref-row.is-selected {
+  background: var(--sage-100);
+  box-shadow: inset 3px 0 0 var(--leaf-700);
+}
+
+.admref-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--leaf-700);
+  cursor: pointer;
+}
+.admref-checkbox:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.admref-person {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+.admref-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--sage-100);
+}
+/* The name is the row's own way in, the way the title is on a project row. */
+.admref-name {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--leaf-900);
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.admref-name:hover {
+  color: var(--leaf-500);
+}
+
+.admref-place {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.admref-rowactions {
+  display: inline-flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+}
+
+/* -------------------- Empty states -------------------- */
+
+.admref-empty {
+  padding: var(--sp-6) var(--sp-5);
+  text-align: center;
+}
+.admref-none {
+  padding: var(--sp-5) 0;
+  text-align: center;
+}
+.admref-empty-title,
+.admref-none-title {
+  font-size: 1.05rem;
+  margin-bottom: var(--sp-2);
+}
+.admref-empty-text,
+.admref-none-text {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.94rem;
+}
+
+/* -------------------- Narrow rows -------------------- */
+
+/* Four columns stop fitting long before the viewport does: inside the stacked
+   split the row has the full width, but a name, a town and two buttons on one
+   line still crowd at phone size. Below 560px the town and the buttons drop to
+   a second line under the name, and the legend goes with them — a header for
+   columns that no longer exist is worse than none. */
+@media (max-width: 560px) {
+  .admref {
+    padding: var(--sp-5) var(--sp-4);
+  }
+  .admref-title {
+    font-size: 1.45rem;
+  }
+  .admref-new {
+    width: 100%;
+  }
+  .admref-legend {
+    display: none;
+  }
+  .admref-row {
+    grid-template-columns: auto minmax(0, 1fr);
+    row-gap: var(--sp-2);
+    padding: var(--sp-4);
+  }
+  .admref-place,
+  .admref-rowactions {
+    grid-column: 2;
+    justify-content: flex-start;
+  }
+  .admref-name {
+    white-space: normal;
+  }
+  .admref-formpane {
+    padding: var(--sp-4);
+  }
+}
+
+/* 375px: the pane's padding matches the shell's own at this width so the two
+   do not read as nested boxes. */
+@media (max-width: 420px) {
+  .admref {
+    padding: var(--sp-5) var(--sp-4);
+  }
+  .admref-avatar {
+    width: 34px;
+    height: 34px;
+  }
+  .admref-listhead,
+  .admref-row {
+    padding-inline: var(--sp-3);
+  }
+}

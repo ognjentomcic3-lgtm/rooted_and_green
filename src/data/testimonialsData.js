@@ -9,6 +9,13 @@
 // Avatars use seeded i.pravatar.cc URLs, the same trick as the picsum imagery
 // elsewhere on the site: a stable placeholder face that loads without a key.
 // They are served at 160px so they stay crisp at the 72px the card draws them.
+//
+// The array below is no longer read directly by the page: it is the seed that
+// useTestimonials() copies into localStorage on a first visit, so the admin has
+// something to edit. `featured` is that admin's checkbox — whether a reference
+// is one of the ones put forward on the landing page. At most three may be true
+// at once and there are exactly three here, so the seeded data already
+// satisfies the rule. The cap lives in setFeatured(), not in this file.
 
 export const testimonials = [
   {
@@ -16,6 +23,7 @@ export const testimonials = [
     name: 'Jelena Popović',
     place: 'Podgorica',
     avatar: 'https://i.pravatar.cc/160?img=45',
+    featured: true,
     i18n: {
       sr: {
         quote:
@@ -32,6 +40,7 @@ export const testimonials = [
     name: 'Marko Đurović',
     place: 'Tivat',
     avatar: 'https://i.pravatar.cc/160?img=13',
+    featured: true,
     i18n: {
       sr: {
         quote:
@@ -48,6 +57,7 @@ export const testimonials = [
     name: 'Danica Vuković',
     place: 'Kolašin',
     avatar: 'https://i.pravatar.cc/160?img=32',
+    featured: true,
     i18n: {
       sr: {
         quote:

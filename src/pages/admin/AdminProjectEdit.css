@@ -1,0 +1,93 @@
+/* The project editor is a whole screen of its own: no navbar, no footer and no
+   master pane beside it, so it centres its own column on the cream ground the
+   way the login card does. Every class here is prefixed `admedit-` because all
+   CSS in this project is global — Vite scopes none of it. */
+.admedit {
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--cream);
+  padding: var(--sp-6) var(--sp-5) var(--sp-8);
+}
+
+.admedit-inner {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+/* The only way out of this screen without the navbar, so it sits above the
+   heading rather than beside it. */
+.admedit-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+  color: var(--leaf-700);
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+.admedit-back:hover {
+  color: var(--leaf-900);
+  text-decoration: underline;
+}
+
+.admedit-head {
+  margin-bottom: var(--sp-5);
+}
+
+/* The global h1 is display-sized for the public pages; an admin form heading
+   should not shout over the form it belongs to. */
+.admedit-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+
+.admedit-lead {
+  color: var(--text-soft);
+  font-size: 0.98rem;
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* .card clips its children, and PostForm's sidebar is position: sticky — an
+   ancestor with overflow: hidden silently kills that, so it is opened back up
+   here rather than in PostForm. */
+.admedit-panel {
+  padding: var(--sp-6);
+  overflow: visible;
+}
+
+/* Scoped nudges to PostForm's own markup — no class of its own is redefined,
+   only its behaviour inside this panel. The form already has the heading above
+   it for separation, and the 90px sticky offset was measured against a navbar
+   that does not exist on this screen. */
+.admedit-panel .post-form {
+  margin-top: 0;
+}
+.admedit-panel .form-side {
+  top: var(--sp-5);
+}
+.admedit-panel .form-actions {
+  flex-wrap: wrap;
+}
+
+.admedit-missing {
+  display: grid;
+  justify-items: start;
+  gap: var(--sp-3);
+}
+.admedit-missing .admedit-title {
+  margin-bottom: 0;
+}
+
+/* 375px: the panel gives up its comfortable padding before the content gives
+   up the screen edges. */
+@media (max-width: 640px) {
+  .admedit {
+    padding: var(--sp-5) var(--sp-4) var(--sp-7);
+  }
+  .admedit-panel {
+    padding: var(--sp-5) var(--sp-4);
+  }
+}

@@ -9,7 +9,6 @@ export default {
   'nav.tagline': 'Gardens that live with you',
   'nav.home': 'Home',
   'nav.projects': 'Projects',
-  'nav.admin': 'Admin',
   'nav.cta': 'See the projects',
   'nav.toggle': 'Toggle menu',
   'nav.language': 'Language',
@@ -92,30 +91,72 @@ export default {
   'project.notFound.text': 'That project may have been moved or removed.',
   'project.notFound.back': 'Back to the projects',
 
-  // -------------------- Admin --------------------
-  'admin.eyebrow': 'Admin',
-  'admin.list.title': 'Manage projects',
-  'admin.list.lead':
-    'Create, edit, and delete projects. Changes save to your browser and appear instantly on the public site.',
-  'admin.edit.title': 'Edit project',
-  'admin.new.title': 'New project',
-  'admin.form.lead':
+  // -------------------- Admin: login --------------------
+  'login.eyebrow': 'Admin',
+  'login.title': 'Sign in',
+  'login.lead': 'Enter the username and password to edit projects and references.',
+  'login.username': 'Username',
+  'login.password': 'Password',
+  'login.submit': 'Sign in',
+  'login.error': 'Wrong username or password.',
+
+  // -------------------- Admin: shell --------------------
+  'admin.nav.title': 'Admin',
+  'admin.nav.label': 'Admin sections',
+  'admin.nav.projects': 'Projects',
+  'admin.nav.references': 'References',
+  'admin.nav.site': 'Back to the site',
+  'admin.nav.logout': 'Log out',
+
+  // -------------------- Admin: projects --------------------
+  'admin.projects.title': 'Projects',
+  'admin.projects.lead':
+    'Edit the projects and choose which of them show on the landing page.',
+  'admin.projects.new': 'New project',
+  'admin.projects.col.featured': 'On the landing page',
+  'admin.projects.col.project': 'Project',
+  'admin.projects.col.category': 'Category',
+  'admin.projects.col.date': 'Date',
+  'admin.projects.col.actions': 'Actions',
+  'admin.projects.edit': 'Edit',
+  'admin.projects.delete': 'Delete',
+  'admin.projects.deleteConfirm': 'Delete “{title}”? This cannot be undone.',
+  'admin.projects.empty.title': 'No projects yet',
+  'admin.projects.empty.text': 'Create your first project to get growing.',
+  'admin.projects.newTitle': 'New project',
+  'admin.projects.editTitle': 'Edit project',
+  'admin.projects.formLead':
     'Fill in the details below. All fields marked required must be completed.',
-  'admin.newProject': 'New project',
-  'admin.stats.projects': 'Total projects',
-  'admin.stats.categories': 'Categories',
-  'admin.stats.authors': 'Authors',
-  'admin.empty.title': 'No projects yet',
-  'admin.empty.text': 'Create your first project to get growing.',
-  'admin.table.project': 'Project',
-  'admin.table.category': 'Category',
-  'admin.table.author': 'Author',
-  'admin.table.date': 'Date',
-  'admin.table.actions': 'Actions',
-  'admin.action.edit': 'Edit',
-  'admin.action.delete': 'Delete',
-  'admin.deleteConfirm': 'Delete “{title}”? This cannot be undone.',
-  'admin.back': 'Back to projects',
+  'admin.projects.back': 'Back to projects',
+  'admin.projects.notFound.title': 'Project not found',
+  'admin.projects.notFound.text':
+    'There is no project at that address — it may have been deleted since.',
+  'admin.projects.notFound.back': 'Back to the project list',
+
+  // -------------------- Admin: references --------------------
+  'admin.references.title': 'References',
+  'admin.references.lead':
+    'Edit what clients said and choose which of them show on the landing page.',
+  'admin.references.new': 'New reference',
+  'admin.references.col.featured': 'On the landing page',
+  'admin.references.col.name': 'Name',
+  'admin.references.col.place': 'Town',
+  'admin.references.col.actions': 'Actions',
+  'admin.references.edit': 'Edit',
+  'admin.references.delete': 'Delete',
+  'admin.references.deleteConfirm':
+    'Delete the reference from {name}? This cannot be undone.',
+  'admin.references.empty.title': 'No references yet',
+  'admin.references.empty.text': 'Add the first client quote.',
+  'admin.references.noSelection.title': 'No reference selected',
+  'admin.references.noSelection.text':
+    'Pick a reference from the list to edit it, or add a new one.',
+
+  // -------------------- Admin: on the landing page --------------------
+  'admin.featured.label': 'Show on the landing page',
+  'admin.featured.count': '{count} / 3 on the landing page',
+  'admin.featured.limitReached':
+    'Three are already chosen. Uncheck one to add another.',
 
   // -------------------- Project form --------------------
   'form.langLabel': 'Content language',
@@ -148,6 +189,28 @@ export default {
   'form.save': 'Save changes',
   'form.publish': 'Publish project',
   'form.cancel': 'Cancel',
+
+  // -------------------- Reference form --------------------
+  'referenceForm.newTitle': 'New reference',
+  'referenceForm.editTitle': 'Edit reference',
+  'referenceForm.langLabel': 'Quote language',
+  'referenceForm.required': 'required',
+  'referenceForm.incomplete': 'incomplete',
+  'referenceForm.name': 'Name',
+  'referenceForm.namePlaceholder': 'e.g. Ana Jovanović',
+  'referenceForm.place': 'Town',
+  'referenceForm.placePlaceholder': 'e.g. Podgorica',
+  'referenceForm.avatar': 'Photo URL',
+  'referenceForm.avatarPlaceholder': 'https://i.pravatar.cc/160?img=12',
+  'referenceForm.avatarAlt': 'Photo preview',
+  'referenceForm.quote': 'Quote',
+  'referenceForm.quotePlaceholder': 'What the client said about the work…',
+  'referenceForm.error.name': 'A name is required.',
+  'referenceForm.error.avatar': 'A photo URL is required.',
+  'referenceForm.error.quote': 'A Serbian quote is required.',
+  'referenceForm.save': 'Save changes',
+  'referenceForm.create': 'Add reference',
+  'referenceForm.cancel': 'Cancel',
 
   // -------------------- Not found --------------------
   'notFound.title': 'Page not found',

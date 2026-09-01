@@ -11,7 +11,6 @@ export default {
   'nav.tagline': 'Vrtovi koji žive s vama',
   'nav.home': 'Početna',
   'nav.projects': 'Projekti',
-  'nav.admin': 'Admin',
   'nav.cta': 'Pogledajte projekte',
   'nav.toggle': 'Meni',
   'nav.language': 'Jezik',
@@ -102,30 +101,81 @@ export default {
   'project.notFound.text': 'Taj projekat je možda premešten ili uklonjen.',
   'project.notFound.back': 'Nazad na projekte',
 
-  // -------------------- Admin --------------------
-  'admin.eyebrow': 'Administracija',
-  'admin.list.title': 'Upravljanje projektima',
-  'admin.list.lead':
-    'Kreirajte, menjajte i brišite projekte. Izmene se čuvaju u vašem pregledaču i odmah se vide na javnom sajtu.',
-  'admin.edit.title': 'Izmena projekta',
-  'admin.new.title': 'Novi projekat',
-  'admin.form.lead':
+  // -------------------- Admin: login --------------------
+  // The only admin screen without the split shell around it. Kept short: two
+  // fields, one button, one error.
+  'login.eyebrow': 'Administracija',
+  'login.title': 'Prijava',
+  'login.lead':
+    'Unesite korisničko ime i lozinku da biste uređivali projekte i reference.',
+  'login.username': 'Korisničko ime',
+  'login.password': 'Lozinka',
+  'login.submit': 'Prijavite se',
+  'login.error': 'Pogrešno korisničko ime ili lozinka.',
+
+  // -------------------- Admin: shell --------------------
+  // The admin has no navbar and no footer, so the master pane carries the only
+  // way out: back to the public site, or out of the session altogether.
+  'admin.nav.title': 'Administracija',
+  'admin.nav.label': 'Odeljci administracije',
+  'admin.nav.projects': 'Projekti',
+  'admin.nav.references': 'Reference',
+  'admin.nav.site': 'Nazad na sajt',
+  'admin.nav.logout': 'Odjavite se',
+
+  // -------------------- Admin: projects --------------------
+  'admin.projects.title': 'Projekti',
+  'admin.projects.lead':
+    'Uređujte projekte i birajte koji se od njih prikazuju na početnoj strani.',
+  'admin.projects.new': 'Novi projekat',
+  'admin.projects.col.featured': 'Na početnoj',
+  'admin.projects.col.project': 'Projekat',
+  'admin.projects.col.category': 'Kategorija',
+  'admin.projects.col.date': 'Datum',
+  'admin.projects.col.actions': 'Radnje',
+  'admin.projects.edit': 'Izmeni',
+  'admin.projects.delete': 'Obriši',
+  'admin.projects.deleteConfirm': 'Obrisati „{title}“? Ovo se ne može poništiti.',
+  'admin.projects.empty.title': 'Još nema projekata',
+  'admin.projects.empty.text': 'Napravite prvi projekat i krenite u rast.',
+  'admin.projects.newTitle': 'Novi projekat',
+  'admin.projects.editTitle': 'Izmena projekta',
+  'admin.projects.formLead':
     'Popunite podatke ispod. Sva obavezna polja moraju biti popunjena.',
-  'admin.newProject': 'Novi projekat',
-  'admin.stats.projects': 'Ukupno projekata',
-  'admin.stats.categories': 'Kategorije',
-  'admin.stats.authors': 'Autori',
-  'admin.empty.title': 'Još nema projekata',
-  'admin.empty.text': 'Napravite prvi projekat i krenite u rast.',
-  'admin.table.project': 'Projekat',
-  'admin.table.category': 'Kategorija',
-  'admin.table.author': 'Autor',
-  'admin.table.date': 'Datum',
-  'admin.table.actions': 'Radnje',
-  'admin.action.edit': 'Izmeni',
-  'admin.action.delete': 'Obriši',
-  'admin.deleteConfirm': 'Obrisati „{title}“? Ovo se ne može poništiti.',
-  'admin.back': 'Nazad na projekte',
+  'admin.projects.back': 'Nazad na projekte',
+  'admin.projects.notFound.title': 'Projekat nije pronađen',
+  'admin.projects.notFound.text':
+    'Na toj adresi nema projekta — možda je u međuvremenu obrisan.',
+  'admin.projects.notFound.back': 'Nazad na spisak projekata',
+
+  // -------------------- Admin: references --------------------
+  'admin.references.title': 'Reference',
+  'admin.references.lead':
+    'Uređujte izjave klijenata i birajte koje se prikazuju na početnoj strani.',
+  'admin.references.new': 'Nova referenca',
+  'admin.references.col.featured': 'Na početnoj',
+  'admin.references.col.name': 'Ime',
+  'admin.references.col.place': 'Mesto',
+  'admin.references.col.actions': 'Radnje',
+  'admin.references.edit': 'Izmeni',
+  'admin.references.delete': 'Obriši',
+  'admin.references.deleteConfirm':
+    'Obrisati referencu od {name}? Ovo se ne može poništiti.',
+  'admin.references.empty.title': 'Još nema referenci',
+  'admin.references.empty.text': 'Dodajte prvu izjavu klijenta.',
+  'admin.references.noSelection.title': 'Nijedna referenca nije izabrana',
+  'admin.references.noSelection.text':
+    'Izaberite referencu sa spiska da biste je izmenili, ili dodajte novu.',
+
+  // -------------------- Admin: on the landing page --------------------
+  // The checkbox that puts a project or a reference on the landing page. Three
+  // at most; once three are ticked the rest go dead and say why. "Na početnoj"
+  // is how the column reads in a table — the full sentence is on the checkbox
+  // itself, where there is room for it.
+  'admin.featured.label': 'Prikaži na početnoj strani',
+  'admin.featured.count': '{count} / 3 na početnoj strani',
+  'admin.featured.limitReached':
+    'Već su izabrana tri. Skinite kvačicu sa jednog da biste dodali drugi.',
 
   // -------------------- Project form --------------------
   'form.langLabel': 'Jezik sadržaja',
@@ -158,6 +208,30 @@ export default {
   'form.save': 'Sačuvaj izmene',
   'form.publish': 'Objavi projekat',
   'form.cancel': 'Otkaži',
+
+  // -------------------- Reference form --------------------
+  // Same shape as the project form: a tab per language with Serbian required,
+  // while the name, the town and the photo are shared by both.
+  'referenceForm.newTitle': 'Nova referenca',
+  'referenceForm.editTitle': 'Izmena reference',
+  'referenceForm.langLabel': 'Jezik izjave',
+  'referenceForm.required': 'obavezno',
+  'referenceForm.incomplete': 'nepotpuno',
+  'referenceForm.name': 'Ime i prezime',
+  'referenceForm.namePlaceholder': 'npr. Ana Jovanović',
+  'referenceForm.place': 'Mesto',
+  'referenceForm.placePlaceholder': 'npr. Podgorica',
+  'referenceForm.avatar': 'URL fotografije',
+  'referenceForm.avatarPlaceholder': 'https://i.pravatar.cc/160?img=12',
+  'referenceForm.avatarAlt': 'Pregled fotografije',
+  'referenceForm.quote': 'Izjava',
+  'referenceForm.quotePlaceholder': 'Šta je klijent rekao o saradnji…',
+  'referenceForm.error.name': 'Ime je obavezno.',
+  'referenceForm.error.avatar': 'URL fotografije je obavezan.',
+  'referenceForm.error.quote': 'Izjava na srpskom je obavezna.',
+  'referenceForm.save': 'Sačuvaj izmene',
+  'referenceForm.create': 'Dodaj referencu',
+  'referenceForm.cancel': 'Otkaži',
 
   // -------------------- Not found --------------------
   'notFound.title': 'Stranica nije pronađena',

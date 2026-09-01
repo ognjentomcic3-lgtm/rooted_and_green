@@ -1,0 +1,141 @@
+/* The reference edit form. It sits inside the right half of the references
+   pane, which itself sits inside the admin shell's detail pane, so it never
+   sets a width of its own — it fills whatever it is given.
+
+   Every class here is prefixed `refform-`. The look is copied from PostForm,
+   deliberately not imported from it: all CSS in this project is global, and two
+   files claiming `.form-lang` would be one file quietly winning. */
+
+.refform {
+  display: block;
+}
+
+.refform-title {
+  font-size: 1.15rem;
+  margin-bottom: var(--sp-5);
+}
+
+/* -------------------- Per-language tabs -------------------- */
+
+/* Only the quote is translated. The name, the town and the photo are the same
+   sentence in both catalogues, so they stay above the tabs where they are
+   written once. */
+.refform-langs {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
+
+.refform-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--leaf-700);
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+.refform-lang:hover {
+  border-color: var(--leaf-500);
+}
+.refform-lang.is-active {
+  background: var(--leaf-700);
+  border-color: var(--leaf-700);
+  color: var(--white);
+}
+.refform-lang.is-invalid {
+  border-color: #c0563f;
+  color: #b04a34;
+}
+.refform-lang.is-invalid.is-active {
+  background: #b04a34;
+  border-color: #b04a34;
+  color: var(--white);
+}
+
+/* Serbian is the required one, so it is the one that carries the asterisk. */
+.refform-lang-req {
+  color: var(--accent);
+  font-weight: 700;
+}
+.refform-lang.is-active .refform-lang-req {
+  color: var(--sage-200);
+}
+
+/* Quiet marker: this language has no quote yet. On English that is allowed and
+   the dot is only a note to self, which is why it is a dot and not a warning. */
+.refform-lang-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--earth-300);
+}
+.refform-lang.is-active .refform-lang-dot {
+  background: var(--sage-400);
+}
+.refform-lang.is-invalid .refform-lang-dot {
+  background: #c0563f;
+}
+
+/* -------------------- Fields -------------------- */
+
+/* A quote is a paragraph a client said, not source text: the global .textarea
+   is a tall monospace slab meant for a whole project body. Double class so this
+   wins over it whatever order the two stylesheets end up bundled in. */
+.textarea.refform-quote {
+  min-height: 170px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.refform-error {
+  color: #b04a34;
+  font-size: 0.84rem;
+  margin: var(--sp-2) 0 0;
+  font-weight: 600;
+}
+
+/* Live preview of the photo URL, the cover-preview idea from PostForm made
+   round: an avatar is shown as a circle everywhere else on the site, and a
+   preview that does not match where the picture lands is not a preview. A
+   broken URL simply shows the browser's own missing-image mark — which is the
+   feedback that matters here. */
+.refform-preview {
+  margin-top: var(--sp-3);
+}
+.refform-preview img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  background: var(--sage-100);
+}
+
+.refform-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+
+/* 375px: the two buttons share the line rather than wrapping into a stack of
+   pill-shaped stubs. */
+@media (max-width: 560px) {
+  .refform-submit,
+  .refform-cancel {
+    flex: 1 1 auto;
+  }
+}
