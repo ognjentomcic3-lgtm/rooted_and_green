@@ -204,7 +204,7 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
               placeholder={t('form.slugPlaceholder')}
             />
             <p className="hint">
-              /blog/{slugify(form.slug || slugSourceTitle(form)) || '…'}
+              /projects/{slugify(form.slug || slugSourceTitle(form)) || '…'}
             </p>
           </div>
 

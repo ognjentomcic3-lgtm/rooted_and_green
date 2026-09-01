@@ -7,7 +7,7 @@ import {
 } from '../data/testimonialsData.js';
 import './WhyUs.css';
 
-// The part between the services and the projects, in two rows: what three
+// The last part of the homepage, after the services, in two rows: what three
 // customers say about the work, then what the years since 2017 add up to.
 //
 // The second row carries its own eyebrow and heading because without one the

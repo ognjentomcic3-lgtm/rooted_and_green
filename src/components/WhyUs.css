@@ -52,7 +52,7 @@
   flex-direction: column;
   gap: var(--sp-4);
 }
-/* The same lift the blog cards use, kept for the family resemblance. */
+/* The same lift the project cards use, kept for the family resemblance. */
 .wy-ref:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
@@ -82,8 +82,8 @@
   line-height: 1.2;
 }
 
-/* Set like the place on a project row, because it is the same fact doing the
-   same job: telling you which Montenegro this garden is in. */
+/* Set small and lettered out, because it is a fact doing a quiet job:
+   telling you which Montenegro this garden is in. */
 .wy-ref-place {
   font-size: 0.8rem;
   letter-spacing: 0.12em;

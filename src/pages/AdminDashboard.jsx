@@ -62,7 +62,7 @@ export default function AdminDashboard() {
           </div>
           {view === 'list' && (
             <button className="btn btn-primary" onClick={startCreate}>
-              + {t('admin.newPost')}
+              + {t('admin.newProject')}
             </button>
           )}
         </div>
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
             <div className="admin-stats">
               <div className="stat card">
                 <span className="stat-num">{posts.length}</span>
-                <span className="stat-label">{t('admin.stats.posts')}</span>
+                <span className="stat-label">{t('admin.stats.projects')}</span>
               </div>
               <div className="stat card">
                 <span className="stat-num">
@@ -94,7 +94,7 @@ export default function AdminDashboard() {
                 <h3>{t('admin.empty.title')}</h3>
                 <p>{t('admin.empty.text')}</p>
                 <button className="btn btn-primary" onClick={startCreate}>
-                  + {t('admin.newPost')}
+                  + {t('admin.newProject')}
                 </button>
               </div>
             ) : (
@@ -102,7 +102,7 @@ export default function AdminDashboard() {
                 <table className="admin-table">
                   <thead>
                     <tr>
-                      <th>{t('admin.table.post')}</th>
+                      <th>{t('admin.table.project')}</th>
                       <th>{t('admin.table.category')}</th>
                       <th>{t('admin.table.author')}</th>
                       <th>{t('admin.table.date')}</th>
@@ -122,7 +122,7 @@ export default function AdminDashboard() {
                             />
                             <div>
                               <Link
-                                to={`/blog/${post.slug}`}
+                                to={`/projects/${post.slug}`}
                                 className="cell-title"
                               >
                                 {localizePost(post, lang).title}

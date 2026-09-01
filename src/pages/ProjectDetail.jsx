@@ -4,9 +4,9 @@ import { usePosts } from '../hooks/usePosts.js';
 import { useI18n } from '../i18n/context.js';
 import { localeOf } from '../i18n/core.js';
 import { localizePost } from '../i18n/posts.js';
-import './BlogPost.css';
+import './ProjectDetail.css';
 
-export default function BlogPost() {
+export default function ProjectDetail() {
   const { slug } = useParams();
   const { getBySlug } = usePosts();
   const { lang, t, categoryLabel, formatDate } = useI18n();
@@ -17,10 +17,10 @@ export default function BlogPost() {
       <section className="section">
         <div className="container post-missing">
           <span aria-hidden="true">🍂</span>
-          <h1>{t('post.notFound.title')}</h1>
-          <p className="lead">{t('post.notFound.text')}</p>
-          <Link to="/blog" className="btn btn-primary">
-            {t('post.notFound.back')}
+          <h1>{t('project.notFound.title')}</h1>
+          <p className="lead">{t('project.notFound.text')}</p>
+          <Link to="/projects" className="btn btn-primary">
+            {t('project.notFound.back')}
           </Link>
         </div>
       </section>
@@ -35,8 +35,8 @@ export default function BlogPost() {
   return (
     <article className="post">
       <div className="container post-container">
-        <Link to="/blog" className="post-back">
-          ← {t('post.back')}
+        <Link to="/projects" className="post-back">
+          ← {t('project.back')}
         </Link>
 
         <header className="post-head">
@@ -44,7 +44,7 @@ export default function BlogPost() {
           <h1 lang={contentLocale}>{copy.title}</h1>
           <div className="post-byline">
             <span className="post-author">
-              {t('post.by', { author: post.author })}
+              {t('project.by', { author: post.author })}
             </span>
             <span aria-hidden="true">·</span>
             <time dateTime={post.date}>{formatDate(post.date, 'long')}</time>
@@ -54,7 +54,7 @@ export default function BlogPost() {
         <figure className="post-cover">
           <img
             src={post.coverImage}
-            alt={t('post.coverAlt', { title: copy.title })}
+            alt={t('project.coverAlt', { title: copy.title })}
             width="1200"
             height="675"
           />
@@ -76,8 +76,8 @@ export default function BlogPost() {
         </div>
 
         <footer className="post-footer">
-          <Link to="/blog" className="btn btn-outline">
-            ← {t('post.readMore')}
+          <Link to="/projects" className="btn btn-outline">
+            ← {t('project.readMore')}
           </Link>
         </footer>
       </div>

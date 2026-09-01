@@ -5,9 +5,10 @@ import { migratePosts, postsChanged, slugSourceTitle } from '../i18n/posts.js';
 
 const DEFAULT_LOCALE = localeOf(DEFAULT_LANG);
 
-// The key predates the rename to Malina Garden and stays as it is on purpose:
-// it is where a visitor's browser already keeps their posts, so renaming it
-// would silently orphan every one of them. The sync event below pairs with it.
+// The key predates both the rename to Malina Garden and the one that turned
+// the blog into Projects, and it stays as it is on purpose: it is where a
+// visitor's browser already keeps their entries, so renaming it would silently
+// orphan every one of them. The sync event below pairs with it.
 const STORAGE_KEY = 'rooted-and-green:posts';
 
 // A simple event so every mounted usePosts() stays in sync within the tab,

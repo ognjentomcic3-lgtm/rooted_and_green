@@ -11,9 +11,8 @@ export default {
   'nav.tagline': 'Vrtovi koji žive s vama',
   'nav.home': 'Početna',
   'nav.projects': 'Projekti',
-  'nav.blog': 'Blog',
   'nav.admin': 'Admin',
-  'nav.cta': 'Pročitajte blog',
+  'nav.cta': 'Pogledajte projekte',
   'nav.toggle': 'Meni',
   'nav.language': 'Jezik',
 
@@ -34,7 +33,7 @@ export default {
   'home.hero.ideology': 'Vrtovi koji žive s vama.',
   'home.hero.service': 'Dizajn i održavanje vrtova',
   'home.hero.imageAlt': 'Bujna cvetna leja u punom rastu',
-  'home.hero.scrollCue': 'Pređite na projekte',
+  'home.hero.scrollCue': 'Pređite na usluge',
 
   // -------------------- Home: services in detail --------------------
   'servicesDetail.eyebrow': 'Šta radimo',
@@ -56,81 +55,69 @@ export default {
   'whyUs.tally.eyebrow': 'U brojkama',
   'whyUs.tally.title': 'Šta smo do sada uradili',
 
-  // -------------------- Home: projects --------------------
+  // -------------------- Projects list --------------------
   'projects.eyebrow': 'Realizovani projekti',
   'projects.title': 'Mesta koja smo zasadili',
   'projects.lead':
-    'Svaki vrt je jedno mesto, jedna godina i jedan spisak poslova. Evo tri skorašnja.',
-  'projects.scope': 'Obim radova',
-  'projects.imageAlt': '{title} — {place}, fotografija {index}',
-  'projects.viewAll': 'Svi projekti',
-  'projectsPage.title': 'Svi projekti',
-  'projectsPage.lead':
     'Vrtovi koje smo do sada napravili i održavamo — od primorja do planine.',
-
-  // -------------------- Blog list --------------------
-  'blog.eyebrow': 'Blog Malina Garden',
-  'blog.title': 'Beleške iz vrta',
-  'blog.lead':
-    'Praktični vodiči, sezonsko znanje i inspiracija za vrt koji ćete voleti.',
-  'blog.searchPlaceholder': 'Pretražite objave…',
-  'blog.searchLabel': 'Pretraga objava',
-  'blog.filterLabel': 'Filtriranje po kategoriji',
-  'blog.all': 'Sve',
+  'projects.searchPlaceholder': 'Pretražite projekte…',
+  'projects.searchLabel': 'Pretraga projekata',
+  'projects.filterLabel': 'Filtriranje po kategoriji',
+  'projects.all': 'Svi',
   // Four complete sentences instead of glued-on fragments — Serbian needs the
   // category and query phrases in its own word order, not appended to a stub.
-  'blog.results': {
-    one: '{count} objava',
-    few: '{count} objave',
-    other: '{count} objava',
+  'projects.results': {
+    one: '{count} projekat',
+    few: '{count} projekta',
+    other: '{count} projekata',
   },
-  'blog.resultsInCategory': {
-    one: '{count} objava u kategoriji {category}',
-    few: '{count} objave u kategoriji {category}',
-    other: '{count} objava u kategoriji {category}',
+  'projects.resultsInCategory': {
+    one: '{count} projekat u kategoriji {category}',
+    few: '{count} projekta u kategoriji {category}',
+    other: '{count} projekata u kategoriji {category}',
   },
-  'blog.resultsMatching': {
-    one: '{count} objava za upit „{query}“',
-    few: '{count} objave za upit „{query}“',
-    other: '{count} objava za upit „{query}“',
+  'projects.resultsMatching': {
+    one: '{count} projekat za upit „{query}“',
+    few: '{count} projekta za upit „{query}“',
+    other: '{count} projekata za upit „{query}“',
   },
-  'blog.resultsInCategoryMatching': {
-    one: '{count} objava u kategoriji {category} za upit „{query}“',
-    few: '{count} objave u kategoriji {category} za upit „{query}“',
-    other: '{count} objava u kategoriji {category} za upit „{query}“',
+  'projects.resultsInCategoryMatching': {
+    one: '{count} projekat u kategoriji {category} za upit „{query}“',
+    few: '{count} projekta u kategoriji {category} za upit „{query}“',
+    other: '{count} projekata u kategoriji {category} za upit „{query}“',
   },
-  'blog.empty.title': 'Nema pronađenih objava',
-  'blog.empty.text': 'Probajte drugi pojam za pretragu ili drugu kategoriju.',
-  'blog.empty.clear': 'Poništi filtere',
+  'projects.empty.title': 'Nema pronađenih projekata',
+  'projects.empty.text': 'Probajte drugi pojam za pretragu ili drugu kategoriju.',
+  'projects.empty.clear': 'Poništi filtere',
 
-  // -------------------- Post card --------------------
-  'postCard.read': 'Pročitajte tekst',
+  // -------------------- Project card --------------------
+  'projectCard.read': 'Pogledajte projekat',
 
-  // -------------------- Blog post --------------------
-  'post.back': 'Nazad na sve objave',
-  'post.by': 'Autor: {author}',
-  'post.readMore': 'Pročitajte još tekstova',
-  'post.coverAlt': 'Naslovna slika za tekst „{title}“',
-  'post.notFound.title': 'Tekst nije pronađen',
-  'post.notFound.text': 'Taj tekst je možda premešten ili uklonjen.',
-  'post.notFound.back': 'Nazad na blog',
+  // -------------------- Project page --------------------
+  'project.back': 'Nazad na sve projekte',
+  'project.by': 'Autor: {author}',
+  'project.readMore': 'Pogledajte još projekata',
+  'project.coverAlt': 'Naslovna slika za projekat „{title}“',
+  'project.notFound.title': 'Projekat nije pronađen',
+  'project.notFound.text': 'Taj projekat je možda premešten ili uklonjen.',
+  'project.notFound.back': 'Nazad na projekte',
 
   // -------------------- Admin --------------------
   'admin.eyebrow': 'Administracija',
-  'admin.list.title': 'Upravljanje objavama',
+  'admin.list.title': 'Upravljanje projektima',
   'admin.list.lead':
-    'Kreirajte, menjajte i brišite objave. Izmene se čuvaju u vašem pregledaču i odmah se vide na javnom sajtu.',
-  'admin.edit.title': 'Izmena objave',
-  'admin.new.title': 'Nova objava',
+    'Kreirajte, menjajte i brišite projekte. Izmene se čuvaju u vašem pregledaču i odmah se vide na javnom sajtu.',
+  'admin.edit.title': 'Izmena projekta',
+  'admin.new.title': 'Novi projekat',
   'admin.form.lead':
     'Popunite podatke ispod. Sva obavezna polja moraju biti popunjena.',
-  'admin.newPost': 'Nova objava',
-  'admin.stats.posts': 'Ukupno objava',
+  'admin.newProject': 'Novi projekat',
+  'admin.stats.projects': 'Ukupno projekata',
   'admin.stats.categories': 'Kategorije',
   'admin.stats.authors': 'Autori',
-  'admin.empty.title': 'Još nema objava',
-  'admin.empty.text': 'Napravite prvu objavu i krenite u rast.',
-  'admin.table.post': 'Objava',
+  'admin.empty.title': 'Još nema projekata',
+  'admin.empty.text': 'Napravite prvi projekat i krenite u rast.',
+  'admin.table.project': 'Projekat',
   'admin.table.category': 'Kategorija',
   'admin.table.author': 'Autor',
   'admin.table.date': 'Datum',
@@ -138,9 +125,9 @@ export default {
   'admin.action.edit': 'Izmeni',
   'admin.action.delete': 'Obriši',
   'admin.deleteConfirm': 'Obrisati „{title}“? Ovo se ne može poništiti.',
-  'admin.back': 'Nazad na objave',
+  'admin.back': 'Nazad na projekte',
 
-  // -------------------- Post form --------------------
+  // -------------------- Project form --------------------
   'form.langLabel': 'Jezik sadržaja',
   'form.required': 'obavezno',
   'form.incomplete': 'nepotpuno',
@@ -151,7 +138,7 @@ export default {
   'form.slugPlaceholder': 'podignute-leje',
   'form.excerpt': 'Sažetak',
   'form.excerptHint': '(prikazuje se na karticama)',
-  'form.excerptPlaceholder': 'Kratak, primamljiv sažetak objave…',
+  'form.excerptPlaceholder': 'Kratak, primamljiv sažetak projekta…',
   'form.content': 'Sadržaj',
   'form.contentHint':
     '(Markdown — podržava naslove, liste, **podebljano** i slike u tekstu)',
@@ -166,10 +153,10 @@ export default {
   'form.date': 'Datum',
   'form.error.title': 'Naslov je obavezan.',
   'form.error.author': 'Autor je obavezan.',
-  'form.error.content': 'Sadržaj objave ne može biti prazan.',
+  'form.error.content': 'Sadržaj projekta ne može biti prazan.',
   'form.error.cover': 'URL naslovne slike je obavezan.',
   'form.save': 'Sačuvaj izmene',
-  'form.publish': 'Objavi',
+  'form.publish': 'Objavi projekat',
   'form.cancel': 'Otkaži',
 
   // -------------------- Not found --------------------

@@ -58,14 +58,11 @@ export default function Navbar() {
           <NavLink to="/projects" onClick={close}>
             {t('nav.projects')}
           </NavLink>
-          <NavLink to="/blog" onClick={close}>
-            {t('nav.blog')}
-          </NavLink>
           <NavLink to="/admin" onClick={close}>
             {t('nav.admin')}
           </NavLink>
           <LanguageSwitcher />
-          <Link to="/blog" className="btn btn-primary btn-sm nav-cta" onClick={close}>
+          <Link to="/projects" className="btn btn-primary btn-sm nav-cta" onClick={close}>
             {t('nav.cta')}
           </Link>
         </nav>

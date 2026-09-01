@@ -9,7 +9,7 @@ export default function PostCard({ post }) {
 
   return (
     <article className="post-card card">
-      <Link to={`/blog/${post.slug}`} className="post-card-media" aria-hidden="true" tabIndex={-1}>
+      <Link to={`/projects/${post.slug}`} className="post-card-media" aria-hidden="true" tabIndex={-1}>
         <img
           src={post.coverImage}
           alt=""
@@ -28,11 +28,11 @@ export default function PostCard({ post }) {
           <time dateTime={post.date}>{formatDate(post.date)}</time>
         </div>
         <h3 className="post-card-title">
-          <Link to={`/blog/${post.slug}`}>{copy.title}</Link>
+          <Link to={`/projects/${post.slug}`}>{copy.title}</Link>
         </h3>
         <p className="post-card-excerpt">{copy.excerpt}</p>
-        <Link to={`/blog/${post.slug}`} className="post-card-link">
-          {t('postCard.read')} →
+        <Link to={`/projects/${post.slug}`} className="post-card-link">
+          {t('projectCard.read')} →
         </Link>
       </div>
     </article>

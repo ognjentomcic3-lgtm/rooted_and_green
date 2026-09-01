@@ -9,9 +9,8 @@ export default {
   'nav.tagline': 'Gardens that live with you',
   'nav.home': 'Home',
   'nav.projects': 'Projects',
-  'nav.blog': 'Blog',
   'nav.admin': 'Admin',
-  'nav.cta': 'Read the blog',
+  'nav.cta': 'See the projects',
   'nav.toggle': 'Toggle menu',
   'nav.language': 'Language',
 
@@ -30,7 +29,7 @@ export default {
   'home.hero.ideology': 'Gardens that live with you.',
   'home.hero.service': 'Garden design & maintenance',
   'home.hero.imageAlt': 'A lush, thriving garden border in full growth',
-  'home.hero.scrollCue': 'Skip to the projects',
+  'home.hero.scrollCue': 'Skip to the services',
 
   // -------------------- Home: services in detail --------------------
   'servicesDetail.eyebrow': 'What we do',
@@ -52,75 +51,63 @@ export default {
   'whyUs.tally.eyebrow': 'By the numbers',
   'whyUs.tally.title': 'What we have accomplished',
 
-  // -------------------- Home: projects --------------------
+  // -------------------- Projects list --------------------
   'projects.eyebrow': 'Finished projects',
   'projects.title': 'Places we have planted',
   'projects.lead':
-    'Every garden is one place, one year and one list of jobs. Here are three recent ones.',
-  'projects.scope': 'Scope of works',
-  'projects.imageAlt': '{title} — {place}, photograph {index}',
-  'projects.viewAll': 'All projects',
-  'projectsPage.title': 'All projects',
-  'projectsPage.lead':
     'The gardens we have built and still look after — from the coast to the mountains.',
+  'projects.searchPlaceholder': 'Search projects…',
+  'projects.searchLabel': 'Search projects',
+  'projects.filterLabel': 'Filter by category',
+  'projects.all': 'All',
+  'projects.results': {
+    one: '{count} project',
+    other: '{count} projects',
+  },
+  'projects.resultsInCategory': {
+    one: '{count} project in {category}',
+    other: '{count} projects in {category}',
+  },
+  'projects.resultsMatching': {
+    one: '{count} project matching “{query}”',
+    other: '{count} projects matching “{query}”',
+  },
+  'projects.resultsInCategoryMatching': {
+    one: '{count} project in {category} matching “{query}”',
+    other: '{count} projects in {category} matching “{query}”',
+  },
+  'projects.empty.title': 'No projects found',
+  'projects.empty.text': 'Try a different search term or category.',
+  'projects.empty.clear': 'Clear filters',
 
-  // -------------------- Blog list --------------------
-  'blog.eyebrow': 'The Malina Garden blog',
-  'blog.title': 'Notes from the garden',
-  'blog.lead':
-    'Practical guides, seasonal know-how, and inspiration for growing a garden you love.',
-  'blog.searchPlaceholder': 'Search posts…',
-  'blog.searchLabel': 'Search posts',
-  'blog.filterLabel': 'Filter by category',
-  'blog.all': 'All',
-  'blog.results': {
-    one: '{count} post',
-    other: '{count} posts',
-  },
-  'blog.resultsInCategory': {
-    one: '{count} post in {category}',
-    other: '{count} posts in {category}',
-  },
-  'blog.resultsMatching': {
-    one: '{count} post matching “{query}”',
-    other: '{count} posts matching “{query}”',
-  },
-  'blog.resultsInCategoryMatching': {
-    one: '{count} post in {category} matching “{query}”',
-    other: '{count} posts in {category} matching “{query}”',
-  },
-  'blog.empty.title': 'No posts found',
-  'blog.empty.text': 'Try a different search term or category.',
-  'blog.empty.clear': 'Clear filters',
+  // -------------------- Project card --------------------
+  'projectCard.read': 'Read the project',
 
-  // -------------------- Post card --------------------
-  'postCard.read': 'Read article',
-
-  // -------------------- Blog post --------------------
-  'post.back': 'Back to all posts',
-  'post.by': 'By {author}',
-  'post.readMore': 'Read more articles',
-  'post.coverAlt': 'Cover image for {title}',
-  'post.notFound.title': 'Post not found',
-  'post.notFound.text': 'That article may have been moved or removed.',
-  'post.notFound.back': 'Back to the blog',
+  // -------------------- Project page --------------------
+  'project.back': 'Back to all projects',
+  'project.by': 'By {author}',
+  'project.readMore': 'More projects',
+  'project.coverAlt': 'Cover image for {title}',
+  'project.notFound.title': 'Project not found',
+  'project.notFound.text': 'That project may have been moved or removed.',
+  'project.notFound.back': 'Back to the projects',
 
   // -------------------- Admin --------------------
   'admin.eyebrow': 'Admin',
-  'admin.list.title': 'Manage posts',
+  'admin.list.title': 'Manage projects',
   'admin.list.lead':
-    'Create, edit, and delete blog posts. Changes save to your browser and appear instantly on the public site.',
-  'admin.edit.title': 'Edit post',
-  'admin.new.title': 'New post',
+    'Create, edit, and delete projects. Changes save to your browser and appear instantly on the public site.',
+  'admin.edit.title': 'Edit project',
+  'admin.new.title': 'New project',
   'admin.form.lead':
     'Fill in the details below. All fields marked required must be completed.',
-  'admin.newPost': 'New post',
-  'admin.stats.posts': 'Total posts',
+  'admin.newProject': 'New project',
+  'admin.stats.projects': 'Total projects',
   'admin.stats.categories': 'Categories',
   'admin.stats.authors': 'Authors',
-  'admin.empty.title': 'No posts yet',
-  'admin.empty.text': 'Create your first post to get growing.',
-  'admin.table.post': 'Post',
+  'admin.empty.title': 'No projects yet',
+  'admin.empty.text': 'Create your first project to get growing.',
+  'admin.table.project': 'Project',
   'admin.table.category': 'Category',
   'admin.table.author': 'Author',
   'admin.table.date': 'Date',
@@ -128,9 +115,9 @@ export default {
   'admin.action.edit': 'Edit',
   'admin.action.delete': 'Delete',
   'admin.deleteConfirm': 'Delete “{title}”? This cannot be undone.',
-  'admin.back': 'Back to posts',
+  'admin.back': 'Back to projects',
 
-  // -------------------- Post form --------------------
+  // -------------------- Project form --------------------
   'form.langLabel': 'Content language',
   'form.required': 'required',
   'form.incomplete': 'incomplete',
@@ -141,7 +128,7 @@ export default {
   'form.slugPlaceholder': 'building-raised-beds',
   'form.excerpt': 'Excerpt',
   'form.excerptHint': '(shown on cards)',
-  'form.excerptPlaceholder': 'A short, enticing summary of the post…',
+  'form.excerptPlaceholder': 'A short, enticing summary of the project…',
   'form.content': 'Content',
   'form.contentHint':
     '(Markdown — supports headings, lists, **bold**, and inline images)',
@@ -156,10 +143,10 @@ export default {
   'form.date': 'Date',
   'form.error.title': 'A title is required.',
   'form.error.author': 'An author is required.',
-  'form.error.content': 'Post content cannot be empty.',
+  'form.error.content': 'Project content cannot be empty.',
   'form.error.cover': 'A cover image URL is required.',
   'form.save': 'Save changes',
-  'form.publish': 'Publish post',
+  'form.publish': 'Publish project',
   'form.cancel': 'Cancel',
 
   // -------------------- Not found --------------------
