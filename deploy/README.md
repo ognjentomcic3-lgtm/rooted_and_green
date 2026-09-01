@@ -79,7 +79,7 @@ rsync -az --delete --exclude='.well-known' \
 
 ```bash
 curl -I http://178.104.109.80/
-curl -o /dev/null -w '%{http_code}\n' http://178.104.109.80/blog/anything  # 200, not 404
+curl -o /dev/null -w '%{http_code}\n' http://178.104.109.80/projects/anything  # 200, not 404
 ssh -i ~/.ssh/rooted-and-green-ci deploy@178.104.109.80 'ls -la /var/www/rooted-and-green'
 ```
 

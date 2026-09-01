@@ -3,7 +3,7 @@
 //
 // Categories are stable keys — display labels live in src/i18n/messages/*.js.
 // Each post keeps language-neutral fields at the top level and its copy under
-// `i18n`, so the slug (and therefore every /blog/:slug URL) stays single.
+// `i18n`, so the slug (and therefore every /projects/:slug URL) stays single.
 
 export const CATEGORIES = [
   'design',

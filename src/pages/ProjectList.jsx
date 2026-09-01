@@ -4,11 +4,11 @@ import { useI18n } from '../i18n/context.js';
 import { foldDiacritics } from '../i18n/core.js';
 import { localizePost } from '../i18n/posts.js';
 import PostCard from '../components/PostCard.jsx';
-import './BlogList.css';
+import './ProjectList.css';
 
 const ALL = 'all';
 
-export default function BlogList() {
+export default function ProjectList() {
   const { getAll } = usePosts();
   const { lang, locale, t, categoryLabel } = useI18n();
   const all = getAll();
@@ -43,26 +43,26 @@ export default function BlogList() {
   // every language controls its own word order.
   const resultKey =
     category !== ALL && query
-      ? 'blog.resultsInCategoryMatching'
+      ? 'projects.resultsInCategoryMatching'
       : category !== ALL
-        ? 'blog.resultsInCategory'
+        ? 'projects.resultsInCategory'
         : query
-          ? 'blog.resultsMatching'
-          : 'blog.results';
+          ? 'projects.resultsMatching'
+          : 'projects.results';
 
   return (
     <>
-      <section className="blog-header">
+      <section className="projects-header">
         <div className="container">
-          <p className="eyebrow">{t('blog.eyebrow')}</p>
-          <h1>{t('blog.title')}</h1>
-          <p className="lead">{t('blog.lead')}</p>
+          <p className="eyebrow">{t('projects.eyebrow')}</p>
+          <h1>{t('projects.title')}</h1>
+          <p className="lead">{t('projects.lead')}</p>
         </div>
       </section>
 
-      <section className="section blog-body">
+      <section className="section projects-body">
         <div className="container">
-          <div className="blog-controls">
+          <div className="projects-controls">
             <div className="search-wrap">
               <span className="search-icon" aria-hidden="true">
                 🔍
@@ -70,16 +70,16 @@ export default function BlogList() {
               <input
                 type="search"
                 className="input search-input"
-                placeholder={t('blog.searchPlaceholder')}
+                placeholder={t('projects.searchPlaceholder')}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                aria-label={t('blog.searchLabel')}
+                aria-label={t('projects.searchLabel')}
               />
             </div>
             <div
               className="chip-row"
               role="group"
-              aria-label={t('blog.filterLabel')}
+              aria-label={t('projects.filterLabel')}
             >
               {categories.map((cat) => (
                 <button
@@ -88,7 +88,7 @@ export default function BlogList() {
                   onClick={() => setCategory(cat)}
                   aria-pressed={category === cat}
                 >
-                  {cat === ALL ? t('blog.all') : categoryLabel(cat)}
+                  {cat === ALL ? t('projects.all') : categoryLabel(cat)}
                 </button>
               ))}
             </div>
@@ -111,8 +111,8 @@ export default function BlogList() {
           ) : (
             <div className="empty-state card">
               <span aria-hidden="true">🌱</span>
-              <h3>{t('blog.empty.title')}</h3>
-              <p>{t('blog.empty.text')}</p>
+              <h3>{t('projects.empty.title')}</h3>
+              <p>{t('projects.empty.text')}</p>
               <button
                 className="btn btn-ghost"
                 onClick={() => {
@@ -120,7 +120,7 @@ export default function BlogList() {
                   setCategory(ALL);
                 }}
               >
-                {t('blog.empty.clear')}
+                {t('projects.empty.clear')}
               </button>
             </div>
           )}

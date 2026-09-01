@@ -50,9 +50,6 @@ export default function Footer() {
                 <Link to="/projects">{t('nav.projects')}</Link>
               </li>
               <li>
-                <Link to="/blog">{t('nav.blog')}</Link>
-              </li>
-              <li>
                 <Link to="/admin">{t('nav.admin')}</Link>
               </li>
             </ul>

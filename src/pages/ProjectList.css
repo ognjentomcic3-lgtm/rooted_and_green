@@ -1,12 +1,12 @@
-.blog-header {
+.projects-header {
   background: linear-gradient(170deg, var(--sage-100), var(--cream));
   padding-block: var(--part-space);
 }
-.blog-header .lead {
+.projects-header .lead {
   margin-bottom: 0;
 }
 
-.blog-controls {
+.projects-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -65,6 +65,14 @@
   margin-bottom: var(--sp-5);
 }
 
+/* The card grid. min() on the track floor, or the cards would insist on 300px
+   and push a scrollbar out of the narrowest phones. */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: var(--sp-5);
+}
+
 .empty-state {
   text-align: center;
   padding: var(--sp-8) var(--sp-5);
@@ -80,7 +88,7 @@
 }
 
 @media (max-width: 620px) {
-  .blog-controls {
+  .projects-controls {
     flex-direction: column;
     align-items: stretch;
   }

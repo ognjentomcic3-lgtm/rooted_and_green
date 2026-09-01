@@ -1,6 +1,6 @@
 // References from customers, and the tally of finished work shown beneath them.
 //
-// Shape mirrors projectsData.js: language-neutral facts stay at the top level
+// Shape mirrors a stored project: language-neutral facts stay at the top level
 // and only the copy lives under `i18n`. A person's name and the town they
 // garden in belong at the top level for the same reason a project's place
 // does — they read identically in both catalogues, and duplicating them would
