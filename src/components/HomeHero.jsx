@@ -14,7 +14,7 @@ export default function HomeHero() {
     <section className="home-hero" aria-labelledby="home-hero-title">
       <div className="home-hero-media">
         <img
-          src="https://picsum.photos/seed/rooted-green-hero/1920/1280"
+          src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1920&h=1280&fit=crop&q=80&auto=format"
           alt={t('home.hero.imageAlt')}
           width="1920"
           height="1280"

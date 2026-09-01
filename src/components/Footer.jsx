@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '../i18n/context.js';
+import logoMark from '../assets/logo-mark-light.png';
 import {
   site,
   socialLinks,
@@ -32,9 +33,8 @@ export default function Footer() {
         <div className="container footer-general-inner">
           <div className="footer-col footer-col-brand">
             <p className="footer-name">
-              <span className="footer-mark" aria-hidden="true">
-                🌿
-              </span>
+              {/* The light cut — this row sits on black. */}
+              <img className="footer-mark" src={logoMark} alt="" />
               {site.name}
             </p>
             <p className="footer-tag">{t('footer.tagline')}</p>

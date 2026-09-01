@@ -18,7 +18,7 @@ export default function ServicesDetail() {
 
         <figure className="svc-media">
           <img
-            src="https://picsum.photos/seed/rooted-green-services/900/1200"
+            src="https://images.unsplash.com/photo-1524247108137-732e0f642303?w=900&h=1200&fit=crop&q=80&auto=format"
             alt={t('servicesDetail.imageAlt')}
             width="900"
             height="1200"

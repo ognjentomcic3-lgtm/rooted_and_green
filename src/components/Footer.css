@@ -86,8 +86,8 @@
   color: #fff;
 }
 .footer-mark {
-  font-size: 1.5rem;
-  line-height: 1;
+  height: 1.9rem;
+  width: auto;
 }
 .footer-tag {
   margin: 0;

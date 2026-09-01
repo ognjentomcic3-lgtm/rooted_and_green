@@ -2,7 +2,9 @@
 //
 // Shape mirrors seedData.js: language-neutral facts stay at the top level
 // (place names and years read the same in both catalogues) and only the copy
-// lives under `i18n`. Imagery uses seeded picsum URLs so it loads without keys.
+// lives under `i18n`. Imagery is hotlinked, so it loads without keys: the first
+// three — the ones the homepage shows — are Unsplash photographs chosen to match
+// what each project claims, and the rest are still random picsum placeholders.
 //
 // `images[0]` is the one the hover preview shows; the rest fill the expanded
 // row. Two or three reads best — the layout stops looking deliberate past four.
@@ -13,9 +15,9 @@ export const projects = [
     place: 'Podgorica',
     year: 2026,
     images: [
-      'https://picsum.photos/seed/rg-gorica-1/900/1200',
-      'https://picsum.photos/seed/rg-gorica-2/900/1200',
-      'https://picsum.photos/seed/rg-gorica-3/900/1200',
+      'https://images.unsplash.com/photo-1766256111797-a85b7ae50881?w=900&h=1200&fit=crop&q=80&auto=format',
+      'https://images.unsplash.com/photo-1766256111587-051df2e524aa?w=900&h=1200&fit=crop&q=80&auto=format',
+      'https://images.unsplash.com/photo-1745057305694-dce726cfcf37?w=900&h=1200&fit=crop&q=80&auto=format',
     ],
     i18n: {
       sr: {
@@ -37,8 +39,8 @@ export const projects = [
     place: 'Tivat',
     year: 2025,
     images: [
-      'https://picsum.photos/seed/rg-tivat-1/900/1200',
-      'https://picsum.photos/seed/rg-tivat-2/900/1200',
+      'https://images.unsplash.com/photo-1775531313307-2b0be7435a1d?w=900&h=1200&fit=crop&q=80&auto=format',
+      'https://images.unsplash.com/photo-1707233811494-e17852ee959e?w=900&h=1200&fit=crop&q=80&auto=format',
     ],
     i18n: {
       sr: {
@@ -60,9 +62,9 @@ export const projects = [
     place: 'Cetinje',
     year: 2025,
     images: [
-      'https://picsum.photos/seed/rg-cetinje-1/900/1200',
-      'https://picsum.photos/seed/rg-cetinje-2/900/1200',
-      'https://picsum.photos/seed/rg-cetinje-3/900/1200',
+      'https://images.unsplash.com/photo-1727120279660-5c28b8461609?w=900&h=1200&fit=crop&q=80&auto=format',
+      'https://images.unsplash.com/photo-1633545382904-5e97dedc6e19?w=900&h=1200&fit=crop&q=80&auto=format',
+      'https://images.unsplash.com/photo-1635776033895-080207b89a06?w=900&h=1200&fit=crop&q=80&auto=format',
     ],
     i18n: {
       sr: {
