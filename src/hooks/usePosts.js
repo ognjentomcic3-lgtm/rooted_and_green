@@ -15,6 +15,21 @@ const STORAGE_KEY = 'rooted-and-green:posts';
 // and a `storage` listener keeps other tabs in sync too.
 const SYNC_EVENT = 'rooted-and-green:posts-changed';
 
+// How many projects may sit on the landing page at once. Exported so a list can
+// show the "n / 3" counter without hardcoding the same number twice.
+export const MAX_FEATURED = 3;
+
+// A project stored before the admin's checkbox existed carries no `featured`
+// field. Read it as "not on the landing page" rather than leaving it undefined,
+// so counting the featured ones is a plain filter. Returns the very same object
+// when there was nothing to change — the contract migratePost() already keeps,
+// and what lets postsChanged() below stay a reference comparison.
+function withFeatured(post) {
+  if (!post || typeof post !== 'object') return post;
+  if (typeof post.featured === 'boolean') return post;
+  return { ...post, featured: Boolean(post.featured) };
+}
+
 function readStore() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -28,7 +43,9 @@ function readStore() {
     // Browsers from before the i18n release hold posts in the flat shape
     // (title/excerpt/content at the top level, category as a display string).
     // Upgrade them in place so nobody loses a post or lands on a blank site.
-    const migrated = migratePosts(parsed);
+    // The same pass fills in `featured` for anything stored before the admin's
+    // checkbox existed — an older store gets the field, not a wipe.
+    const migrated = migratePosts(parsed).map(withFeatured);
     if (postsChanged(parsed, migrated)) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
     }
@@ -86,6 +103,9 @@ export function usePosts() {
       id: `post-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       slug: data.slug ? slugify(data.slug) : slugify(slugSourceTitle(data)),
       date: data.date || new Date().toISOString().slice(0, 10),
+      // A new project starts off the landing page. Putting it on goes through
+      // setFeatured(), which is the only place the cap is checked.
+      featured: false,
     };
     const next = [newPost, ...current];
     writeStore(next);
@@ -101,6 +121,10 @@ export function usePosts() {
             ...p,
             ...data,
             slug: data.slug ? slugify(data.slug) : p.slug,
+            // Editing a project is not how it gets onto the landing page;
+            // setFeatured() is. Keeping the stored flag here means a form that
+            // round-trips the whole post cannot walk past the cap.
+            featured: Boolean(p.featured),
           }
         : p,
     );
@@ -115,5 +139,35 @@ export function usePosts() {
     setPosts(next);
   }, []);
 
-  return { posts: sortByDateDesc(posts), getAll, getBySlug, create, update, remove };
+  // Turning one off always works. Turning a fourth one on does not: it returns
+  // false and writes nothing. A checkbox that disables itself is a courtesy to
+  // whoever is looking at it, not a rule — the rule has to live here.
+  const setFeatured = useCallback((id, next) => {
+    const current = readStore();
+    const target = current.find((p) => p.id === id);
+    if (!target) return false;
+
+    const wanted = Boolean(next);
+    if (wanted && !target.featured) {
+      const count = current.filter((p) => p.featured).length;
+      if (count >= MAX_FEATURED) return false;
+    }
+
+    const updated = current.map((p) =>
+      p.id === id ? { ...p, featured: wanted } : p,
+    );
+    writeStore(updated);
+    setPosts(updated);
+    return true;
+  }, []);
+
+  return {
+    posts: sortByDateDesc(posts),
+    getAll,
+    getBySlug,
+    create,
+    update,
+    remove,
+    setFeatured,
+  };
 }
