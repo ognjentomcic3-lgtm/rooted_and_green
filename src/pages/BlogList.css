@@ -1,6 +1,6 @@
 .blog-header {
   background: linear-gradient(170deg, var(--sage-100), var(--cream));
-  padding-block: var(--sp-8) var(--sp-7);
+  padding-block: var(--part-space);
 }
 .blog-header .lead {
   margin-bottom: 0;

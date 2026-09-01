@@ -1,0 +1,180 @@
+/* ============================================================
+   Why choose us — references on top, the tally underneath
+   ============================================================ */
+
+/* Sage rather than more cream. The part above is cream and the part below is
+   the near-black slab, so the page steps paper → leaf → dark instead of
+   falling off a cliff in one move; and sage is still light enough that the
+   white reference cards read as cards sitting on something, which they would
+   not on cream. Padding carries the room above and below, like every part, so
+   the colour meets its neighbours edge to edge. */
+.wy {
+  background: var(--sage-100);
+  padding-block: var(--part-space);
+}
+
+.wy-head {
+  margin-bottom: var(--sp-8);
+  max-width: 620px;
+}
+.wy-head h2 {
+  text-wrap: balance;
+}
+/* Last thing in the block, and the room under it belongs to .wy-head. */
+.wy-head .lead {
+  margin-bottom: 0;
+}
+
+/* -------------------- Row one: the references -------------------- */
+/* Wider than the gap between the cards, so the join between the two rows is
+   plainly a change of subject rather than another gutter. */
+.wy-refs {
+  list-style: none;
+  margin: 0 0 clamp(var(--sp-8), 7vw, var(--sp-9));
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(var(--sp-4), 2.5vw, var(--sp-6));
+}
+
+/* The card is the grid item's only child and takes the whole cell, so three
+   quotes of unequal length still finish on one level line. */
+.wy-refs > li {
+  display: grid;
+}
+
+/* .card brings the paper, the border and the radius; what is left is the room
+   inside and the rhythm down the column. */
+.wy-ref {
+  margin: 0;
+  padding: clamp(var(--sp-5), 2.5vw, var(--sp-6));
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+/* The same lift the blog cards use, kept for the family resemblance. */
+.wy-ref:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.wy-ref-who {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-1);
+}
+
+/* Drawn at less than half the file's own size, so it stays sharp on a dense
+   screen; the width and height attributes are there to hold the space open
+   before the picture lands, not to set this size. */
+.wy-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  object-fit: cover;
+  margin-bottom: var(--sp-2);
+}
+
+.wy-ref-name {
+  font-weight: 700;
+  color: var(--leaf-900);
+  line-height: 1.2;
+}
+
+/* Set like the place on a project row, because it is the same fact doing the
+   same job: telling you which Montenegro this garden is in. */
+.wy-ref-place {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.wy-ref-quote {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.98rem;
+}
+.wy-ref-quote p {
+  margin: 0;
+}
+
+/* -------------------- Row two: the tally -------------------- */
+.wy-tally-head {
+  margin-bottom: var(--sp-6);
+  max-width: 620px;
+}
+.wy-tally-head h3 {
+  margin-bottom: 0;
+}
+
+.wy-tally {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(var(--sp-4), 2.5vw, var(--sp-6));
+}
+
+/* A rule above each figure rather than a box around it: four more cards under
+   three cards would collapse the two rows back into one long grid. */
+.wy-stat {
+  border-top: 2px solid var(--sage-400);
+  padding-top: var(--sp-4);
+}
+
+.wy-stat-value {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--leaf-700);
+  /* Lining figures of one width, so four numbers side by side sit on the same
+     optical baseline instead of stepping about. */
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 var(--sp-2);
+}
+
+.wy-stat-label {
+  font-weight: 700;
+  color: var(--leaf-900);
+  line-height: 1.3;
+  margin: 0 0 var(--sp-2);
+}
+
+.wy-stat-note {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* The lift is decoration, not feedback — nothing here is clickable — so it is
+   the first thing to go for a reader who has asked for less movement. */
+@media (prefers-reduced-motion: reduce) {
+  .wy-ref {
+    transition: none;
+  }
+  .wy-ref:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Three quotes across a tablet leaves each one a column of three words. */
+  .wy-refs {
+    grid-template-columns: 1fr;
+  }
+  /* Two by two: at a quarter of this width the labels break mid-word and the
+     big numbers stop looking like an achievement. */
+  .wy-tally {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .wy-tally {
+    grid-template-columns: 1fr;
+  }
+}

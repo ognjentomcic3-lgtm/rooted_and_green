@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Rooted & Green -- one-command runner.
+# Malina Garden -- one-command runner.
 #
 #   ./run.sh              start the dev server (default)
 #   ./run.sh dev          same as above

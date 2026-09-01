@@ -1,4 +1,4 @@
-// Seed content for Rooted & Green. Loaded into localStorage on first run.
+// Seed content for Malina Garden. Loaded into localStorage on first run.
 // All images use picsum.photos seeded URLs so they load without API keys.
 //
 // Categories are stable keys — display labels live in src/i18n/messages/*.js.

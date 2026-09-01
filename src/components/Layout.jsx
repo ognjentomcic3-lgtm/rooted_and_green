@@ -4,12 +4,20 @@ import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
 
 export default function Layout() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
-  // Scroll to top on route change for a clean page-to-page feel.
+  // Scroll to top on route change for a clean page-to-page feel — unless the
+  // link carried a hash, in which case that section is the destination.
   useEffect(() => {
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return (
     <div className="app-shell">

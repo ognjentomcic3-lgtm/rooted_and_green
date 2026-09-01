@@ -5,11 +5,12 @@
 
 export default {
   // -------------------- Document / meta --------------------
-  'meta.title': 'Rooted & Green — Vrtovi koji žive s vama',
+  'meta.title': 'Malina Garden — Vrtovi koji žive s vama',
 
   // -------------------- Navigation --------------------
   'nav.tagline': 'Vrtovi koji žive s vama',
   'nav.home': 'Početna',
+  'nav.projects': 'Projekti',
   'nav.blog': 'Blog',
   'nav.admin': 'Admin',
   'nav.cta': 'Pročitajte blog',
@@ -17,52 +18,58 @@ export default {
   'nav.language': 'Jezik',
 
   // -------------------- Footer --------------------
+  // Row one is the ideology sentence and the contact button; the rest is the
+  // usual footer matter.
+  'footer.ideology': 'Vrtovi koji žive s vama.',
+  'footer.contactCta': 'Javite nam se',
+  'footer.exploreLabel': 'Sajt',
+  'footer.contactLabel': 'Kontakt',
+  'footer.followLabel': 'Pratite nas',
   'footer.tagline': 'Vrtovi koji žive s vama.',
   'footer.navLabel': 'Podnožje',
   'footer.note': 'Dizajn i održavanje vrtova · Uz vas gde god da gajite vrt',
-  'footer.copyright': '© {year} Rooted & Green. Uzgojeno s pažnjom.',
+  'footer.copyright': '© {year} Malina Garden. Uzgojeno s pažnjom.',
 
-  // -------------------- Landing: hero --------------------
-  'landing.eyebrow': 'Dizajn i održavanje vrtova',
-  'landing.hero.titleLead': 'Vrtovi koji',
-  'landing.hero.titleAccent': 'žive s vama.',
-  'landing.hero.lead':
-    'Rooted & Green projektuje, sadi i neguje lepe vrtove u kojima se dobro oseća i divlji svet. Praktični saveti, pošten zanat i ljubav prema svemu što raste.',
-  'landing.hero.ctaPrimary': 'Istražite blog',
-  'landing.hero.ctaSecondary': 'Naše usluge',
-  'landing.hero.imageAlt': 'Bujna cvetna leja u punom rastu',
-  'landing.hero.badgeText': 'Negujemo vrtove od prvog dana',
+  // -------------------- Home: header --------------------
+  'home.hero.ideology': 'Vrtovi koji žive s vama.',
+  'home.hero.service': 'Dizajn i održavanje vrtova',
+  'home.hero.imageAlt': 'Bujna cvetna leja u punom rastu',
+  'home.hero.scrollCue': 'Pređite na projekte',
 
-  // -------------------- Landing: services --------------------
-  'landing.services.eyebrow': 'Šta radimo',
-  'landing.services.title': 'Briga za svaki kutak vašeg vrta',
-  'landing.services.lead':
-    'Od prve skice do sezonskog održavanja, pomažemo vašem prostoru da procveta.',
-  'landing.service.design.title': 'Dizajn vrta',
-  'landing.service.design.text':
-    'Planovi sadnje i rasporedi po meri, prilagođeni vašem prostoru, zemljištu i načinu na koji volite da boravite napolju.',
-  'landing.service.planting.title': 'Sadnja i održavanje',
-  'landing.service.planting.text':
-    'Sezonska nega, rezidba, prihrana i sređivanje koji vaše leje drže u najboljem izdanju tokom cele godine.',
-  'landing.service.wildlife.title': 'Divlji svet i livade',
-  'landing.service.wildlife.text':
-    'Leje za oprašivače, livade divljeg cveća i staništa od kojih vaš vrt bruji od života.',
-  'landing.service.containers.title': 'Saksije i dvorišta',
-  'landing.service.containers.text':
-    'Bujne kompozicije u saksijama i rešenja za male prostore koja balkone i terase pretvaraju u zelena utočišta.',
+  // -------------------- Home: services in detail --------------------
+  'servicesDetail.eyebrow': 'Šta radimo',
+  'servicesDetail.title': 'Od prve skice do redovnog održavanja',
+  'servicesDetail.lead':
+    'Radimo ceo posao — izađemo na teren, nacrtamo rešenje, damo predmer i predračun, izvedemo radove i posle toga održavamo ono što smo zasadili.',
+  'servicesDetail.body':
+    'Ne prodajemo pakete. Svaki vrt dobije spisak poslova koji mu zaista treba, u redosledu koji ima smisla za sezonu i za teren.',
+  'servicesDetail.imageAlt': 'Rad u vrtu tokom sadnje',
 
-  // -------------------- Landing: blog teaser & CTA --------------------
-  'landing.blog.eyebrow': 'Iz baštenske šupe',
-  'landing.blog.title': 'Najnovije s bloga',
-  'landing.blog.viewAll': 'Sve objave',
-  'landing.blog.empty': 'Još nema objava — navratite uskoro.',
-  'landing.cta.title': 'Spremni da uzgojite nešto divno?',
-  'landing.cta.lead':
-    'Bilo da sanjate livadu divljeg cveća ili jednostavno želite uredne i zdrave leje, rado ćemo pomoći vašem vrtu da napreduje.',
-  'landing.cta.button': 'Počnite da čitate',
+  // -------------------- Home: why choose us --------------------
+  // Written from scratch rather than translated across from en.js. "Zašto baš
+  // mi" is how the question is actually put here — the "baš" is the whole
+  // point of it, and English has no word to spend on it.
+  'whyUs.eyebrow': 'Zašto baš mi',
+  'whyUs.title': 'Razlozi zbog kojih ostaju s nama',
+  'whyUs.lead':
+    'Najveći deo posla dobijemo od ljudi koji već imaju naš broj. Evo šta kažu troje od njih i šta se za ove godine skupilo.',
+  'whyUs.tally.eyebrow': 'U brojkama',
+  'whyUs.tally.title': 'Šta smo do sada uradili',
+
+  // -------------------- Home: projects --------------------
+  'projects.eyebrow': 'Realizovani projekti',
+  'projects.title': 'Mesta koja smo zasadili',
+  'projects.lead':
+    'Svaki vrt je jedno mesto, jedna godina i jedan spisak poslova. Evo tri skorašnja.',
+  'projects.scope': 'Obim radova',
+  'projects.imageAlt': '{title} — {place}, fotografija {index}',
+  'projects.viewAll': 'Svi projekti',
+  'projectsPage.title': 'Svi projekti',
+  'projectsPage.lead':
+    'Vrtovi koje smo do sada napravili i održavamo — od primorja do planine.',
 
   // -------------------- Blog list --------------------
-  'blog.eyebrow': 'Blog Rooted & Green',
+  'blog.eyebrow': 'Blog Malina Garden',
   'blog.title': 'Beleške iz vrta',
   'blog.lead':
     'Praktični vodiči, sezonsko znanje i inspiracija za vrt koji ćete voleti.',

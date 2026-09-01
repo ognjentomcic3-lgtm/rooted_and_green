@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 74px;
+  min-height: var(--nav-h);
   gap: var(--sp-4);
 }
 
@@ -25,9 +25,12 @@
   color: var(--leaf-900);
 }
 .brand-mark {
-  font-size: 1.7rem;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(30, 58, 43, 0.15));
+  height: 2.1rem;
+  width: auto;
+}
+/* Only one of the two cuts is ever shown; the light one waits for the hero. */
+.brand-mark-light {
+  display: none;
 }
 .brand-text {
   display: flex;
@@ -74,8 +77,10 @@
 }
 
 /* Serbian nav labels run longer than English and the switcher adds a pill, so
-   the desktop row tightens up before it reaches the mobile breakpoint. */
-@media (max-width: 940px) {
+   the desktop row tightens up before it reaches the mobile breakpoint. The bar
+   keeps the same gutters as the rest of the page, so it is working with 80% of
+   the screen and hits that squeeze earlier than it used to. */
+@media (max-width: 1100px) {
   .nav-links {
     gap: var(--sp-4);
   }
@@ -101,13 +106,15 @@
   transition: 0.2s ease;
 }
 
-@media (max-width: 760px) {
+/* Same arithmetic: 80% of 900px is about what the row used to have at 760px,
+   which is where it gave up and became a menu. */
+@media (max-width: 900px) {
   .nav-toggle {
     display: flex;
   }
   .nav-links {
     position: absolute;
-    top: 74px;
+    top: var(--nav-h);
     left: 0;
     right: 0;
     flex-direction: column;
@@ -115,7 +122,8 @@
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--border);
-    padding: var(--sp-3) var(--sp-5) var(--sp-5);
+    /* Gutter, not a fixed inset — the links line up under the brand. */
+    padding: var(--sp-3) var(--gutter) var(--sp-5);
     box-shadow: var(--shadow);
     display: none;
   }
@@ -133,4 +141,57 @@
     margin-top: var(--sp-4);
     text-align: center;
   }
+}
+
+/* -------------------- Over the homepage header -------------------- */
+/* The bar sits on top of the full-screen photo until the page scrolls. The
+   photo's own scrim is heaviest at the top, so white type has contrast. */
+.nav.is-over-hero {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+.nav.is-over-hero .brand,
+.nav.is-over-hero .brand:hover,
+.nav.is-over-hero .nav-links a {
+  color: #fff;
+}
+.nav.is-over-hero .brand-tag {
+  color: rgba(255, 255, 255, 0.72);
+}
+.nav.is-over-hero .brand-mark-dark {
+  display: none;
+}
+/* A shadow earns its keep here — the mark is over a photograph, not a flat bar. */
+.nav.is-over-hero .brand-mark-light {
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+.nav.is-over-hero .nav-links a.active:not(.nav-cta) {
+  color: #fff;
+}
+.nav.is-over-hero .nav-links a:not(.nav-cta).active::after {
+  background: #fff;
+}
+.nav.is-over-hero .nav-toggle-bar {
+  background: #fff;
+}
+.nav.is-over-hero .nav-cta {
+  background: #fff;
+  color: var(--leaf-900) !important;
+}
+.nav.is-over-hero .nav-cta:hover {
+  background: var(--leaf-500);
+  color: #fff !important;
+}
+.nav.is-over-hero .lang-switch {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.nav.is-over-hero .lang-option {
+  color: #fff;
+}
+.nav.is-over-hero .lang-option.is-active {
+  background: #fff;
+  color: var(--leaf-900);
 }

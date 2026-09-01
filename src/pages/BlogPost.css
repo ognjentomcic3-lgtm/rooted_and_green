@@ -1,8 +1,11 @@
 .post {
-  padding-block: var(--sp-7) var(--sp-8);
+  padding-block: var(--part-space);
 }
+/* An article is the one place that wants a measure narrower than the gutters
+   allow. The cap is on the column of type, so the gutters are added on top of
+   it rather than eaten out of it. */
 .post-container {
-  max-width: 780px;
+  max-width: calc(780px + var(--gutter) * 2);
 }
 
 .post-back {
@@ -124,9 +127,9 @@
   border-top: 1px solid var(--border);
 }
 
+/* Sits inside a .section, which already brings the part space with it. */
 .post-missing {
   text-align: center;
-  padding-block: var(--sp-8);
 }
 .post-missing span[aria-hidden] {
   font-size: 3rem;

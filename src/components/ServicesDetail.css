@@ -1,0 +1,68 @@
+/* ============================================================
+   Services, in detail — text left, one photograph right
+   ============================================================ */
+
+.svc {
+  background: var(--cream);
+  padding-block: var(--part-space);
+}
+
+.svc-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(var(--sp-6), 5vw, var(--sp-8));
+  /* Stretch, so the photograph runs the full height of the row rather than
+     stranding empty cream under a short image. Whichever column is taller
+     sets that height; these days it is the photograph. */
+  align-items: stretch;
+}
+
+/* ...which is why the copy opts out and sits on the middle of the picture
+   instead. Stretched, a few short paragraphs would hang off the top edge. */
+.svc-copy {
+  align-self: center;
+}
+
+.svc-copy h2 {
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.svc-body {
+  color: var(--text-soft);
+  max-width: 58ch;
+  /* Last thing in the column, so no trailing room — it would push the copy
+     off centre by half of whatever it was. */
+  margin-bottom: 0;
+}
+
+/* -------------------- The photograph -------------------- */
+.svc-media {
+  margin: 0;
+  /* min-height:0 lets the stretched grid item actually shrink-wrap its row so
+     the image can take 100% of it. */
+  min-height: 0;
+}
+.svc-media img {
+  width: 100%;
+  /* Fills the row, which the picture's own 3:4 shape is now what sets. The
+     height attribute on the <img> is a presentation hint and would otherwise
+     win, hence the explicit value. */
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 900px) {
+  .svc-inner {
+    grid-template-columns: 1fr;
+  }
+  .svc-media {
+    order: 2;
+  }
+  .svc-media img {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+}

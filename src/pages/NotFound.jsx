@@ -6,7 +6,7 @@ export default function NotFound() {
 
   return (
     <section className="section">
-      <div className="container text-center" style={{ paddingBlock: '4rem' }}>
+      <div className="container text-center">
         <p style={{ fontSize: '3rem', margin: 0 }} aria-hidden="true">
           🌾
         </p>

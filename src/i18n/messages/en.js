@@ -3,11 +3,12 @@
 
 export default {
   // -------------------- Document / meta --------------------
-  'meta.title': 'Rooted & Green — Gardens that live with you',
+  'meta.title': 'Malina Garden — Gardens that live with you',
 
   // -------------------- Navigation --------------------
   'nav.tagline': 'Gardens that live with you',
   'nav.home': 'Home',
+  'nav.projects': 'Projects',
   'nav.blog': 'Blog',
   'nav.admin': 'Admin',
   'nav.cta': 'Read the blog',
@@ -15,52 +16,56 @@ export default {
   'nav.language': 'Language',
 
   // -------------------- Footer --------------------
+  'footer.ideology': 'Gardens that live with you.',
+  'footer.contactCta': 'Get in touch',
+  'footer.exploreLabel': 'Site',
+  'footer.contactLabel': 'Contact',
+  'footer.followLabel': 'Follow',
   'footer.tagline': 'Gardens that live with you.',
   'footer.navLabel': 'Footer',
   'footer.note': 'Garden design & maintenance · Serving keen gardeners everywhere',
-  'footer.copyright': '© {year} Rooted & Green. Grown with care.',
+  'footer.copyright': '© {year} Malina Garden. Grown with care.',
 
-  // -------------------- Landing: hero --------------------
-  'landing.eyebrow': 'Garden design & maintenance',
-  'landing.hero.titleLead': 'Gardens that',
-  'landing.hero.titleAccent': 'live with you.',
-  'landing.hero.lead':
-    'Rooted & Green designs, plants, and cares for beautiful, wildlife-friendly gardens. Practical advice, honest craft, and a love of growing things.',
-  'landing.hero.ctaPrimary': 'Explore the blog',
-  'landing.hero.ctaSecondary': 'Our services',
-  'landing.hero.imageAlt': 'A lush, thriving garden border in full growth',
-  'landing.hero.badgeText': 'Growing gardens since day one',
+  // -------------------- Home: header --------------------
+  'home.hero.ideology': 'Gardens that live with you.',
+  'home.hero.service': 'Garden design & maintenance',
+  'home.hero.imageAlt': 'A lush, thriving garden border in full growth',
+  'home.hero.scrollCue': 'Skip to the projects',
 
-  // -------------------- Landing: services --------------------
-  'landing.services.eyebrow': 'What we do',
-  'landing.services.title': 'Care for every corner of your garden',
-  'landing.services.lead':
-    'From first sketch to seasonal upkeep, we help your outdoor space flourish.',
-  'landing.service.design.title': 'Garden Design',
-  'landing.service.design.text':
-    'Bespoke planting plans and layouts that suit your space, soil, and the way you like to live outdoors.',
-  'landing.service.planting.title': 'Planting & Maintenance',
-  'landing.service.planting.text':
-    'Seasonal care, pruning, feeding, and tidy-ups that keep your borders looking their best all year.',
-  'landing.service.wildlife.title': 'Wildlife & Meadows',
-  'landing.service.wildlife.text':
-    'Pollinator borders, wildflower meadows, and habitats that make your garden hum with life.',
-  'landing.service.containers.title': 'Containers & Courtyards',
-  'landing.service.containers.text':
-    'Lush pot displays and small-space schemes that turn balconies and patios into green retreats.',
+  // -------------------- Home: services in detail --------------------
+  'servicesDetail.eyebrow': 'What we do',
+  'servicesDetail.title': 'From the first sketch to the regular upkeep',
+  'servicesDetail.lead':
+    'We do the whole job — come out to the site, draw up a design, price the work, build it, and then look after what we planted.',
+  'servicesDetail.body':
+    'We do not sell packages. Every garden gets the list of jobs it actually needs, in the order that makes sense for the season and the ground.',
+  'servicesDetail.imageAlt': 'Work under way in a garden during planting',
 
-  // -------------------- Landing: blog teaser & CTA --------------------
-  'landing.blog.eyebrow': 'From the potting shed',
-  'landing.blog.title': 'Latest from the blog',
-  'landing.blog.viewAll': 'View all posts',
-  'landing.blog.empty': 'No posts yet — check back soon.',
-  'landing.cta.title': 'Ready to grow something wonderful?',
-  'landing.cta.lead':
-    'Whether you dream of a wildflower meadow or simply want tidy, healthy borders, we would love to help your garden thrive.',
-  'landing.cta.button': 'Start reading',
+  // -------------------- Home: why choose us --------------------
+  // Two rows in one part: the references first, the tally under them. The
+  // names, places and figures those rows are built from are facts, so they
+  // live in data/testimonialsData.js and never pass through here.
+  'whyUs.eyebrow': 'Why choose us',
+  'whyUs.title': 'Reasons people stay with us',
+  'whyUs.lead':
+    'Most of our work comes from people who already have our number. Here is what three of them say, and what the years since add up to.',
+  'whyUs.tally.eyebrow': 'By the numbers',
+  'whyUs.tally.title': 'What we have accomplished',
+
+  // -------------------- Home: projects --------------------
+  'projects.eyebrow': 'Finished projects',
+  'projects.title': 'Places we have planted',
+  'projects.lead':
+    'Every garden is one place, one year and one list of jobs. Here are three recent ones.',
+  'projects.scope': 'Scope of works',
+  'projects.imageAlt': '{title} — {place}, photograph {index}',
+  'projects.viewAll': 'All projects',
+  'projectsPage.title': 'All projects',
+  'projectsPage.lead':
+    'The gardens we have built and still look after — from the coast to the mountains.',
 
   // -------------------- Blog list --------------------
-  'blog.eyebrow': 'The Rooted & Green blog',
+  'blog.eyebrow': 'The Malina Garden blog',
   'blog.title': 'Notes from the garden',
   'blog.lead':
     'Practical guides, seasonal know-how, and inspiration for growing a garden you love.',

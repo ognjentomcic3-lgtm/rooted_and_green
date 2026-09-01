@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Landing from './pages/Landing.jsx';
+import Projects from './pages/Projects.jsx';
 import BlogList from './pages/BlogList.jsx';
 import BlogPost from './pages/BlogPost.jsx';
 import AdminDashboard from './pages/AdminDashboard.jsx';
@@ -11,6 +12,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Landing />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/admin" element={<AdminDashboard />} />
