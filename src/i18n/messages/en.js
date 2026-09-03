@@ -55,6 +55,10 @@ export default {
   'projects.title': 'Places we have planted',
   'projects.lead':
     'The gardens we have built and still look after — from the coast to the mountains.',
+  // Restored with the homepage showcase: the alt text for each row's
+  // photographs and the button that leads to the full list.
+  'projects.imageAlt': '{title} — {place}, photograph {index}',
+  'projects.viewAll': 'All projects',
   'projects.searchPlaceholder': 'Search projects…',
   'projects.searchLabel': 'Search projects',
   'projects.filterLabel': 'Filter by category',
