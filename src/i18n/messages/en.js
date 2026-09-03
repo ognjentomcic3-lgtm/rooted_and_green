@@ -94,6 +94,7 @@ export default {
   'gallery.previous': 'Previous picture',
   'gallery.next': 'Next picture',
   'gallery.position': '{index} / {total}',
+  'gallery.singleAlt': 'A picture from the project',
   'gallery.imageAlt': 'Picture {index} of {total}',
   'gallery.missing': 'This picture is no longer available.',
 
@@ -177,7 +178,6 @@ export default {
   'form.excerptPlaceholder': 'A short, enticing summary of the project…',
   'form.cover': 'Cover picture',
   'form.coverHint': '(the picture shown in the project list)',
-  'form.coverAlt': 'Cover preview',
   'form.url': 'Page address',
   'form.urlHint': '(built from the title on its own)',
   'form.date': 'Date',
@@ -218,6 +218,7 @@ export default {
   'picker.error.quota':
     'The browser is out of room. Delete a picture and try again.',
   'picker.error.write': 'The picture was not saved. Try again.',
+  'picker.error.delete': 'The picture was not deleted. Try again.',
   'picker.error.read':
     'The library cannot be reached. A private window does not allow it — open the site in an ordinary window.',
   'picker.error.type': 'That file is not an image.',

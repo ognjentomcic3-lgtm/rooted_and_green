@@ -8,6 +8,13 @@
   gap: var(--sp-6);
   align-items: start;
 }
+/* Grid children default to min-content width, not zero, so one long word in a
+   text block or a wide picture grid in the picker would push the whole two
+   column layout past the panel. Both columns are told they may shrink. */
+.form-main,
+.form-side {
+  min-width: 0;
+}
 
 .form-side {
   background: var(--cream-dark);
@@ -16,6 +23,14 @@
   border: 1px solid var(--border);
   position: sticky;
   top: 90px;
+  /* The block list in the main column is far taller than a textarea ever was,
+     so the sidebar is stuck against it for most of a long page. If the picker
+     opens a library grid and the sidebar grows past the viewport, the bottom of
+     it would sit off-screen with no way to reach it — sticky does not scroll
+     the part that overflows. Capping it to what is left of the viewport under
+     the 90px offset lets the sidebar scroll on its own instead. */
+  max-height: calc(100vh - 90px - var(--sp-5));
+  overflow-y: auto;
 }
 .form-side .field:last-child {
   margin-bottom: 0;
@@ -73,7 +88,8 @@
   color: var(--sage-200);
 }
 
-/* Quiet marker: this language still has an empty title or body. */
+/* Quiet marker: this language has no title, or none of the project's text
+   blocks have been written in it yet. */
 .form-lang-dot {
   width: 7px;
   height: 7px;
@@ -93,6 +109,12 @@
   font-size: 0.98rem;
 }
 
+/* The block editor brings its own chrome, so this wrapper only owns the space
+   around it and the error line underneath. */
+.form-blocks {
+  margin-bottom: 0;
+}
+
 .field-error {
   color: #b04a34;
   font-size: 0.84rem;
@@ -100,17 +122,24 @@
   font-weight: 600;
 }
 
-.cover-preview {
-  margin-top: var(--sp-3);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 1px solid var(--border);
+/* The derived address. Still an input so it can be selected and copied, but
+   visibly not somewhere to type: no white field, no focus ring promising an
+   edit that will not take. */
+.input-readonly {
   background: var(--sage-100);
+  color: var(--text-soft);
+  cursor: default;
 }
-.cover-preview img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+.input-readonly:focus {
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+/* The picker draws its own label, so its hint has to be pulled up under it
+   rather than sitting a paragraph's worth of air away. */
+.form-cover-hint {
+  display: block;
+  margin: var(--sp-2) 0 0;
 }
 
 .form-actions {
@@ -125,7 +154,26 @@
   .form-grid {
     grid-template-columns: 1fr;
   }
+  /* Stacked, the sidebar is just the next run of fields: nothing to stick to
+     and nothing to scroll inside, so both guards come back off. */
   .form-side {
     position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 480px) {
+  /* .btn is white-space: nowrap, so at 375px "Objavi projekat" beside
+     "Otkaži" does not wrap when the row runs out of room — it overflows the
+     panel sideways. A row each, full width, keeps the page inside itself. */
+  .form-actions {
+    flex-wrap: wrap;
+  }
+  .form-actions .btn {
+    flex: 1 1 100%;
+  }
+  .form-side {
+    padding: var(--sp-4);
   }
 }

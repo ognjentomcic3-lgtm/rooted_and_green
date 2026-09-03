@@ -120,6 +120,103 @@ export function newImagesBlock() {
   return { id: runtimeBlockId(), type: 'images', imageIds: [] };
 }
 
+// -------------------- Pure list operations --------------------
+//
+// The block editor is the only caller today, but these live here rather than
+// in the component because this file is already the one place that knows what
+// a block is — newTextBlock() and localizeBlock() are its neighbours. Keeping
+// them out of the component also means they can be exercised on their own,
+// without a browser, which is how the same-reference guarantees below were
+// actually checked.
+//
+// Every operation below takes the current list and returns a brand-new one,
+// with brand-new objects along the path that changed and the untouched blocks
+// left at their original references. The form holds `blocks` in state and
+// compares by reference, so mutating the incoming array would leave the form
+// showing stale content — React would see the same array and skip the render.
+
+// One block replaced, every other block kept by reference.
+function replaceAt(list, index, next) {
+  return list.map((item, i) => (i === index ? next : item));
+}
+
+// Move one item to another index. Written without splice so nothing is ever
+// mutated, not even a local copy — the rule is easier to keep when there is no
+// mutating call anywhere in the file to copy by accident. A move that would
+// fall off either end is a no-op and hands the same list straight back.
+function moveWithin(list, from, to) {
+  if (to < 0 || to >= list.length || from === to) return list;
+  const moved = list[from];
+  const rest = list.filter((_, i) => i !== from);
+  return [...rest.slice(0, to), moved, ...rest.slice(to)];
+}
+
+export function addBlock(blocks, block) {
+  return [...blocks, block];
+}
+
+export function removeBlock(blocks, index) {
+  return blocks.filter((_, i) => i !== index);
+}
+
+export function moveBlock(blocks, from, to) {
+  return moveWithin(blocks, from, to);
+}
+
+// Writes the active language and nothing else. The other languages come across
+// by reference inside the spread of `block.i18n`, so writing Serbian cannot
+// disturb a word of the English translation — which is the whole point of a
+// per-block bundle, and the easiest thing here to get subtly wrong.
+export function setBlockText(blocks, index, lang, text) {
+  const block = blocks[index];
+  if (!block || block.type !== 'text') return blocks;
+  return replaceAt(blocks, index, {
+    ...block,
+    i18n: {
+      ...block.i18n,
+      [lang]: { ...(block.i18n && block.i18n[lang]), text },
+    },
+  });
+}
+
+// A picture already in this block is refused rather than added twice. Two
+// copies of one photograph in one gallery is a slip of the hand every time,
+// and letting it through would also put two identical keys in the thumbnail
+// list, which is how a reorder starts redrawing the wrong picture.
+export function addPicture(blocks, index, idOrUrl) {
+  const block = blocks[index];
+  if (!block || block.type !== 'images' || !idOrUrl) return blocks;
+  const imageIds = block.imageIds || [];
+  if (imageIds.includes(idOrUrl)) return blocks;
+  return replaceAt(blocks, index, {
+    ...block,
+    imageIds: [...imageIds, idOrUrl],
+  });
+}
+
+export function removePicture(blocks, index, pictureIndex) {
+  const block = blocks[index];
+  if (!block || block.type !== 'images') return blocks;
+  const imageIds = block.imageIds || [];
+  if (pictureIndex < 0 || pictureIndex >= imageIds.length) return blocks;
+  return replaceAt(blocks, index, {
+    ...block,
+    imageIds: imageIds.filter((_, i) => i !== pictureIndex),
+  });
+}
+
+export function movePicture(blocks, index, from, to) {
+  const block = blocks[index];
+  if (!block || block.type !== 'images') return blocks;
+  const imageIds = block.imageIds || [];
+  const moved = moveWithin(imageIds, from, to);
+  // moveWithin hands the same array back when the move would fall off an end.
+  // Passing that on unchanged keeps the whole list at its original reference,
+  // so a disabled button that somehow fires costs the form nothing.
+  if (moved === imageIds) return blocks;
+  return replaceAt(blocks, index, { ...block, imageIds: moved });
+}
+
 // Migrated blocks must NOT use runtimeBlockId(). migratePost() runs on every
 // read of the store, and an id minted from Date.now() and Math.random() would
 // make it hand back a different object every time — which would break the

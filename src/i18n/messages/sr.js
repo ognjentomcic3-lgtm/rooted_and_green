@@ -101,6 +101,9 @@ export default {
   'gallery.previous': 'Prethodna slika',
   'gallery.next': 'Sledeća slika',
   'gallery.position': '{index} / {total}',
+  // A lone picture in the body has no position to report, so it does not
+  // borrow gallery.imageAlt and announce itself as "picture 1 of 1".
+  'gallery.singleAlt': 'Slika iz projekta',
   'gallery.imageAlt': 'Slika {index} od {total}',
   'gallery.missing': 'Ova slika više nije dostupna.',
 
@@ -193,7 +196,6 @@ export default {
   'form.excerptPlaceholder': 'Kratak, primamljiv sažetak projekta…',
   'form.cover': 'Naslovna slika',
   'form.coverHint': '(slika koja stoji na spisku projekata)',
-  'form.coverAlt': 'Pregled naslovne slike',
   'form.url': 'Adresa strane',
   'form.urlHint': '(gradi se sama iz naslova)',
   'form.date': 'Datum',
@@ -235,6 +237,7 @@ export default {
   'picker.error.quota':
     'U pregledaču nema više mesta. Obrišite neku sliku pa pokušajte ponovo.',
   'picker.error.write': 'Slika nije sačuvana. Pokušajte ponovo.',
+  'picker.error.delete': 'Slika nije obrisana. Pokušajte ponovo.',
   'picker.error.read':
     'Biblioteci se ne može pristupiti. U privatnom prozoru pregledač je ne dozvoljava — otvorite sajt u običnom prozoru.',
   'picker.error.type': 'Ta datoteka nije slika.',

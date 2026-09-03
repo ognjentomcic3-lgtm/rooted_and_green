@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Picture } from '../../components/Gallery.jsx';
 import { MAX_FEATURED, usePosts } from '../../hooks/usePosts.js';
 import { useI18n } from '../../i18n/context.js';
 import { localizePost } from '../../i18n/posts.js';
@@ -98,13 +99,16 @@ export default function AdminProjects() {
 
                     <td>
                       <div className="admp-cell-project">
-                        <img
-                          className="admp-thumb"
-                          src={post.coverImage}
+                        {/* Through the same resolution the public site uses:
+                            `coverImage` went with the v2 post shape, and
+                            `coverImageId` holds either a library id or a plain
+                            URL. */}
+                        <Picture
+                          idOrUrl={post.coverImageId}
                           alt=""
-                          loading="lazy"
-                          width="58"
-                          height="44"
+                          className="admp-thumb"
+                          width={58}
+                          height={44}
                         />
                         <span>
                           <span className="admp-title">{copy.title}</span>

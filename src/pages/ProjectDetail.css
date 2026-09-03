@@ -46,6 +46,34 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
 }
+/* The stand-in for a cover that is gone wants the same frame the photograph
+   would have had, so the page keeps its shape either way. */
+.post-cover .picture-empty {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* -------------------- The body, block by block -------------------- */
+/* The body is an ordered run of blocks now rather than one piece of markdown,
+   so the space between them is owned here, once, instead of falling out of
+   whatever the last paragraph of the previous block happened to be. Blocks that
+   render nothing take no room, which is what keeps a half-written project from
+   showing a gap. */
+.post-body > * + * {
+  margin-top: var(--sp-6);
+}
+
+/* A picture block holding exactly one picture: full width, no controls. */
+.post-figure {
+  margin: 0;
+}
+.post-figure img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
 
 /* -------------------- Markdown body -------------------- */
 .post-content {
@@ -55,6 +83,12 @@
 }
 .post-content > *:first-child {
   margin-top: 0;
+}
+/* Trailing margin belongs to .post-body's gap now — left on, two text blocks
+   in a row would sit a paragraph break further apart than a text block and a
+   gallery do. */
+.post-content > *:last-child {
+  margin-bottom: 0;
 }
 .post-content h2 {
   margin-top: var(--sp-7);

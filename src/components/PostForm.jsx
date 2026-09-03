@@ -8,14 +8,19 @@ import {
   migratePost,
   slugSourceTitle,
 } from '../i18n/posts.js';
+import BlockEditor from './BlockEditor.jsx';
+import ImagePicker from './ImagePicker.jsx';
 import './PostForm.css';
 
+// The language-neutral half of a project. There is no slug here any more —
+// usePosts derives it from the title on every save — and no category or author,
+// which left the shape with v2. What is left is the cover picture, the date and
+// the block list that carries the body.
 const EMPTY = {
-  slug: '',
-  coverImage: '',
-  author: '',
+  coverImageId: '',
   date: new Date().toISOString().slice(0, 10),
   i18n: emptyBundles(),
+  blocks: [],
 };
 
 // Accepts a post in either shape — migratePost normalises anything legacy.
@@ -29,17 +34,24 @@ function toFormState(post) {
   };
 }
 
+// The words one text block holds in one language, read straight out of its
+// bundle. Deliberately not localizeBlock(): that walks the fallback chain and
+// would answer with the Serbian text when the English is missing, which is
+// exactly the gap the incomplete dot below exists to show.
+function blockText(block, lang) {
+  const bundles = block.i18n || {};
+  return String((bundles[lang] || {}).text || '');
+}
+
 export default function PostForm({ initial, onSubmit, onCancel }) {
   const { t } = useI18n();
   const isEditing = Boolean(initial);
   const [form, setForm] = useState(() => toFormState(initial));
   const [activeLang, setActiveLang] = useState(DEFAULT_LANG);
-  const [slugTouched, setSlugTouched] = useState(Boolean(initial));
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setForm(toFormState(initial));
-    setSlugTouched(Boolean(initial));
     setActiveLang(DEFAULT_LANG);
     setErrors({});
   }, [initial]);
@@ -55,56 +67,63 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
       },
     }));
 
-  // The slug is language-neutral, so it follows the default language's title.
-  const handleTitle = (lang, value) => {
-    setForm((f) => ({
-      ...f,
-      i18n: {
-        ...f.i18n,
-        [lang]: { ...(f.i18n[lang] || emptyBundle()), title: value },
-      },
-      slug: !slugTouched && lang === DEFAULT_LANG ? slugify(value) : f.slug,
-    }));
-  };
-
   const bundle = (lang) => form.i18n[lang] || emptyBundle();
 
-  // Stopgap: `content` left the bundles when the body became blocks, so every
-  // read of it has to survive an undefined. The block editor replaces this.
-  const bodyOf = (lang) => bundle(lang).content || '';
+  const textBlocks = form.blocks.filter((b) => b.type === 'text');
 
+  // A language is incomplete when it has no title, or when the project has text
+  // blocks and this language has no words in any of them. The second half is a
+  // judgement call worth spelling out: blocks are language-neutral in structure
+  // and translated only in their words, so a project made of nothing but
+  // picture blocks has nothing to translate — marking it "incomplete" in
+  // English would be flagging work that does not exist.
   const isIncomplete = (lang) =>
-    !bundle(lang).title.trim() || !bodyOf(lang).trim();
+    !bundle(lang).title.trim() ||
+    (textBlocks.length > 0 &&
+      !textBlocks.some((block) => blockText(block, lang).trim()));
 
   const validate = () => {
     const next = {};
     const base = bundle(DEFAULT_LANG);
     if (!base.title.trim()) next[`title:${DEFAULT_LANG}`] = t('form.error.title');
-    if (!bodyOf(DEFAULT_LANG).trim())
-      next[`content:${DEFAULT_LANG}`] = t('form.error.content');
-    if (!form.author.trim()) next.author = t('form.error.author');
-    if (!form.coverImage.trim()) next.coverImage = t('form.error.cover');
+    if (!String(form.coverImageId || '').trim()) {
+      next.coverImageId = t('form.error.cover');
+    }
+    if (form.blocks.length === 0) next.blocks = t('form.error.blocks');
     setErrors(next);
 
-    // Send the admin to the tab that is actually missing something.
-    if (next[`title:${DEFAULT_LANG}`] || next[`content:${DEFAULT_LANG}`]) {
-      setActiveLang(DEFAULT_LANG);
-    }
+    // Only the title belongs to a language, so it is the only error that can
+    // send the admin to a tab. The cover picture and the block list are
+    // language-neutral: there is no tab that would fix either of them, and
+    // switching away would just move the admin off what they were doing.
+    if (next[`title:${DEFAULT_LANG}`]) setActiveLang(DEFAULT_LANG);
     return Object.keys(next).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
+    // Named fields rather than a spread of the whole form: the state still
+    // carries `id`, `slug` and `featured` when an existing project was loaded
+    // into it, and none of the three is the form's to set. usePosts.update()
+    // keeps the stored id and featured flag and re-derives the slug itself.
     onSubmit({
-      ...form,
-      slug: form.slug ? slugify(form.slug) : slugify(slugSourceTitle(form)),
+      coverImageId: form.coverImageId,
+      date: form.date,
+      i18n: form.i18n,
+      blocks: form.blocks,
     });
   };
 
+  // A preview of the address, not the address itself: usePosts derives the real
+  // one from this same title on every save. It cannot show a `-2` suffix,
+  // because uniqueness is settled against the whole store at save time and this
+  // form does not hold the store — a second project called "Vrt na Vračaru"
+  // reads as /projects/vrt-na-vracaru here and is stored one number along.
+  const urlPreview = `/projects/${slugify(slugSourceTitle(form)) || '…'}`;
+
   const active = bundle(activeLang);
   const titleError = errors[`title:${activeLang}`];
-  const contentError = errors[`content:${activeLang}`];
 
   return (
     <form className="post-form" onSubmit={handleSubmit} noValidate>
@@ -112,9 +131,7 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
         <div className="form-main">
           <div className="form-langs" role="group" aria-label={t('form.langLabel')}>
             {LANGUAGES.map((option) => {
-              const invalid = Boolean(
-                errors[`title:${option.code}`] || errors[`content:${option.code}`],
-              );
+              const invalid = Boolean(errors[`title:${option.code}`]);
               const incomplete = isIncomplete(option.code);
               return (
                 <button
@@ -152,7 +169,7 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
               id={`pf-title-${activeLang}`}
               className="input"
               value={active.title}
-              onChange={(e) => handleTitle(activeLang, e.target.value)}
+              onChange={(e) => setCopy(activeLang, 'title', e.target.value)}
               placeholder={t('form.titlePlaceholder')}
               aria-invalid={Boolean(titleError)}
             />
@@ -173,74 +190,48 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
             />
           </div>
 
-          <div className="field">
-            <label htmlFor={`pf-content-${activeLang}`}>
-              {t('form.content')}{' '}
-              <span className="hint">{t('form.contentHint')}</span>
-            </label>
-            <textarea
-              id={`pf-content-${activeLang}`}
-              className="textarea"
-              value={bodyOf(activeLang)}
-              onChange={(e) => setCopy(activeLang, 'content', e.target.value)}
-              placeholder={t('form.contentPlaceholder')}
-              aria-invalid={Boolean(contentError)}
+          {/* The body. The active tab goes through so a text block edits the
+              language the admin is reading, and the whole next array comes
+              back — the editor owns the order, the form owns the state. */}
+          <div className="field form-blocks">
+            <BlockEditor
+              blocks={form.blocks}
+              lang={activeLang}
+              onChange={(blocks) => setField('blocks', blocks)}
             />
-            {contentError && <p className="field-error">{contentError}</p>}
+            {errors.blocks && <p className="field-error">{errors.blocks}</p>}
           </div>
         </div>
 
         <aside className="form-side">
+          {/* The picker renders the label itself, so it is handed the
+              translated string rather than wrapped in a <label> here. */}
           <div className="field">
-            <label htmlFor="pf-slug">
-              {t('form.slug')} <span className="hint">{t('form.slugHint')}</span>
+            <ImagePicker
+              value={form.coverImageId || null}
+              onChange={(id) => setField('coverImageId', id)}
+              label={t('form.cover')}
+            />
+            <p className="hint form-cover-hint">{t('form.coverHint')}</p>
+            {errors.coverImageId && (
+              <p className="field-error">{errors.coverImageId}</p>
+            )}
+          </div>
+
+          {/* Read-only rather than absent: the admin cannot change the address,
+              but watching it follow the title is how the rename behaviour stops
+              being a surprise. An input keeps it selectable so it can be
+              copied — readOnly, not disabled, so it stays reachable. */}
+          <div className="field">
+            <label htmlFor="pf-url">
+              {t('form.url')} <span className="hint">{t('form.urlHint')}</span>
             </label>
             <input
-              id="pf-slug"
-              className="input"
-              value={form.slug}
-              onChange={(e) => {
-                setSlugTouched(true);
-                setField('slug', e.target.value);
-              }}
-              placeholder={t('form.slugPlaceholder')}
+              id="pf-url"
+              className="input input-readonly"
+              value={urlPreview}
+              readOnly
             />
-            <p className="hint">
-              /projects/{slugify(form.slug || slugSourceTitle(form)) || '…'}
-            </p>
-          </div>
-
-          <div className="field">
-            <label htmlFor="pf-cover">{t('form.cover')}</label>
-            <input
-              id="pf-cover"
-              className="input"
-              value={form.coverImage}
-              onChange={(e) => setField('coverImage', e.target.value)}
-              placeholder={t('form.coverPlaceholder')}
-              aria-invalid={Boolean(errors.coverImage)}
-            />
-            {errors.coverImage && (
-              <p className="field-error">{errors.coverImage}</p>
-            )}
-            {form.coverImage && (
-              <div className="cover-preview">
-                <img src={form.coverImage} alt={t('form.coverAlt')} />
-              </div>
-            )}
-          </div>
-
-          <div className="field">
-            <label htmlFor="pf-author">{t('form.author')}</label>
-            <input
-              id="pf-author"
-              className="input"
-              value={form.author}
-              onChange={(e) => setField('author', e.target.value)}
-              placeholder={t('form.authorPlaceholder')}
-              aria-invalid={Boolean(errors.author)}
-            />
-            {errors.author && <p className="field-error">{errors.author}</p>}
           </div>
 
           <div className="field">

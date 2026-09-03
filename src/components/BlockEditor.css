@@ -1,0 +1,260 @@
+/* The body editor sits inside the project form, so it borrows the form's
+   tokens and shared classes (.btn, .textarea, .hint, .sr-only) and adds only
+   what a stack of framed blocks actually needs. Every class is prefixed
+   `blocked-` and nothing here reaches into PostForm.css. */
+
+.blocked {
+  margin-top: var(--sp-5);
+}
+
+.blocked-head {
+  margin-bottom: var(--sp-4);
+}
+.blocked-title {
+  margin: 0 0 var(--sp-1);
+  font-size: 1.05rem;
+  color: var(--leaf-900);
+}
+.blocked-head .hint {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.86rem;
+}
+
+/* No blocks yet. Dashed rather than solid so it reads as a space waiting to be
+   filled instead of a block that failed to draw. */
+.blocked-empty {
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--cream-dark);
+  padding: var(--sp-5);
+  text-align: center;
+}
+.blocked-empty-title {
+  margin: 0 0 var(--sp-2);
+  font-weight: 600;
+  color: var(--leaf-900);
+}
+.blocked-empty .hint {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.86rem;
+}
+
+.blocked-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* One framed block. The frame is what makes the order visible: the admin is
+   arranging boxes, not editing one long field. */
+.blocked-block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  padding: var(--sp-4);
+}
+
+.blocked-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.blocked-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--leaf-700);
+}
+
+.blocked-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--sage-100);
+  color: var(--leaf-700);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Wraps rather than overflows: at 375px the three controls do not fit on one
+   line, and a second line is the right answer where a scrollbar is not. */
+.blocked-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* A move control at the end of the list stays where it is and goes quiet. The
+   row must not reflow as blocks move past one another, so the button is
+   disabled rather than removed — and it must not pretend to be hoverable. */
+.blocked .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.blocked .btn:disabled:hover {
+  transform: none;
+  background: var(--sage-100);
+  color: var(--leaf-700);
+}
+
+.blocked-body {
+  display: block;
+}
+
+/* The global .textarea is sized for one long body. A block is a paragraph or
+   two, and several of them have to stay scannable on one screen. */
+.blocked-textarea {
+  min-height: 150px;
+}
+
+.blocked-hint {
+  margin: var(--sp-2) 0 0;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+}
+
+/* What the public page will do with this block. It is a promise, not a
+   caption, so it is tinted rather than quiet — the admin should not have to go
+   and check. */
+.blocked-promise {
+  margin: var(--sp-3) 0 0;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  background: var(--sage-100);
+  color: var(--leaf-700);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.blocked-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--sp-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blocked-thumb {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--sage-100);
+}
+.blocked-thumb img,
+.blocked-thumb-empty {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+/* Nothing to draw yet — a library picture is still being read, or it has gone
+   from the library. Either way an empty tinted box keeps the grid steady. */
+.blocked-thumb-empty {
+  background: var(--sage-200);
+}
+
+.blocked-thumb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-1);
+  padding: var(--sp-2);
+  background: var(--cream-dark);
+  border-top: 1px solid var(--border);
+}
+
+.blocked-thumb-index {
+  margin-right: auto;
+  padding-left: var(--sp-1);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+
+/* Square buttons carrying a glyph, with the translated wording on aria-label
+   and title. Three full-width buttons would not fit under a 150px thumbnail,
+   and shortening the words would only shorten them in English. */
+.blocked-thumb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--leaf-700);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.blocked-thumb-btn:hover:not(:disabled) {
+  border-color: var(--leaf-500);
+  background: var(--sage-100);
+}
+.blocked-thumb-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.blocked-thumb-btn.is-danger {
+  color: #b04a34;
+}
+.blocked-thumb-btn.is-danger:hover:not(:disabled) {
+  border-color: #c0563f;
+  background: #b04a34;
+  color: var(--white);
+}
+
+.blocked-picker {
+  margin-top: var(--sp-3);
+}
+
+.blocked-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+
+/* A 375px phone. The block frame gives back some of its padding, the controls
+   take a line of their own, and the thumbnails hold two columns rather than
+   collapsing to one — two is still enough to see an order. */
+@media (max-width: 480px) {
+  .blocked-block {
+    padding: var(--sp-3);
+  }
+  .blocked-bar {
+    align-items: flex-start;
+    gap: var(--sp-2);
+  }
+  .blocked-controls {
+    width: 100%;
+  }
+  .blocked-thumbs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-2);
+  }
+  .blocked-add .btn {
+    flex: 1 1 auto;
+  }
+}
