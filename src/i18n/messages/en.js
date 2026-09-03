@@ -82,6 +82,7 @@ export default {
   'project.back': 'Back to all projects',
   'project.readMore': 'More projects',
   'project.coverAlt': 'Cover image for {title}',
+  'project.scrollCue': 'Skip to the project',
   'project.notFound.title': 'Project not found',
   'project.notFound.text': 'That project may have been moved or removed.',
   'project.notFound.back': 'Back to the projects',

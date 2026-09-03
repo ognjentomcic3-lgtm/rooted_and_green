@@ -89,6 +89,7 @@ export default {
   'project.back': 'Nazad na sve projekte',
   'project.readMore': 'Pogledajte još projekata',
   'project.coverAlt': 'Naslovna slika za projekat „{title}“',
+  'project.scrollCue': 'Pređite na opis projekta',
   'project.notFound.title': 'Projekat nije pronađen',
   'project.notFound.text': 'Taj projekat je možda premešten ili uklonjen.',
   'project.notFound.back': 'Nazad na projekte',
