@@ -11,7 +11,7 @@ import './AdminProjects.css';
 // what the client asked for.
 export default function AdminProjects() {
   const { posts, remove, setFeatured } = usePosts();
-  const { lang, t, categoryLabel, formatDate } = useI18n();
+  const { lang, t, formatDate } = useI18n();
 
   // setFeatured() refuses a fourth and returns false. The boxes are disabled
   // before it can come to that, but a disabled box is a courtesy, not the rule,
@@ -63,7 +63,6 @@ export default function AdminProjects() {
                   {t('admin.projects.col.featured')}
                 </th>
                 <th scope="col">{t('admin.projects.col.project')}</th>
-                <th scope="col">{t('admin.projects.col.category')}</th>
                 <th scope="col">{t('admin.projects.col.date')}</th>
                 <th scope="col" className="admp-col-actions">
                   {t('admin.projects.col.actions')}
@@ -112,10 +111,6 @@ export default function AdminProjects() {
                           <span className="admp-slug">/{post.slug}</span>
                         </span>
                       </div>
-                    </td>
-
-                    <td className="admp-muted">
-                      {categoryLabel(post.category)}
                     </td>
 
                     <td className="admp-muted">

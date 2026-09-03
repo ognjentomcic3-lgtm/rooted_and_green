@@ -1,9 +1,19 @@
 // Seed content for Malina Garden. Loaded into localStorage on first run.
 // All images use picsum.photos seeded URLs so they load without API keys.
 //
-// Categories are stable keys — display labels live in src/i18n/messages/*.js.
 // Each post keeps language-neutral fields at the top level and its copy under
 // `i18n`, so the slug (and therefore every /projects/:slug URL) stays single.
+// The body is an ordered list of `blocks` shared by both languages — see the
+// shape documented at the top of src/i18n/posts.js.
+//
+// `coverImageId` and the `imageIds` of a picture block name a picture in the
+// library, but a fresh browser has no library yet, so the seeds put plain
+// picsum.photos URLs in those fields instead. That is allowed on purpose: the
+// renderer tells the two apart with isLibraryId() in src/images/imageStore.js.
+//
+// Block ids are hardcoded rather than generated. migratePost() runs on every
+// read of the store and compares by reference, so anything derived from
+// Date.now() here would make the seeds look different on each load.
 //
 // `featured` is the admin's checkbox: whether a project is one of the ones put
 // forward on the landing page. At most three may be true at once, which is why
@@ -11,21 +21,11 @@
 // rule rather than start over the limit. The cap itself is enforced by
 // setFeatured() in src/hooks/usePosts.js, not here.
 
-export const CATEGORIES = [
-  'design',
-  'planting',
-  'maintenance',
-  'sustainability',
-  'seasonal',
-];
-
 export const seedPosts = [
   {
     id: 'post-raised-beds',
     slug: 'building-raised-beds-that-last',
-    coverImage: 'https://picsum.photos/seed/raisedbeds-cover/1200/675',
-    category: 'design',
-    author: 'Maya Fernsby',
+    coverImageId: 'https://picsum.photos/seed/raisedbeds-cover/1200/675',
     date: '2026-06-28',
     featured: true,
     i18n: {
@@ -33,11 +33,43 @@ export const seedPosts = [
         title: 'Podignute leje koje traju deceniju',
         excerpt:
           'Dobro napravljena podignuta leja vraća uloženo godinama. Evo kako projektujemo i gradimo leje koje ostaju u pravom uglu, dobro se dreniraju i daju obilan rod.',
-        content: `Podignute leje su kičma produktivnog vrta koji ne lomi leđa. U proleće se ranije zagreju, voda kroz njih slobodno otiče, a zemlja ostaje rastresita jer po njoj nikada ne gazite.
-
-![Sveže napravljene leje od kedrovine](https://picsum.photos/seed/raisedbeds-inline/800/450)
-
-## Zašto ih volimo
+      },
+      en: {
+        title: 'Building Raised Beds That Last a Decade',
+        excerpt:
+          'A well-built raised bed pays you back for years. Here is how we design and construct beds that stay square, drain well, and grow abundant harvests.',
+      },
+    },
+    blocks: [
+      {
+        id: 'block-raised-beds-1',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: 'Podignute leje su kičma produktivnog vrta koji ne lomi leđa. U proleće se ranije zagreju, voda kroz njih slobodno otiče, a zemlja ostaje rastresita jer po njoj nikada ne gazite.',
+          },
+          en: {
+            text: 'Raised beds are the backbone of a productive, low-strain garden. They warm up earlier in spring, drain freely, and keep your soil loose because you never walk on it.',
+          },
+        },
+      },
+      {
+        id: 'block-raised-beds-2',
+        type: 'images',
+        imageIds: [
+          'https://picsum.photos/seed/raisedbeds-inline/800/450',
+          'https://picsum.photos/seed/raisedbeds-frame/800/450',
+          'https://picsum.photos/seed/raisedbeds-fill/800/450',
+          'https://picsum.photos/seed/raisedbeds-planted/800/450',
+          'https://picsum.photos/seed/raisedbeds-harvest/800/450',
+        ],
+      },
+      {
+        id: 'block-raised-beds-3',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: `## Zašto ih volimo
 
 - **Bolja drenaža** — nema više zagušenog korena posle jake kiše.
 - **Manje korova** — jasna ivica zaustavlja travu koja se širi.
@@ -54,16 +86,9 @@ Gradimo gotovo isključivo od **netretirane kedrovine** ili **ariša**. Oba prir
 > Podignuta leja vredi tačno onoliko koliko i ono čime je napunite. Hranite zemlju, a zemlja će hraniti biljke.
 
 Ostavite drvenariji punu sezonu da se slegne, svakog proleća dopunite zemlju i dobra leja će vam služiti deset godina i duže.`,
-      },
-      en: {
-        title: 'Building Raised Beds That Last a Decade',
-        excerpt:
-          'A well-built raised bed pays you back for years. Here is how we design and construct beds that stay square, drain well, and grow abundant harvests.',
-        content: `Raised beds are the backbone of a productive, low-strain garden. They warm up earlier in spring, drain freely, and keep your soil loose because you never walk on it.
-
-![Freshly built cedar raised beds](https://picsum.photos/seed/raisedbeds-inline/800/450)
-
-## Why we love them
+          },
+          en: {
+            text: `## Why we love them
 
 - **Better drainage** — no more waterlogged roots after heavy rain.
 - **Fewer weeds** — a defined edge keeps encroaching grass out.
@@ -80,15 +105,15 @@ We build almost exclusively with **untreated cedar** or **larch**. Both resist r
 > A raised bed is only as good as what you put in it. Feed the soil, and the soil feeds the plants.
 
 Give the timber a full season to settle, top up the soil each spring, and a good bed will serve you for ten years or more.`,
+          },
+        },
       },
-    },
+    ],
   },
   {
     id: 'post-pollinator-border',
     slug: 'pollinator-border-every-season',
-    coverImage: 'https://picsum.photos/seed/pollinator-cover/1200/675',
-    category: 'planting',
-    author: 'Theo Marsh',
+    coverImageId: 'https://picsum.photos/seed/pollinator-cover/1200/675',
     date: '2026-06-15',
     featured: true,
     i18n: {
@@ -96,11 +121,39 @@ Give the timber a full season to settle, top up the soil each spring, and a good
         title: 'Leja za oprašivače koja cveta u svakoj sezoni',
         excerpt:
           'Pčelama, leptirima i osolikim muvama treba paše od marta do oktobra. Ovaj plan sadnje čini da nešto cveta sve vreme.',
-        content: `Vrt koji bruji od života nije slučajnost. Tajna je u *smeni* — sadite tako da se, čim jedan cvet prođe, otvori sledeći.
-
-![Leja puna pčela i leptira](https://picsum.photos/seed/pollinator-inline/800/450)
-
-## Pravilo tri sezone
+      },
+      en: {
+        title: 'Designing a Pollinator Border for Every Season',
+        excerpt:
+          'Bees, butterflies, and hoverflies need forage from March to October. This planting plan keeps something in bloom the whole way through.',
+      },
+    },
+    blocks: [
+      {
+        id: 'block-pollinator-1',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: 'Vrt koji bruji od života nije slučajnost. Tajna je u *smeni* — sadite tako da se, čim jedan cvet prođe, otvori sledeći.',
+          },
+          en: {
+            text: 'A garden that hums with life is no accident. The secret is *succession* — planting so that as one flower fades, another opens.',
+          },
+        },
+      },
+      // A single picture, deliberately: the layout has to look right with one
+      // as well as with a whole gallery.
+      {
+        id: 'block-pollinator-2',
+        type: 'images',
+        imageIds: ['https://picsum.photos/seed/pollinator-inline/800/450'],
+      },
+      {
+        id: 'block-pollinator-3',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: `## Pravilo tri sezone
 
 Leju delimo na tri talasa koji se preklapaju:
 
@@ -128,16 +181,9 @@ Leju delimo na tri talasa koji se preklapaju:
 > Ciljajte na bar dve medonosne biljke u cvetu tokom svakog meseca vegetacije.
 
 Uradite to i vaša leja će biti puna života od prvog toplog dana u martu do poslednjeg u oktobru.`,
-      },
-      en: {
-        title: 'Designing a Pollinator Border for Every Season',
-        excerpt:
-          'Bees, butterflies, and hoverflies need forage from March to October. This planting plan keeps something in bloom the whole way through.',
-        content: `A garden that hums with life is no accident. The secret is *succession* — planting so that as one flower fades, another opens.
-
-![A border alive with bees and butterflies](https://picsum.photos/seed/pollinator-inline/800/450)
-
-## The three-season rule
+          },
+          en: {
+            text: `## The three-season rule
 
 We split the border into three overlapping waves:
 
@@ -165,15 +211,15 @@ We split the border into three overlapping waves:
 > Aim for at least two nectar plants in flower during every month of the growing season.
 
 Do this, and your border will be busy from the first warm day of March to the last of October.`,
+          },
+        },
       },
-    },
+    ],
   },
   {
     id: 'post-lawn-to-meadow',
     slug: 'tired-lawn-to-wildflower-meadow',
-    coverImage: 'https://picsum.photos/seed/meadow-cover/1200/675',
-    category: 'sustainability',
-    author: 'Maya Fernsby',
+    coverImageId: 'https://picsum.photos/seed/meadow-cover/1200/675',
     date: '2026-05-30',
     featured: true,
     i18n: {
@@ -181,11 +227,41 @@ Do this, and your border will be busy from the first warm day of March to the la
         title: 'Od umornog travnjaka do livade divljeg cveća',
         excerpt:
           'Zamena žednog travnjaka mini-livadom smanjuje košenje, hrani divlji svet i izgleda predivno. Evo realnog metoda, korak po korak.',
-        content: `Klasičan travnjak je zelena pustinja — žedan, gladan i zahteva stalno košenje. Livada divljeg cveća daje mnogo više, uz daleko manje truda.
-
-![Mlada livada divljeg cveća početkom leta](https://picsum.photos/seed/meadow-inline/800/450)
-
-## Iskreno o livadama
+      },
+      en: {
+        title: 'From Tired Lawn to Wildflower Meadow',
+        excerpt:
+          'Swapping a thirsty lawn for a mini-meadow cuts your mowing, feeds wildlife, and looks glorious. Here is the realistic, step-by-step method.',
+      },
+    },
+    blocks: [
+      {
+        id: 'block-meadow-1',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: 'Klasičan travnjak je zelena pustinja — žedan, gladan i zahteva stalno košenje. Livada divljeg cveća daje mnogo više, uz daleko manje truda.',
+          },
+          en: {
+            text: 'A traditional lawn is a green desert — thirsty, hungry, and demanding constant mowing. A wildflower meadow gives more back for far less effort.',
+          },
+        },
+      },
+      {
+        id: 'block-meadow-2',
+        type: 'images',
+        imageIds: [
+          'https://picsum.photos/seed/meadow-inline/800/450',
+          'https://picsum.photos/seed/meadow-rattle/800/450',
+          'https://picsum.photos/seed/meadow-summer/800/450',
+        ],
+      },
+      {
+        id: 'block-meadow-3',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: `## Iskreno o livadama
 
 One *nisu* bez održavanja, ali jesu **niskog** održavanja. Trik je u smanjenju plodnosti zemljišta, da trave ne nadjačaju cveće.
 
@@ -205,16 +281,9 @@ One *nisu* bez održavanja, ali jesu **niskog** održavanja. Trik je u smanjenju
 > Pokosite jednom, krajem leta, sklonite seno i pustite je da se sama zaseje. To je ceo godišnji ritual.
 
 Manje košenja, više leptira i vrt koji se prelepo menja iz sezone u sezonu.`,
-      },
-      en: {
-        title: 'From Tired Lawn to Wildflower Meadow',
-        excerpt:
-          'Swapping a thirsty lawn for a mini-meadow cuts your mowing, feeds wildlife, and looks glorious. Here is the realistic, step-by-step method.',
-        content: `A traditional lawn is a green desert — thirsty, hungry, and demanding constant mowing. A wildflower meadow gives more back for far less effort.
-
-![A young wildflower meadow in early summer](https://picsum.photos/seed/meadow-inline/800/450)
-
-## The honest truth about meadows
+          },
+          en: {
+            text: `## The honest truth about meadows
 
 They are *not* no-maintenance, but they are **low**-maintenance. The trick is reducing soil fertility so grasses do not out-compete the flowers.
 
@@ -234,15 +303,15 @@ They are *not* no-maintenance, but they are **low**-maintenance. The trick is re
 > Cut once in late summer, lift the hay, and let it self-seed. That is the whole annual routine.
 
 Less mowing, more butterflies, and a garden that changes beautifully with the seasons.`,
+          },
+        },
       },
-    },
+    ],
   },
   {
     id: 'post-winter-pruning',
     slug: 'gardeners-guide-winter-pruning',
-    coverImage: 'https://picsum.photos/seed/pruning-cover/1200/675',
-    category: 'maintenance',
-    author: 'Theo Marsh',
+    coverImageId: 'https://picsum.photos/seed/pruning-cover/1200/675',
     date: '2026-01-18',
     featured: false,
     i18n: {
@@ -250,11 +319,40 @@ Less mowing, more butterflies, and a garden that changes beautifully with the se
         title: 'Vrtlarski vodič kroz zimsku rezidbu',
         excerpt:
           'Zima je idealno vreme da oblikujete jabuke, gliciniju i ruže dok spavaju. Naučite rezove koji vode ka zdravijim i rodnijim biljkama.',
-        content: `Kada list opadne i sokovi se povuku, konačno *vidite* strukturu biljke. Zato je zima savršena sezona za rezidbu oblikovanja.
-
-![Čisti rezovi na uspavanom stablu jabuke](https://picsum.photos/seed/pruning-inline/800/450)
-
-## Prvo alat
+      },
+      en: {
+        title: 'The Gardener’s Guide to Winter Pruning',
+        excerpt:
+          'Winter is the ideal time to shape apples, wisteria, and roses while they sleep. Learn the cuts that lead to healthier, more productive plants.',
+      },
+    },
+    blocks: [
+      {
+        id: 'block-pruning-1',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: 'Kada list opadne i sokovi se povuku, konačno *vidite* strukturu biljke. Zato je zima savršena sezona za rezidbu oblikovanja.',
+          },
+          en: {
+            text: 'When the leaves are down and the sap is low, you can finally *see* the structure of a plant. That makes winter the perfect season for structural pruning.',
+          },
+        },
+      },
+      {
+        id: 'block-pruning-2',
+        type: 'images',
+        imageIds: [
+          'https://picsum.photos/seed/pruning-inline/800/450',
+          'https://picsum.photos/seed/pruning-tools/800/450',
+        ],
+      },
+      {
+        id: 'block-pruning-3',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: `## Prvo alat
 
 - Oštre makaze za rezidbu s mimoilazećim sečivima
 - Sklopiva testerica za sve deblje od palca
@@ -282,16 +380,9 @@ Skratite bujne letnje izdanke na dva do tri pupoljka — upravo to izaziva one �
 > Nikada ne uklanjajte više od četvrtine krošnje u toku jedne zime.
 
 Ne žurite, često se odmaknite i pogledajte celinu i zapamtite: granu ne možete zalepiti nazad.`,
-      },
-      en: {
-        title: 'The Gardener’s Guide to Winter Pruning',
-        excerpt:
-          'Winter is the ideal time to shape apples, wisteria, and roses while they sleep. Learn the cuts that lead to healthier, more productive plants.',
-        content: `When the leaves are down and the sap is low, you can finally *see* the structure of a plant. That makes winter the perfect season for structural pruning.
-
-![Clean pruning cuts on a dormant apple tree](https://picsum.photos/seed/pruning-inline/800/450)
-
-## First, the toolkit
+          },
+          en: {
+            text: `## First, the toolkit
 
 - Sharp bypass secateurs
 - A folding pruning saw for anything thicker than a thumb
@@ -319,15 +410,15 @@ Cut back the summer's whippy growth to two or three buds — this is what trigge
 > Never remove more than a quarter of a plant's canopy in a single winter.
 
 Take your time, step back often, and remember: you cannot glue a branch back on.`,
+          },
+        },
       },
-    },
+    ],
   },
   {
     id: 'post-container-shade',
     slug: 'container-plants-that-thrive-in-shade',
-    coverImage: 'https://picsum.photos/seed/shade-cover/1200/675',
-    category: 'seasonal',
-    author: 'Priya Ellwood',
+    coverImageId: 'https://picsum.photos/seed/shade-cover/1200/675',
     date: '2026-04-09',
     featured: false,
     i18n: {
@@ -335,11 +426,42 @@ Take your time, step back often, and remember: you cannot glue a branch back on.
         title: 'Deset biljaka za saksije koje uspevaju u senci',
         excerpt:
           'Senovito dvorište ili balkon nisu ograničenje — to je prilika za bujnu, lisnatu dramu. Ovih deset biljaka zaslužuje mesto u saksiji.',
-        content: `Senka se često doživljava kao problem koji treba rešiti. Mi je vidimo drugačije — ona je savršena pozornica za hladne zelene tonove, upadljivo lišće i smirenu sadnju.
-
-![Grupa lisnatih biljaka za senku u saksijama](https://picsum.photos/seed/shade-inline/800/450)
-
-## Prvo lišće
+      },
+      en: {
+        title: 'Ten Container Plants That Thrive in Shade',
+        excerpt:
+          'A shady courtyard or balcony is not a limitation — it is an opportunity for lush, leafy drama. These ten performers earn their place in a pot.',
+      },
+    },
+    blocks: [
+      {
+        id: 'block-shade-1',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: 'Senka se često doživljava kao problem koji treba rešiti. Mi je vidimo drugačije — ona je savršena pozornica za hladne zelene tonove, upadljivo lišće i smirenu sadnju.',
+          },
+          en: {
+            text: 'Shade is often treated as a problem to solve. We see it differently — it is the perfect stage for cool greens, bold foliage, and calm, restful planting.',
+          },
+        },
+      },
+      {
+        id: 'block-shade-2',
+        type: 'images',
+        imageIds: [
+          'https://picsum.photos/seed/shade-inline/800/450',
+          'https://picsum.photos/seed/shade-hosta/800/450',
+          'https://picsum.photos/seed/shade-fern/800/450',
+          'https://picsum.photos/seed/shade-heuchera/800/450',
+        ],
+      },
+      {
+        id: 'block-shade-3',
+        type: 'text',
+        i18n: {
+          sr: {
+            text: `## Prvo lišće
 
 Pri slabom svetlu *lišće* radi više posla od cvetova. Posegnite za teksturom i oblikom:
 
@@ -362,16 +484,9 @@ Pri slabom svetlu *lišće* radi više posla od cvetova. Posegnite za teksturom 
 > Grupa neparnog broja saksija — tri, pet, sedam — uvek izgleda prirodnije od urednog para.
 
 Zbijte saksije u grupu, varirajte visine i najmračniji ćošak postaje zeleno utočište.`,
-      },
-      en: {
-        title: 'Ten Container Plants That Thrive in Shade',
-        excerpt:
-          'A shady courtyard or balcony is not a limitation — it is an opportunity for lush, leafy drama. These ten performers earn their place in a pot.',
-        content: `Shade is often treated as a problem to solve. We see it differently — it is the perfect stage for cool greens, bold foliage, and calm, restful planting.
-
-![A collection of leafy shade-loving containers](https://picsum.photos/seed/shade-inline/800/450)
-
-## Foliage first
+          },
+          en: {
+            text: `## Foliage first
 
 In low light, *leaves* do more work than flowers. Reach for texture and shape:
 
@@ -394,7 +509,9 @@ In low light, *leaves* do more work than flowers. Reach for texture and shape:
 > A grouping of odd numbers — three, five, seven pots — always looks more natural than a tidy pair.
 
 Cluster your containers, vary the heights, and even the darkest corner becomes a green retreat.`,
+          },
+        },
       },
-    },
+    ],
   },
 ];

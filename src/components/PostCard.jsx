@@ -4,7 +4,7 @@ import { localizePost } from '../i18n/posts.js';
 import './PostCard.css';
 
 export default function PostCard({ post }) {
-  const { lang, t, categoryLabel, formatDate } = useI18n();
+  const { lang, t, formatDate } = useI18n();
   const copy = localizePost(post, lang);
 
   return (
@@ -17,14 +17,11 @@ export default function PostCard({ post }) {
           width="600"
           height="338"
         />
-        <span className="post-card-badge badge">
-          {categoryLabel(post.category)}
-        </span>
       </Link>
       <div className="post-card-body">
+        {/* The date is the whole meta line now — the category badge and the
+            author both went with this feature. */}
         <div className="post-card-meta">
-          <span>{post.author}</span>
-          <span aria-hidden="true">·</span>
           <time dateTime={post.date}>{formatDate(post.date)}</time>
         </div>
         <h3 className="post-card-title">

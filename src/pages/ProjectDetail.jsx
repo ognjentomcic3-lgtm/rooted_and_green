@@ -9,7 +9,7 @@ import './ProjectDetail.css';
 export default function ProjectDetail() {
   const { slug } = useParams();
   const { getBySlug } = usePosts();
-  const { lang, t, categoryLabel, formatDate } = useI18n();
+  const { lang, t, formatDate } = useI18n();
   const post = getBySlug(slug);
 
   if (!post) {
@@ -40,13 +40,10 @@ export default function ProjectDetail() {
         </Link>
 
         <header className="post-head">
-          <span className="badge">{categoryLabel(post.category)}</span>
           <h1 lang={contentLocale}>{copy.title}</h1>
+          {/* The byline is down to the date: the category badge above it and
+              the author beside it both went with this feature. */}
           <div className="post-byline">
-            <span className="post-author">
-              {t('project.by', { author: post.author })}
-            </span>
-            <span aria-hidden="true">·</span>
             <time dateTime={post.date}>{formatDate(post.date, 'long')}</time>
           </div>
         </header>

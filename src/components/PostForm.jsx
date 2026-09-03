@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { slugify } from '../hooks/usePosts.js';
-import { CATEGORIES } from '../data/seedData.js';
 import { DEFAULT_LANG, LANGUAGES } from '../i18n/core.js';
 import { useI18n } from '../i18n/context.js';
 import {
@@ -14,7 +13,6 @@ import './PostForm.css';
 const EMPTY = {
   slug: '',
   coverImage: '',
-  category: CATEGORIES[0],
   author: '',
   date: new Date().toISOString().slice(0, 10),
   i18n: emptyBundles(),
@@ -71,14 +69,18 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
 
   const bundle = (lang) => form.i18n[lang] || emptyBundle();
 
+  // Stopgap: `content` left the bundles when the body became blocks, so every
+  // read of it has to survive an undefined. The block editor replaces this.
+  const bodyOf = (lang) => bundle(lang).content || '';
+
   const isIncomplete = (lang) =>
-    !bundle(lang).title.trim() || !bundle(lang).content.trim();
+    !bundle(lang).title.trim() || !bodyOf(lang).trim();
 
   const validate = () => {
     const next = {};
     const base = bundle(DEFAULT_LANG);
     if (!base.title.trim()) next[`title:${DEFAULT_LANG}`] = t('form.error.title');
-    if (!base.content.trim())
+    if (!bodyOf(DEFAULT_LANG).trim())
       next[`content:${DEFAULT_LANG}`] = t('form.error.content');
     if (!form.author.trim()) next.author = t('form.error.author');
     if (!form.coverImage.trim()) next.coverImage = t('form.error.cover');
@@ -179,7 +181,7 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
             <textarea
               id={`pf-content-${activeLang}`}
               className="textarea"
-              value={active.content}
+              value={bodyOf(activeLang)}
               onChange={(e) => setCopy(activeLang, 'content', e.target.value)}
               placeholder={t('form.contentPlaceholder')}
               aria-invalid={Boolean(contentError)}
@@ -226,22 +228,6 @@ export default function PostForm({ initial, onSubmit, onCancel }) {
                 <img src={form.coverImage} alt={t('form.coverAlt')} />
               </div>
             )}
-          </div>
-
-          <div className="field">
-            <label htmlFor="pf-category">{t('form.category')}</label>
-            <select
-              id="pf-category"
-              className="select"
-              value={form.category}
-              onChange={(e) => setField('category', e.target.value)}
-            >
-              {CATEGORIES.map((c) => (
-                <option key={c} value={c}>
-                  {t(`category.${c}`)}
-                </option>
-              ))}
-            </select>
           </div>
 
           <div className="field">
