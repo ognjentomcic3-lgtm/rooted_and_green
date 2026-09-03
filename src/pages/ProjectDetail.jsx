@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Gallery, { Picture } from '../components/Gallery.jsx';
+import ProjectDetailHero from '../components/ProjectDetailHero.jsx';
 import { usePosts } from '../hooks/usePosts.js';
 import { useI18n } from '../i18n/context.js';
 import { LANG_CODES, localeOf } from '../i18n/core.js';
@@ -109,51 +110,50 @@ export default function ProjectDetail() {
   // its own language now and each one says so for itself.
   const titleLocale = localeOf(copy.resolvedLang);
   const blocks = Array.isArray(post.blocks) ? post.blocks : [];
+  // A project with a cover wears it as the page header, and the title is
+  // written over the photograph there. One without keeps the plain heading at
+  // the top of the article instead, so the page carries exactly one <h1>
+  // either way.
+  const hasCover = Boolean(post.coverImageId);
 
   return (
-    <article className="post">
-      <div className="container post-container">
-        <Link to="/projects" className="post-back">
-          ← {t('project.back')}
-        </Link>
+    <>
+      {hasCover ? (
+        <ProjectDetailHero
+          idOrUrl={post.coverImageId}
+          title={copy.title}
+          lang={titleLocale}
+        />
+      ) : null}
 
-        <header className="post-head">
-          <h1 lang={titleLocale}>{copy.title}</h1>
-          {/* The byline is down to the date: the category badge above it and
-              the author beside it both went with this feature. */}
-          <div className="post-byline">
-            <time dateTime={post.date}>{formatDate(post.date, 'long')}</time>
-          </div>
-        </header>
-
-        {/* A project without a cover is a project without a cover — no frame,
-            no tinted box, just the words starting where the picture would have
-            been. */}
-        {post.coverImageId ? (
-          <figure className="post-cover">
-            <Picture
-              idOrUrl={post.coverImageId}
-              alt={t('project.coverAlt', { title: copy.title })}
-              caption={t('gallery.missing')}
-              width={1200}
-              height={675}
-              loading="eager"
-            />
-          </figure>
-        ) : null}
-
-        <div className="post-body">
-          {blocks.map((block) => (
-            <Block key={block.id} block={block} lang={lang} />
-          ))}
-        </div>
-
-        <footer className="post-footer">
-          <Link to="/projects" className="btn btn-outline">
-            ← {t('project.readMore')}
+      <article className="post" id="project-body">
+        <div className="container post-container">
+          <Link to="/projects" className="post-back">
+            ← {t('project.back')}
           </Link>
-        </footer>
-      </div>
-    </article>
+
+          <header className="post-head">
+            {hasCover ? null : <h1 lang={titleLocale}>{copy.title}</h1>}
+            {/* The byline is down to the date: the category badge above it and
+                the author beside it both went with this feature. */}
+            <div className="post-byline">
+              <time dateTime={post.date}>{formatDate(post.date, 'long')}</time>
+            </div>
+          </header>
+
+          <div className="post-body">
+            {blocks.map((block) => (
+              <Block key={block.id} block={block} lang={lang} />
+            ))}
+          </div>
+
+          <footer className="post-footer">
+            <Link to="/projects" className="btn btn-outline">
+              ← {t('project.readMore')}
+            </Link>
+          </footer>
+        </div>
+      </article>
+    </>
   );
 }

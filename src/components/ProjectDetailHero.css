@@ -1,0 +1,27 @@
+/* ============================================================
+   Project header — the cover photograph, full screen
+   ============================================================ */
+
+/* The cover is the header now (see ProjectDetailHero.jsx), wearing the
+   homepage header's styling from HomeHero.css. Two things have to differ.
+   The navbar only turns transparent on the homepage, so this one must not be
+   pulled up underneath it — the top strip of the photograph would sit behind
+   opaque cream — and the height gives back the strip the negative margin is
+   no longer taking. */
+.project-hero {
+  margin-top: 0;
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100svh - var(--nav-h));
+}
+.project-hero .home-hero-inner {
+  padding-block: var(--part-space);
+}
+/* A cover still on its way, or gone for good, fills the header rather than
+   sitting in it at its own 16/9, and lets the section's deep green show
+   through: a header with no photograph still has a white title to carry. */
+.project-hero .picture-empty {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: none;
+}

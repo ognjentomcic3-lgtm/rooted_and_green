@@ -36,23 +36,6 @@
   color: var(--leaf-700);
 }
 
-.post-cover {
-  margin: 0 0 var(--sp-6);
-}
-.post-cover img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-}
-/* The stand-in for a cover that is gone wants the same frame the photograph
-   would have had, so the page keeps its shape either way. */
-.post-cover .picture-empty {
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-}
-
 /* -------------------- The body, block by block -------------------- */
 /* The body is an ordered run of blocks now rather than one piece of markdown,
    so the space between them is owned here, once, instead of falling out of

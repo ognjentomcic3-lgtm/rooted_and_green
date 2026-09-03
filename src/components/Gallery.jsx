@@ -31,6 +31,11 @@ export function Picture({
   width,
   height,
   loading = 'lazy',
+  // A cover standing as a page header is the largest thing on screen and the
+  // one the browser should fetch first. It cannot be preload-scanned — the URL
+  // only exists once React has rendered — so the priority hint is the whole of
+  // what can be said about it. Everything else keeps the browser's own guess.
+  fetchPriority,
   caption,
 }) {
   const { t } = useI18n();
@@ -55,6 +60,7 @@ export function Picture({
         src={url}
         alt={alt}
         loading={loading}
+        fetchPriority={fetchPriority}
         width={width}
         height={height}
       />
