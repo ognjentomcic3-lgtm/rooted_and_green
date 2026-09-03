@@ -59,6 +59,10 @@ export default {
   'projects.title': 'Mesta koja smo zasadili',
   'projects.lead':
     'Vrtovi koje smo do sada napravili i održavamo — od primorja do planine.',
+  // Restored with the homepage showcase: the alt text for each row's
+  // photographs and the button that leads to the full list.
+  'projects.imageAlt': '{title} — {place}, fotografija {index}',
+  'projects.viewAll': 'Svi projekti',
   'projects.searchPlaceholder': 'Pretražite projekte…',
   'projects.searchLabel': 'Pretraga projekata',
   'projects.filterLabel': 'Filtriranje po kategoriji',
