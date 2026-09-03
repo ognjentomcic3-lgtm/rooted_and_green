@@ -40,11 +40,14 @@ function readStore() {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return seedPosts;
 
-    // Browsers from before the i18n release hold posts in the flat shape
-    // (title/excerpt/content at the top level, category as a display string).
-    // Upgrade them in place so nobody loses a post or lands on a blank site.
+    // Older browsers hold posts in older shapes: the pre-i18n flat one
+    // (title/excerpt/content at the top level) and the v1 one (category,
+    // author, a `content` string per language). migratePost() upgrades both in
+    // place — the body text lands in a text block, so nobody loses a word.
     // The same pass fills in `featured` for anything stored before the admin's
-    // checkbox existed — an older store gets the field, not a wipe.
+    // checkbox existed — an older store gets the field, not a wipe. Both
+    // helpers hand back the very same object when there was nothing to change,
+    // which is what makes the write below happen once rather than every read.
     const migrated = migratePosts(parsed).map(withFeatured);
     if (postsChanged(parsed, migrated)) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
@@ -75,6 +78,25 @@ export function slugify(text) {
     .replace(/^-|-$/g, '');
 }
 
+// The URL is derived from the default-language title and from nothing else —
+// there is no custom-slug field any more, so this is the single source. Two
+// projects may legitimately be called the same thing, and the second one must
+// not quietly take over the first one's URL, so a slug that is already spoken
+// for picks up a `-2`, `-3`, and so on. `selfId` is the project being saved, so
+// re-saving one does not find itself in the way. An untitled project falls back
+// to its own id, which is unique and already URL-safe.
+function uniqueSlug(posts, post, selfId) {
+  const base = slugify(slugSourceTitle(post)) || selfId;
+  const taken = new Set(
+    posts.filter((p) => p.id !== selfId).map((p) => p.slug),
+  );
+  if (!taken.has(base)) return base;
+
+  let suffix = 2;
+  while (taken.has(`${base}-${suffix}`)) suffix += 1;
+  return `${base}-${suffix}`;
+}
+
 export function usePosts() {
   const [posts, setPosts] = useState(() => readStore());
 
@@ -98,10 +120,13 @@ export function usePosts() {
 
   const create = useCallback((data) => {
     const current = readStore();
+    const id = `post-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
     const newPost = {
       ...data,
-      id: `post-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      slug: data.slug ? slugify(data.slug) : slugify(slugSourceTitle(data)),
+      id,
+      // After the spread on purpose: whatever `data` carries as a slug is
+      // ignored, because the title is the only source of a URL.
+      slug: uniqueSlug(current, data, id),
       date: data.date || new Date().toISOString().slice(0, 10),
       // A new project starts off the landing page. Putting it on goes through
       // setFeatured(), which is the only place the cap is checked.
@@ -120,7 +145,10 @@ export function usePosts() {
         ? {
             ...p,
             ...data,
-            slug: data.slug ? slugify(data.slug) : p.slug,
+            // Re-derived from the title every save, through the same helper
+            // create() uses, so renaming a project moves its URL and a title
+            // borrowed from another project still gets its own.
+            slug: uniqueSlug(current, { ...p, ...data }, id),
             // Editing a project is not how it gets onto the landing page;
             // setFeatured() is. Keeping the stored flag here means a form that
             // round-trips the whole post cannot walk past the cap.

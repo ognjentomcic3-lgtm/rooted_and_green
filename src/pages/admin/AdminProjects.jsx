@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Picture } from '../../components/Gallery.jsx';
 import { MAX_FEATURED, usePosts } from '../../hooks/usePosts.js';
 import { useI18n } from '../../i18n/context.js';
 import { localizePost } from '../../i18n/posts.js';
@@ -11,7 +12,7 @@ import './AdminProjects.css';
 // what the client asked for.
 export default function AdminProjects() {
   const { posts, remove, setFeatured } = usePosts();
-  const { lang, t, categoryLabel, formatDate } = useI18n();
+  const { lang, t, formatDate } = useI18n();
 
   // setFeatured() refuses a fourth and returns false. The boxes are disabled
   // before it can come to that, but a disabled box is a courtesy, not the rule,
@@ -63,7 +64,6 @@ export default function AdminProjects() {
                   {t('admin.projects.col.featured')}
                 </th>
                 <th scope="col">{t('admin.projects.col.project')}</th>
-                <th scope="col">{t('admin.projects.col.category')}</th>
                 <th scope="col">{t('admin.projects.col.date')}</th>
                 <th scope="col" className="admp-col-actions">
                   {t('admin.projects.col.actions')}
@@ -99,23 +99,22 @@ export default function AdminProjects() {
 
                     <td>
                       <div className="admp-cell-project">
-                        <img
-                          className="admp-thumb"
-                          src={post.coverImage}
+                        {/* Through the same resolution the public site uses:
+                            `coverImage` went with the v2 post shape, and
+                            `coverImageId` holds either a library id or a plain
+                            URL. */}
+                        <Picture
+                          idOrUrl={post.coverImageId}
                           alt=""
-                          loading="lazy"
-                          width="58"
-                          height="44"
+                          className="admp-thumb"
+                          width={58}
+                          height={44}
                         />
                         <span>
                           <span className="admp-title">{copy.title}</span>
                           <span className="admp-slug">/{post.slug}</span>
                         </span>
                       </div>
-                    </td>
-
-                    <td className="admp-muted">
-                      {categoryLabel(post.category)}
                     </td>
 
                     <td className="admp-muted">

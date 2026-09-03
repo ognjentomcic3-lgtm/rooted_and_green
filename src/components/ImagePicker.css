@@ -1,0 +1,339 @@
+/* The picture picker. It never sets a width: it is dropped into a form field,
+   into a block editor row and into an admin list, and it fills whatever it is
+   given in each of them.
+
+   Every class here is prefixed `picker-`, and everything it borrows — .card,
+   .btn, .hint, .sr-only — comes from the design system in index.css rather
+   than from a sibling component's stylesheet, because all CSS in this project
+   is global and two files claiming one class would be one file quietly
+   winning. */
+
+.picker {
+  display: block;
+}
+
+/* `label` arrives already translated and is a span rather than a <label>: what
+   it names is a button, and a label element may not point at one. */
+.picker-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+  color: var(--leaf-900);
+  font-size: 0.92rem;
+}
+
+/* -------------------- The chosen picture -------------------- */
+
+/* Fixed shape whether or not there is a picture in it, so choosing one does
+   not shove the rest of the form down the page. */
+.picker-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 4 / 3;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--sage-100);
+  overflow: hidden;
+}
+
+/* A picture that is actually there earns a solid edge; the dashed one reads as
+   an empty slot waiting to be filled. */
+.picker-frame:has(.picker-frame-image) {
+  border-style: solid;
+  background: var(--cream-dark);
+}
+
+.picker-frame-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.picker-frame-mark {
+  font-size: 1.6rem;
+  line-height: 1;
+  opacity: 0.75;
+}
+.picker-frame-mark.is-missing {
+  opacity: 1;
+}
+
+/* Said in words as well as drawn, because a warning sign on its own is not a
+   sentence anybody can act on. */
+.picker-missing {
+  margin: var(--sp-2) 0 0;
+  max-width: 42ch;
+  color: #b04a34;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.picker-toggle {
+  margin-top: var(--sp-3);
+}
+
+/* -------------------- The library panel -------------------- */
+
+/* An expanding panel rather than a sheet over the page: nothing here has to
+   cover the form to be usable, and a panel that is part of the page cannot
+   take the page's scroll away from the visitor or leave the body locked
+   behind it. */
+.picker-panel {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  /* .card hides its overflow, which would cut the panel's own scroll box. */
+  overflow: visible;
+}
+
+.picker-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-4);
+}
+
+.picker-panel-title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--leaf-900);
+  font-size: 1rem;
+}
+
+.picker-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Off screen but still a real, clickable input. Not display:none — a file
+   input that is not rendered cannot always be opened from script. */
+.picker-file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.picker-hint {
+  margin: 0;
+  flex: 1 1 16ch;
+  min-width: 0;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+}
+
+/* One line per reason, with the files that hit it named after it. A batch
+   where one file failed and nine went in has to look like that and not like a
+   failed upload. */
+.picker-failures {
+  list-style: none;
+  margin: var(--sp-3) 0 0;
+  padding: var(--sp-3);
+  border: 1.5px solid #c0563f;
+  border-radius: var(--radius-sm);
+  background: #fdf3f0;
+  color: #b04a34;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+.picker-failures li + li {
+  margin-top: var(--sp-2);
+}
+.picker-failed-names {
+  font-weight: 400;
+  word-break: break-word;
+}
+
+/* The one scroll box in the component. Capped in vh so it never grows taller
+   than the screen on a phone, and capped in px so it does not become a
+   letterbox on a tall desktop window. */
+.picker-body {
+  margin-top: var(--sp-4);
+  max-height: min(52vh, 420px);
+  overflow-y: auto;
+}
+
+.picker-state {
+  margin: 0;
+  padding: var(--sp-5) 0;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+.picker-state.is-error {
+  color: #b04a34;
+  font-weight: 600;
+}
+
+.picker-empty {
+  text-align: center;
+  padding: var(--sp-5) var(--sp-4);
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+}
+.picker-empty span {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+.picker-empty-title {
+  margin: var(--sp-3) 0 0;
+  font-weight: 700;
+  color: var(--leaf-900);
+}
+.picker-empty-text {
+  margin: var(--sp-2) auto 0;
+  max-width: 40ch;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+}
+
+/* -------------------- The grid -------------------- */
+
+.picker-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--sp-3);
+}
+
+.picker-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+/* The whole tile is the button — a thumbnail with a caption is one target, not
+   a picture beside a link to it. */
+.picker-pick {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--sp-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.picker-pick:hover {
+  border-color: var(--leaf-500);
+}
+.picker-pick:focus-visible {
+  outline: none;
+  border-color: var(--leaf-500);
+  box-shadow: 0 0 0 3px rgba(76, 138, 99, 0.18);
+}
+.picker-pick.is-chosen {
+  border-color: var(--leaf-700);
+  box-shadow: inset 0 0 0 1.5px var(--leaf-700);
+}
+
+.picker-pick-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--sage-100);
+}
+.picker-pick-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Held open while useImageUrl() reads the blob out of IndexedDB, so the tiles
+   do not jump into place one at a time as the pictures arrive. */
+.picker-pick-blank {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--sage-100);
+}
+
+/* The chosen tile says so in words as well as in its border, because a border
+   colour is not something everybody can see. */
+.picker-flag {
+  position: absolute;
+  left: var(--sp-2);
+  bottom: var(--sp-2);
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  background: var(--leaf-700);
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.picker-name {
+  display: block;
+  margin-top: var(--sp-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--leaf-900);
+  /* File names run long and are not worth a second line in a 140px tile. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-meta {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--text-soft);
+}
+
+.picker-delete {
+  width: 100%;
+  /* .btn refuses to wrap its label, so a tile narrower than the word clips it
+     instead of pushing the whole grid past the edge of the screen. */
+  min-width: 0;
+  overflow: hidden;
+}
+
+.picker-usage {
+  margin: var(--sp-4) 0 0;
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.8rem;
+}
+
+/* -------------------- 375px -------------------- */
+
+/* Two columns, held there rather than left to auto-fill: a phone can fit two
+   140px tiles and a third would be a stamp. The delete button's text is what
+   overflows first, so it loses its padding before the tile loses its width. */
+@media (max-width: 460px) {
+  .picker-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-2);
+  }
+  .picker-delete {
+    padding-inline: 0.4rem;
+    font-size: 0.78rem;
+  }
+  .picker-panel {
+    padding: var(--sp-3);
+  }
+}

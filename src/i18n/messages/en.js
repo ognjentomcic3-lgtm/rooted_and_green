@@ -61,39 +61,42 @@ export default {
   'projects.viewAll': 'All projects',
   'projects.searchPlaceholder': 'Search projects…',
   'projects.searchLabel': 'Search projects',
-  'projects.filterLabel': 'Filter by category',
-  'projects.all': 'All',
+  // The search box is the only filter left, so the count has just these two
+  // shapes.
   'projects.results': {
     one: '{count} project',
     other: '{count} projects',
-  },
-  'projects.resultsInCategory': {
-    one: '{count} project in {category}',
-    other: '{count} projects in {category}',
   },
   'projects.resultsMatching': {
     one: '{count} project matching “{query}”',
     other: '{count} projects matching “{query}”',
   },
-  'projects.resultsInCategoryMatching': {
-    one: '{count} project in {category} matching “{query}”',
-    other: '{count} projects in {category} matching “{query}”',
-  },
   'projects.empty.title': 'No projects found',
-  'projects.empty.text': 'Try a different search term or category.',
-  'projects.empty.clear': 'Clear filters',
+  'projects.empty.text': 'Try a different search term.',
+  'projects.empty.clear': 'Clear the search',
 
   // -------------------- Project card --------------------
   'projectCard.read': 'Read the project',
 
   // -------------------- Project page --------------------
   'project.back': 'Back to all projects',
-  'project.by': 'By {author}',
   'project.readMore': 'More projects',
   'project.coverAlt': 'Cover image for {title}',
   'project.notFound.title': 'Project not found',
   'project.notFound.text': 'That project may have been moved or removed.',
   'project.notFound.back': 'Back to the projects',
+
+  // -------------------- Project page: picture slider --------------------
+  // A block of two or more pictures is shown as a slider on the public page.
+  // The position reads as a fraction because that is what a reader glances at;
+  // the alt text spells it out for anyone who cannot glance.
+  'gallery.label': 'Pictures from the project',
+  'gallery.previous': 'Previous picture',
+  'gallery.next': 'Next picture',
+  'gallery.position': '{index} / {total}',
+  'gallery.singleAlt': 'A picture from the project',
+  'gallery.imageAlt': 'Picture {index} of {total}',
+  'gallery.missing': 'This picture is no longer available.',
 
   // -------------------- Admin: login --------------------
   'login.eyebrow': 'Admin',
@@ -119,7 +122,6 @@ export default {
   'admin.projects.new': 'New project',
   'admin.projects.col.featured': 'On the landing page',
   'admin.projects.col.project': 'Project',
-  'admin.projects.col.category': 'Category',
   'admin.projects.col.date': 'Date',
   'admin.projects.col.actions': 'Actions',
   'admin.projects.edit': 'Edit',
@@ -163,36 +165,100 @@ export default {
     'Three are already chosen. Uncheck one to add another.',
 
   // -------------------- Project form --------------------
+  // The cover is picked out of the picture library and the address writes
+  // itself from the title, so neither is typed any more — both labels say what
+  // the field is for rather than what to put in it.
   'form.langLabel': 'Content language',
   'form.required': 'required',
   'form.incomplete': 'incomplete',
   'form.title': 'Title',
   'form.titlePlaceholder': 'e.g. Building Raised Beds That Last',
-  'form.slug': 'Slug',
-  'form.slugHint': '(URL — auto-filled from title)',
-  'form.slugPlaceholder': 'building-raised-beds',
   'form.excerpt': 'Excerpt',
   'form.excerptHint': '(shown on cards)',
   'form.excerptPlaceholder': 'A short, enticing summary of the project…',
-  'form.content': 'Content',
-  'form.contentHint':
-    '(Markdown — supports headings, lists, **bold**, and inline images)',
-  'form.contentPlaceholder':
-    '## A heading\n\nSome text with **bold**.\n\n![Alt text](https://picsum.photos/seed/example/800/450)\n\n- a list item',
-  'form.cover': 'Cover image URL',
-  'form.coverPlaceholder': 'https://picsum.photos/seed/xyz/1200/675',
-  'form.coverAlt': 'Cover preview',
-  'form.category': 'Category',
-  'form.author': 'Author',
-  'form.authorPlaceholder': 'e.g. Maya Fernsby',
+  'form.cover': 'Cover picture',
+  'form.coverHint': '(the picture shown in the project list)',
+  'form.url': 'Page address',
+  'form.urlHint': '(built from the title on its own)',
   'form.date': 'Date',
   'form.error.title': 'A title is required.',
-  'form.error.author': 'An author is required.',
-  'form.error.content': 'Project content cannot be empty.',
-  'form.error.cover': 'A cover image URL is required.',
+  'form.error.cover': 'A cover picture must be chosen.',
+  'form.error.blocks': 'At least one block of text or pictures is required.',
   'form.save': 'Save changes',
   'form.publish': 'Publish project',
   'form.cancel': 'Cancel',
+
+  // -------------------- Project form: picture library --------------------
+  // The picker opens over a library of pictures already uploaded. Everything
+  // in it lives in this browser, which the hint says plainly — nobody should
+  // discover that from an error message on another computer.
+  'picker.choose': 'Choose a picture',
+  'picker.change': 'Change the picture',
+  'picker.title': 'Picture library',
+  'picker.close': 'Close the library',
+  'picker.upload': 'Add a picture',
+  'picker.uploadHint':
+    'The pictures stay in this browser — nothing is sent anywhere.',
+  'picker.uploading': 'Adding…',
+  'picker.loading': 'Loading the library…',
+  'picker.empty.title': 'The library is empty',
+  'picker.empty.text':
+    'Add the first picture and you can pick it for any project from then on.',
+  'picker.meta': '{width}×{height} · {size}',
+  'picker.delete': 'Delete the picture',
+  'picker.deleteConfirm':
+    'Delete “{name}”? Projects using it will be left without a picture.',
+  'picker.select': 'Choose this picture',
+  'picker.selected': 'Chosen',
+  'picker.count': {
+    one: '{count} picture in the library',
+    other: '{count} pictures in the library',
+  },
+  'picker.usage': 'Using {size}',
+  'picker.error.quota':
+    'The browser is out of room. Delete a picture and try again.',
+  'picker.error.write': 'The picture was not saved. Try again.',
+  'picker.error.delete': 'The picture was not deleted. Try again.',
+  'picker.error.read':
+    'The library cannot be reached. A private window does not allow it — open the site in an ordinary window.',
+  'picker.error.type': 'That file is not an image.',
+  'picker.missing': 'The chosen picture is no longer in the library.',
+  'picker.missingAlt': 'A picture that is no longer there',
+  'picker.chosenAlt': 'Preview of the chosen picture',
+
+  // -------------------- Project form: block editor --------------------
+  // The body is a list of blocks instead of one textarea. The two preview
+  // lines promise on screen exactly what the public page does with a picture
+  // block, because the editor has no other way to show it.
+  'editor.title': 'Project body',
+  'editor.hint':
+    'Stack blocks of text and pictures in the order they should read on the page.',
+  'editor.empty.title': 'The body is still empty',
+  'editor.empty.text': 'Add a block of text or a block of pictures to begin.',
+  'editor.addText': 'Add text',
+  'editor.addImages': 'Add pictures',
+  'editor.moveUp': 'Move up',
+  'editor.moveDown': 'Move down',
+  'editor.remove': 'Remove block',
+  'editor.removeConfirm': 'Remove this block? This cannot be undone.',
+  'editor.blockText': 'Text',
+  'editor.blockImages': 'Pictures',
+  'editor.blockPosition': 'Block {index} of {total}',
+  'editor.textPlaceholder':
+    '## A heading\n\nSome text with **bold**.\n\n- a list item',
+  'editor.textHint': '(Markdown — supports headings, lists and **bold**)',
+  'editor.addPicture': 'Add a picture to the block',
+  'editor.removePicture': 'Remove picture',
+  'editor.removePictureConfirm': 'Remove this picture from the block?',
+  'editor.pictureLeft': 'Move left',
+  'editor.pictureRight': 'Move right',
+  'editor.picturePosition': 'Picture {index} of {total}',
+  'editor.picturesEmpty': 'No pictures in this block yet.',
+  'editor.previewSingle': 'One picture: shown on its own, full width.',
+  'editor.previewGallery': {
+    one: '{count} picture: shown as a slider with left and right buttons.',
+    other: '{count} pictures: shown as a slider with left and right buttons.',
+  },
 
   // -------------------- Reference form --------------------
   'referenceForm.newTitle': 'New reference',
@@ -221,11 +287,4 @@ export default {
   'notFound.text':
     'We could not find the page you were looking for. Let’s get you back to the garden.',
   'notFound.home': 'Return home',
-
-  // -------------------- Categories --------------------
-  'category.design': 'Design',
-  'category.planting': 'Planting',
-  'category.maintenance': 'Maintenance',
-  'category.sustainability': 'Sustainability',
-  'category.seasonal': 'Seasonal',
 };

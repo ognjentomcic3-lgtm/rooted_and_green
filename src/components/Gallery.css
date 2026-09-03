@@ -1,0 +1,114 @@
+/* -------------------- The placeholder -------------------- */
+/* What Picture draws when there is no picture: a quiet tinted box the size the
+   photograph would have been, rather than the browser's broken-image icon.
+
+   Its dimensions, corner and ground sit inside :where() so they carry no
+   specificity at all. The same component stands in for a full-width cover and
+   for the admin's fixed 58×44 row thumbnail, and the class the caller already
+   styles has to win — without :where() which one won would come down to the
+   order the bundler happened to concatenate the stylesheets in. */
+:where(.picture-empty) {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  background: var(--sage-100);
+}
+.picture-empty {
+  display: grid;
+  place-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  text-align: center;
+  color: var(--text-soft);
+}
+.picture-empty-mark {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+.picture-empty-text {
+  margin: 0;
+  font-size: 0.9rem;
+  max-width: 32ch;
+}
+
+/* -------------------- The slider -------------------- */
+.gallery {
+  display: block;
+}
+
+.gallery-viewport {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--sage-100);
+  box-shadow: var(--shadow-sm);
+}
+
+/* One row of full-width slides that the transform walks along. Sliding the
+   track rather than swapping the picture keeps every slide mounted, which is
+   why Gallery.jsx has to hide the off-screen ones from assistive technology
+   itself. */
+.gallery-track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: transform 0.35s ease;
+}
+.gallery-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+.gallery-slide img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+/* Inside the viewport the corner is already cut, and a second one at a
+   different radius shows as a pale sliver in the four corners. */
+.gallery-slide .picture-empty {
+  border-radius: 0;
+}
+
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-3);
+}
+
+/* .btn is shaped for words; these two hold one arrow each. 44px square is the
+   smallest comfortable target on a phone, and it is square rather than pill so
+   the two ends of the row match. */
+.gallery-step {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: 1.15rem;
+}
+/* pointer-events off as well as dimmed: .btn-ghost lights up on hover, and a
+   button at the end of the run that still responds to the mouse would promise
+   a picture that is not there. */
+.gallery-step:disabled {
+  opacity: 0.38;
+  cursor: default;
+  pointer-events: none;
+}
+
+.gallery-position {
+  margin: 0;
+  min-width: 5ch;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  /* Digits of one width, so the row does not twitch on the way from 9 to 10. */
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-track {
+    transition: none;
+  }
+}

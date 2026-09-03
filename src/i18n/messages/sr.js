@@ -65,45 +65,47 @@ export default {
   'projects.viewAll': 'Svi projekti',
   'projects.searchPlaceholder': 'Pretražite projekte…',
   'projects.searchLabel': 'Pretraga projekata',
-  'projects.filterLabel': 'Filtriranje po kategoriji',
-  'projects.all': 'Svi',
-  // Four complete sentences instead of glued-on fragments — Serbian needs the
-  // category and query phrases in its own word order, not appended to a stub.
+  // Two complete sentences instead of glued-on fragments — Serbian needs the
+  // query phrase in its own word order, not appended to a stub. The search box
+  // is the only filter left, so there are only these two.
   'projects.results': {
     one: '{count} projekat',
     few: '{count} projekta',
     other: '{count} projekata',
-  },
-  'projects.resultsInCategory': {
-    one: '{count} projekat u kategoriji {category}',
-    few: '{count} projekta u kategoriji {category}',
-    other: '{count} projekata u kategoriji {category}',
   },
   'projects.resultsMatching': {
     one: '{count} projekat za upit „{query}“',
     few: '{count} projekta za upit „{query}“',
     other: '{count} projekata za upit „{query}“',
   },
-  'projects.resultsInCategoryMatching': {
-    one: '{count} projekat u kategoriji {category} za upit „{query}“',
-    few: '{count} projekta u kategoriji {category} za upit „{query}“',
-    other: '{count} projekata u kategoriji {category} za upit „{query}“',
-  },
   'projects.empty.title': 'Nema pronađenih projekata',
-  'projects.empty.text': 'Probajte drugi pojam za pretragu ili drugu kategoriju.',
-  'projects.empty.clear': 'Poništi filtere',
+  'projects.empty.text': 'Probajte drugi pojam za pretragu.',
+  'projects.empty.clear': 'Poništi pretragu',
 
   // -------------------- Project card --------------------
   'projectCard.read': 'Pogledajte projekat',
 
   // -------------------- Project page --------------------
   'project.back': 'Nazad na sve projekte',
-  'project.by': 'Autor: {author}',
   'project.readMore': 'Pogledajte još projekata',
   'project.coverAlt': 'Naslovna slika za projekat „{title}“',
   'project.notFound.title': 'Projekat nije pronađen',
   'project.notFound.text': 'Taj projekat je možda premešten ili uklonjen.',
   'project.notFound.back': 'Nazad na projekte',
+
+  // -------------------- Project page: picture slider --------------------
+  // A block of two or more pictures is shown as a slider on the public page.
+  // The position reads as a fraction because that is what a reader glances at;
+  // the alt text spells it out for anyone who cannot glance.
+  'gallery.label': 'Slike iz projekta',
+  'gallery.previous': 'Prethodna slika',
+  'gallery.next': 'Sledeća slika',
+  'gallery.position': '{index} / {total}',
+  // A lone picture in the body has no position to report, so it does not
+  // borrow gallery.imageAlt and announce itself as "picture 1 of 1".
+  'gallery.singleAlt': 'Slika iz projekta',
+  'gallery.imageAlt': 'Slika {index} od {total}',
+  'gallery.missing': 'Ova slika više nije dostupna.',
 
   // -------------------- Admin: login --------------------
   // The only admin screen without the split shell around it. Kept short: two
@@ -134,7 +136,6 @@ export default {
   'admin.projects.new': 'Novi projekat',
   'admin.projects.col.featured': 'Na početnoj',
   'admin.projects.col.project': 'Projekat',
-  'admin.projects.col.category': 'Kategorija',
   'admin.projects.col.date': 'Datum',
   'admin.projects.col.actions': 'Radnje',
   'admin.projects.edit': 'Izmeni',
@@ -182,36 +183,102 @@ export default {
     'Već su izabrana tri. Skinite kvačicu sa jednog da biste dodali drugi.',
 
   // -------------------- Project form --------------------
+  // The cover is picked out of the picture library and the address writes
+  // itself from the title, so neither is typed any more — both labels say what
+  // the field is for rather than what to put in it.
   'form.langLabel': 'Jezik sadržaja',
   'form.required': 'obavezno',
   'form.incomplete': 'nepotpuno',
   'form.title': 'Naslov',
   'form.titlePlaceholder': 'npr. Podignute leje koje traju deceniju',
-  'form.slug': 'Skraćeni URL',
-  'form.slugHint': '(URL — popunjava se sam iz naslova)',
-  'form.slugPlaceholder': 'podignute-leje',
   'form.excerpt': 'Sažetak',
   'form.excerptHint': '(prikazuje se na karticama)',
   'form.excerptPlaceholder': 'Kratak, primamljiv sažetak projekta…',
-  'form.content': 'Sadržaj',
-  'form.contentHint':
-    '(Markdown — podržava naslove, liste, **podebljano** i slike u tekstu)',
-  'form.contentPlaceholder':
-    '## Naslov\n\nMalo teksta sa **podebljanim** delom.\n\n![Opis slike](https://picsum.photos/seed/example/800/450)\n\n- stavka liste',
-  'form.cover': 'URL naslovne slike',
-  'form.coverPlaceholder': 'https://picsum.photos/seed/xyz/1200/675',
-  'form.coverAlt': 'Pregled naslovne slike',
-  'form.category': 'Kategorija',
-  'form.author': 'Autor',
-  'form.authorPlaceholder': 'npr. Maya Fernsby',
+  'form.cover': 'Naslovna slika',
+  'form.coverHint': '(slika koja stoji na spisku projekata)',
+  'form.url': 'Adresa strane',
+  'form.urlHint': '(gradi se sama iz naslova)',
   'form.date': 'Datum',
   'form.error.title': 'Naslov je obavezan.',
-  'form.error.author': 'Autor je obavezan.',
-  'form.error.content': 'Sadržaj projekta ne može biti prazan.',
-  'form.error.cover': 'URL naslovne slike je obavezan.',
+  'form.error.cover': 'Morate izabrati naslovnu sliku.',
+  'form.error.blocks': 'Potreban je bar jedan blok teksta ili slika.',
   'form.save': 'Sačuvaj izmene',
   'form.publish': 'Objavi projekat',
   'form.cancel': 'Otkaži',
+
+  // -------------------- Project form: picture library --------------------
+  // The picker opens over a library of pictures already uploaded. Everything
+  // in it lives in this browser, which the hint says plainly — nobody should
+  // discover that from an error message on another computer.
+  'picker.choose': 'Izaberite sliku',
+  'picker.change': 'Promenite sliku',
+  'picker.title': 'Biblioteka slika',
+  'picker.close': 'Zatvorite biblioteku',
+  'picker.upload': 'Dodajte sliku',
+  'picker.uploadHint':
+    'Slike ostaju u ovom pregledaču — ne šalju se nigde na internet.',
+  'picker.uploading': 'Dodavanje u toku…',
+  'picker.loading': 'Učitavanje biblioteke…',
+  'picker.empty.title': 'Biblioteka je prazna',
+  'picker.empty.text':
+    'Dodajte prvu sliku i od tada je možete izabrati u bilo kom projektu.',
+  'picker.meta': '{width}×{height} · {size}',
+  'picker.delete': 'Obriši sliku',
+  'picker.deleteConfirm':
+    'Obrisati „{name}“? Projekti koji je koriste ostaće bez slike.',
+  'picker.select': 'Izaberite ovu sliku',
+  'picker.selected': 'Izabrano',
+  'picker.count': {
+    one: '{count} slika u biblioteci',
+    few: '{count} slike u biblioteci',
+    other: '{count} slika u biblioteci',
+  },
+  'picker.usage': 'Zauzeto {size}',
+  'picker.error.quota':
+    'U pregledaču nema više mesta. Obrišite neku sliku pa pokušajte ponovo.',
+  'picker.error.write': 'Slika nije sačuvana. Pokušajte ponovo.',
+  'picker.error.delete': 'Slika nije obrisana. Pokušajte ponovo.',
+  'picker.error.read':
+    'Biblioteci se ne može pristupiti. U privatnom prozoru pregledač je ne dozvoljava — otvorite sajt u običnom prozoru.',
+  'picker.error.type': 'Ta datoteka nije slika.',
+  'picker.missing': 'Izabrane slike više nema u biblioteci.',
+  'picker.missingAlt': 'Slika koje više nema',
+  'picker.chosenAlt': 'Pregled izabrane slike',
+
+  // -------------------- Project form: block editor --------------------
+  // The body is a list of blocks instead of one textarea. The two preview
+  // lines promise on screen exactly what the public page does with a picture
+  // block, because the editor has no other way to show it.
+  'editor.title': 'Sadržaj projekta',
+  'editor.hint':
+    'Slažite blokove teksta i slika onim redom kojim treba da stoje na strani.',
+  'editor.empty.title': 'Sadržaj je još prazan',
+  'editor.empty.text': 'Dodajte blok teksta ili blok slika da biste počeli.',
+  'editor.addText': 'Dodaj tekst',
+  'editor.addImages': 'Dodaj slike',
+  'editor.moveUp': 'Pomeri naviše',
+  'editor.moveDown': 'Pomeri naniže',
+  'editor.remove': 'Ukloni blok',
+  'editor.removeConfirm': 'Ukloniti ovaj blok? Ovo se ne može poništiti.',
+  'editor.blockText': 'Tekst',
+  'editor.blockImages': 'Slike',
+  'editor.blockPosition': 'Blok {index} od {total}',
+  'editor.textPlaceholder':
+    '## Naslov\n\nMalo teksta sa **podebljanim** delom.\n\n- stavka liste',
+  'editor.textHint': '(Markdown — podržava naslove, liste i **podebljano**)',
+  'editor.addPicture': 'Dodaj sliku u blok',
+  'editor.removePicture': 'Ukloni sliku',
+  'editor.removePictureConfirm': 'Ukloniti ovu sliku iz bloka?',
+  'editor.pictureLeft': 'Pomeri ulevo',
+  'editor.pictureRight': 'Pomeri udesno',
+  'editor.picturePosition': 'Slika {index} od {total}',
+  'editor.picturesEmpty': 'U ovom bloku još nema slika.',
+  'editor.previewSingle': 'Jedna slika: stoji sama, preko cele širine.',
+  'editor.previewGallery': {
+    one: '{count} slika: prikazuje se kao slajder sa dugmetom levo i desno.',
+    few: '{count} slike: prikazuju se kao slajder sa dugmetom levo i desno.',
+    other: '{count} slika: prikazuju se kao slajder sa dugmetom levo i desno.',
+  },
 
   // -------------------- Reference form --------------------
   // Same shape as the project form: a tab per language with Serbian required,
@@ -242,11 +309,4 @@ export default {
   'notFound.text':
     'Nismo uspeli da pronađemo stranicu koju tražite. Hajde da vas vratimo u vrt.',
   'notFound.home': 'Nazad na početnu',
-
-  // -------------------- Categories --------------------
-  'category.design': 'Dizajn',
-  'category.planting': 'Sadnja',
-  'category.maintenance': 'Održavanje',
-  'category.sustainability': 'Održivost',
-  'category.seasonal': 'Sezonski',
 };
